@@ -4,16 +4,15 @@ session_start();
 include('header.php');
 
 if (isset($_SESSION["user_id"]))
-    header("Location:home.php");
-    
+	header("Location:home.php");
+
 ?>
 
 <div class="container">
 	<div class="row justify-content-md-center">
 		<div class="col col-md-4">
 			<?php
-			if(isset($_SESSION["success_message"]))
-			{
+			if (isset($_SESSION["success_message"])) {
 				echo $_SESSION["success_message"];
 				unset($_SESSION["success_message"]);
 			}
@@ -29,7 +28,7 @@ if (isset($_SESSION["user_id"]))
 						</div>
 						<div class="form-group">
 							<label>Password</label>
-							<input type="password" name="user_password" id="user_password" class="form-control" required  data-parsley-trigger="keyup" />
+							<input type="password" name="user_password" id="user_password" class="form-control" required data-parsley-trigger="keyup" />
 						</div>
 						<div class="form-group text-center">
 							<input type="hidden" name="action" value="user_login" />
@@ -42,6 +41,8 @@ if (isset($_SESSION["user_id"]))
 					</form>
 				</div>
 			</div>
+			<br />
+			<br />
 		</div>
 	</div>
 </div>

@@ -76,3 +76,21 @@ include('basehome.php');
 <?php
 include('footer.php');
 ?>
+
+<?php
+include('addpost.php');
+?>
+
+<script>
+    $(document).on('click', '.edit_button', function() {
+
+        $('#modal_title').text('Edit Post');
+
+$('#action').val('Add');
+
+$('#submit_button').val('Add');
+
+$('#addPostModal').modal('show');
+
+    });
+</script>

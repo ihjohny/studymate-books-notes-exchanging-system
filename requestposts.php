@@ -41,7 +41,7 @@ include('basehome.php');
                         <td>
                             <span class="badge badge-warning">Request</span>
                         </td>
-                        <td><button type="button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="data_id" data-status="data_status">View</button></td>
+                        <td><button type="button" id="view_button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="data_id" data-status="data_status">View</button></td>
                     </tr>
                 </tbody>
 
@@ -53,7 +53,7 @@ include('basehome.php');
                         <td>
                             <span class="badge badge-warning">Request</span>
                         </td>
-                        <td><button type="button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="data_id" data-status="data_status">View</button></td>
+                        <td><button type="button" id="view_button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="data_id" data-status="data_status">View</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -63,4 +63,12 @@ include('basehome.php');
 
 <?php
 include('footer.php');
+?>
+
+<?php
+include('addpost.php');
+?>
+
+<?php
+include('viewpost.php');
 ?>

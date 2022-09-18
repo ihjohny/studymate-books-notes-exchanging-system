@@ -99,7 +99,7 @@
                     </button>
 
                     <div class="text-center">
-                        <h2>Books, Notes Exchanging System for NSTU</h2>
+                        <h2>Intra University Books, Notes Sharing Platform</h2>
                     </div>
 
                     <!-- Topbar Navbar -->

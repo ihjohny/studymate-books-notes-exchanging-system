@@ -10,7 +10,7 @@
                     <div id="post_details">
                         <div class="d-flex flex-row">
                             <div class="flex-fill mr-2">
-
+                                Chat list
                             </div>
                             <div>
                                 <div class="d-flex flex-column">
@@ -32,8 +32,8 @@
                 <div class="modal-footer">
                     <input type="hidden" name="hidden_appointment_id" id="hidden_appointment_id" />
                     <input type="hidden" name="action" value="change_appointment_status" />
-                    <input type="submit" name="save_appointment" id="save_appointment" class="btn btn-success" value="Accept" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="save_appointment" id="save_appointment" class="btn btn-success" value="Received" />
+                    <input type="submit" name="save_appointment" id="save_appointment" class="btn btn-warning" value="Discard" />
                 </div>
             </div>
         </form>

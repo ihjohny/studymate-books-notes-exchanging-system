@@ -21,50 +21,42 @@ include('basehome.php');
     <div class="card-body">
         <div id="table_status">
             <div class="row">
-                <div class="col-lg-3 mb-3">
-                    <div class="card bg-success text-white shadow" id="view_conversation">
+                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
+                    <div class=" card bg-warning text-white shadow" id="view_conversation">
                         <div class="card-body">
                             This is a Test Book
                             <div class="mt-1 text-white small">Offered by Another User</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="card bg-success text-white shadow" id="view_conversation">
+                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
+                    <div class=" card bg-success text-white shadow" id="view_conversation">
                         <div class="card-body">
-                            Another Book
+                            This is a Test Book
                             <div class="mt-1 text-white small">Offered by Another User</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="card bg-warning text-white shadow" id="view_conversation">
+                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
+                    <div class=" card bg-success text-white shadow" id="view_conversation">
                         <div class="card-body">
-                            Sample Book
-                            <div class="mt-1 text-white small">Requested by User</div>
+                            This is a Test Book
+                            <div class="mt-1 text-white small">Offered by Another User</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="card bg-warning text-white shadow" id="view_conversation">
+                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
+                    <div class=" card bg-warning text-white shadow" id="view_conversation">
                         <div class="card-body">
-                            Sample Book
-                            <div class="mt-1 text-white small">Requested by User</div>
+                            This is a Test Book
+                            <div class="mt-1 text-white small">Offered by Another User</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="card bg-warning text-white shadow" id="view_conversation">
+                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
+                    <div class=" card bg-success text-white shadow" id="view_conversation">
                         <div class="card-body">
-                            Sample Book 2
-                            <div class="mt-1 text-white small">Requested by User</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3">
-                    <div class="card bg-success text-white shadow" id="view_conversation">
-                        <div class="card-body">
-                            Another Book
+                            This is a Test Book
                             <div class="mt-1 text-white small">Offered by Another User</div>
                         </div>
                     </div>
@@ -76,8 +68,4 @@ include('basehome.php');
 
 <?php
 include('footer.php');
-?>
-
-<?php
-include('conversation.php');
 ?>

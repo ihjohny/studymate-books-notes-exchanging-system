@@ -1,27 +1,25 @@
 <?php
-session_start();
+
+include('class/DbData.php');
+
+$object = new DbData;
+
+if ($object->is_login()) {
+	header("location:" . $object->base_url . "home.php");
+}
 
 include('header.php');
-
-if (isset($_SESSION["user_id"]))
-	header("Location:home.php");
 
 ?>
 
 <div class="container">
 	<div class="row justify-content-md-center">
 		<div class="col col-md-4">
-			<?php
-			if (isset($_SESSION["success_message"])) {
-				echo $_SESSION["success_message"];
-				unset($_SESSION["success_message"]);
-			}
-			?>
 			<span id="message"></span>
 			<div class="card">
 				<div class="card-header">Login</div>
 				<div class="card-body">
-					<form method="post" id="patient_login_form">
+					<form method="post" id="user_login_form">
 						<div class="form-group">
 							<label>User Email Address</label>
 							<input type="text" name="user_email_address" id="user_email_address" class="form-control" required autofocus data-parsley-type="email" data-parsley-trigger="keyup" />
@@ -52,3 +50,44 @@ if (isset($_SESSION["user_id"]))
 include('footer.php');
 
 ?>
+
+<script>
+	$(document).ready(function() {
+
+		$('#user_login_form').parsley();
+
+		$('#user_login_form').on('submit', function(event) {
+
+			event.preventDefault();
+
+			if ($('#user_login_form').parsley().isValid()) {
+				$.ajax({
+					url: "login_action.php",
+					method: "POST",
+					data: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function() {
+						$('#user_login_button').attr('disabled', 'disabled');
+						$('#user_login_button').val('wait...');
+					},
+					success: function(data) {
+						$('#user_login_button').attr('disabled', false);
+						if (data.error != '') {
+							$('#message').html(data.error);
+							$('#user_login_button').val('Login');
+						} else {
+							window.location.href = data.url;
+						}
+					},
+					error: function(error) {
+						$('#message').html("Something went wrong.");
+						$('#user_login_button').attr('disabled', false);
+						$('#user_login_button').val('Login');
+						console.log("error ", error);
+					}
+				})
+			}
+		});
+
+	});
+</script>

@@ -7,7 +7,6 @@ include('header.php');
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col col-md-6">
-            <span id="message"></span>
             <div class="card">
                 <div class="card-header">Register</div>
                 <div class="card-body">
@@ -69,6 +68,7 @@ include('header.php');
                         <div class="form-group text-center">
                             <p><a href="/">Login</a></p>
                         </div>
+                        <span id="message"></span>
                     </form>
                 </div>
             </div>
@@ -83,3 +83,39 @@ include('header.php');
 include('footer.php');
 
 ?>
+
+<script>
+    $('#user_register_form').parsley();
+
+    $('#user_register_form').on('submit', function(event) {
+
+        event.preventDefault();
+
+        if ($('#user_register_form').parsley().isValid()) {
+            $.ajax({
+                url: "register_action.php",
+                method: "POST",
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+                    $('#user_register_button').attr('disabled', 'disabled');
+                },
+                success: function(data) {
+                    $('#user_register_button').attr('disabled', false);
+                    $('#user_register_form')[0].reset();
+                    if (data.error !== '') {
+                        $('#message').html(data.error);
+                    } else {
+                        window.location.href = data.url;
+                    }
+                },
+                error: function(error) {
+                    $('#user_register_button').attr('disabled', false);
+                    $('#message').html("something went wrong.");
+                    console.log("error", error);
+                }
+            });
+        }
+
+    });
+</script>

@@ -104,21 +104,41 @@
                     </div>
 
                     <!-- Topbar Navbar -->
+
+                    <?php
+                    $user_name = '';
+                    $user_profile_img = '';
+                    $point = '';
+
+                    $object->query = "
+                    SELECT * FROM users 
+                    WHERE id = '" . $_SESSION['user_id'] . "'
+                    ";
+
+                    $user_result = $object->get_result();
+
+                    foreach ($user_result as $row) {
+                        $user_name = $row['name'];
+                        $user_profile_img = $row['photo'];
+                        $point = $row['point'];
+                    }
+                    ?>
+
                     <ul class="navbar-nav ml-auto">
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <button class="btn btn-outline-success btn-sm" disabled>Points: 12</button>
+                                <button class="btn btn-outline-success btn-sm" disabled>Points: <?php echo $point; ?></button>
                             </a>
                         </li>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user_profile_name">Sample User</span>
-                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg" id="user_profile_image">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user_profile_name"><?php echo $user_name; ?></span>
+                                <img class="img-profile rounded-circle" src="<?php echo $user_profile_img; ?>" id="user_profile_image">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

@@ -31,13 +31,14 @@ if (isset($_POST["user_email_address"])) {
             ':phone'        =>    $object->clean_input($_POST["user_phone_no"]),
             ':roll'        =>    $object->clean_input($_POST["user_roll_no"]),
             ':department'        =>    $object->clean_input($_POST["user_department"]),
-            ':address'        =>    $object->clean_input($_POST["user_address"])
+            ':address'        =>    $object->clean_input($_POST["user_address"]),
+            ':photo'        =>    '../img/undraw_profile.svg'
         );
 
         $object->query = "
         INSERT INTO `users` 
-        (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`) 
-        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll);
+        (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`) 
+        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll, :photo);
         ";
 
         $object->execute($data);

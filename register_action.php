@@ -26,13 +26,18 @@ if (isset($_POST["user_email_address"])) {
     } else {
         $data = array(
             ':email'        =>    $object->clean_input($_POST["user_email_address"]),
-            ':password'                =>    $_POST["user_password"]
+            ':password'                =>    $_POST["user_password"],
+            ':name'        =>    $object->clean_input($_POST["user_name"]),
+            ':phone'        =>    $object->clean_input($_POST["user_phone_no"]),
+            ':roll'        =>    $object->clean_input($_POST["user_roll_no"]),
+            ':department'        =>    $object->clean_input($_POST["user_department"]),
+            ':address'        =>    $object->clean_input($_POST["user_address"])
         );
 
         $object->query = "
         INSERT INTO `users` 
         (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`) 
-        VALUES ('sample9', :email, 'address', '01763183408', '5', :password, 'ice', 'ash1611008m');
+        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll);
         ";
 
         $object->execute($data);
@@ -46,5 +51,3 @@ if (isset($_POST["user_email_address"])) {
     );
     echo json_encode($output);
 }
-
-?>

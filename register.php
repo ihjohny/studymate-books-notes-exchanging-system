@@ -47,6 +47,8 @@ include('header.php');
                                         <option value="ice">ICE</option>
                                         <option value="cste">CSTE</option>
                                         <option value="eee">EEE</option>
+                                        <option value="se">SE</option>
+                                        <option value="math">Math</option>
                                     </select>
                                 </div>
                             </div>

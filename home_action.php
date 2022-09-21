@@ -72,7 +72,7 @@ if ($_POST["action"] == 'fetch_all') {
         }
         $sub_array[] = $status;
 
-        $sub_array[] = '<button type="button" id="view_button" name="view_button" class="btn btn-primary btn-sm" data-id="'.$row["id"].'"> View </button></td>';
+        $sub_array[] = '<button type="button" id="view_button" name="view_button" class="btn btn-primary btn-sm" data-id="'.$row["id"].'"> View </button>';
 
         $data[] = $sub_array;
     }

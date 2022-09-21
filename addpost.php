@@ -31,7 +31,7 @@
                         <div class="row">
                             <label class="col-md-3 text-right">Tag<span class="text-danger">*</span></label>
                             <div class="col-md-9">
-                                <input type="text" name="post_tag" id="post_tag" class="form-control" data-parsley-maxlength="15" required data-parsley-trigger="keyup" />
+                                <input type="text" name="post_tag" id="post_tag" class="form-control" data-parsley-maxlength="30" required data-parsley-trigger="keyup" />
                             </div>
                         </div>
                     </div>

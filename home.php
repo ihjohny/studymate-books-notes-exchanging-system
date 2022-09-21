@@ -11,7 +11,7 @@ include('basehome.php');
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">Current Accepted Posts</h6>
+                <h6 class="m-0 font-weight-bold text-primary">My Current Accepted Posts</h6>
             </div>
             <div class="col" align="right">
 
@@ -33,7 +33,7 @@ include('basehome.php');
                     <div class=" card bg-warning text-white shadow" id="view_conversation">
                         <div class="card-body">
                             This is a Test Book
-                            <div class="mt-1 text-white small">Offered by Another User</div>
+                            <div class="mt-1 text-white small">Requested by Another User</div>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ include('basehome.php');
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">All Posts</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All Posts By Other Users</h6>
             </div>
             <div class="col" align="right">
                 <button type="button" name="add_post" id="add_post" class="btn btn-success btn-sm"><i class="fas fa-plus"> Add New Post</i></button>

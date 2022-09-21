@@ -13,7 +13,7 @@ include('basehome.php');
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">Books, Notes Offered by Users</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Books, Notes Offered by Other Users</h6>
             </div>
             <div class="col" align="right">
                 <button type="button" name="add_post" id="add_post" class="btn btn-success btn-sm"><i class="fas fa-plus"> Add New Post</i></button>

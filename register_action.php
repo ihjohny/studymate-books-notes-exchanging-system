@@ -38,7 +38,7 @@ if (isset($_POST["user_email_address"])) {
         $object->query = "
         INSERT INTO `users` 
         (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`) 
-        VALUES (:name, :email, :address, :phone, '3', :password, :department, :roll, :photo);
+        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll, :photo);
         ";
 
         $object->execute($data);

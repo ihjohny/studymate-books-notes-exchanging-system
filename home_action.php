@@ -11,15 +11,17 @@ if ($_POST["action"] == 'fetch_all') {
     $output = array();
 
     $main_query = "
-    SELECT * FROM posts 
+    SELECT * FROM posts WHERE userId != '" . $_SESSION['user_id'] . "'
     ";
 
     $search_query = '';
 
     if (isset($_POST["search"]["value"])) {
-        $search_query .= 'WHERE title LIKE "%' . $_POST["search"]["value"] . '%" ';
+        $search_query .= 'AND(';
+        $search_query .= 'title LIKE "%' . $_POST["search"]["value"] . '%" ';
         $search_query .= 'OR tag LIKE "%' . $_POST["search"]["value"] . '%" ';
         $search_query .= 'OR writerName LIKE "%' . $_POST["search"]["value"] . '%" ';
+        $search_query .= ')';
     }
 
     if (isset($_POST["order"])) {

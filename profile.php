@@ -2,6 +2,13 @@
 
 include('basehome.php');
 
+$object->query = "
+SELECT * FROM users
+WHERE id = '" . $_SESSION["user_id"] . "'
+";
+
+$result = $object->get_result();
+
 ?>
 
 <!-- Page Heading -->
@@ -20,13 +27,13 @@ include('basehome.php');
                         </div>
                         <div clas="col" align="right">
                             <input type="hidden" name="action" value="user_profile" />
-                            <button type="submit" name="edit_button" id="edit_button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
+                            <button name="edit_button" id="edit_button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
                             &nbsp;&nbsp;
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" id="user_register_form">
+                    <form method="post" id="user_profile_form" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>User Email Address<span class="text-danger">*</span></label>
                             <input type="text" name="user_email_address" id="user_email_address" class="form-control" required autofocus data-parsley-type="email" data-parsley-trigger="keyup" readonly />
@@ -74,10 +81,9 @@ include('basehome.php');
                         <div class="form-group">
                             <label>User Photo</label><br />
                             <input type="file" name="user_photo" id="user_photo" />
+                            </br>
+                            </br>
                             <span id="uploaded_user_photo"></span>
-                            </br>
-                            </br>
-                            <div id="uploaded_image"><img src="../img/undraw_profile.svg" class="img-thumbnail" width="100"></div>
                         </div>
 
                     </form>
@@ -89,3 +95,80 @@ include('basehome.php');
 <?php
 include('footer.php');
 ?>
+
+<script>
+    $(document).ready(function() {
+
+        <?php
+        foreach ($result as $row) {
+        ?>
+            $('#user_email_address').val("<?php echo $row['email']; ?>");
+            $('#user_password').val("<?php echo $row['password']; ?>");
+            $('#user_name').val("<?php echo $row['name']; ?>");
+            $('#user_phone_no').val("<?php echo $row['phone']; ?>");
+            $('#user_roll_no').val("<?php echo $row['roll']; ?>");
+            $('#user_department').val("<?php echo $row['department']; ?>");
+            $('#user_address').val("<?php echo $row['address']; ?>");
+
+            <?php
+            if ($row['photo'] != '') {
+            ?>
+                $("#uploaded_user_photo").html("<img src='<?php echo $row["photo"]; ?>' class='img-thumbnail' width='100' /><input type='hidden' name='hidden_uploaded_user_photo' value='<?php echo $row['photo']; ?>' />");
+
+            <?php
+            } else {
+            ?>
+                $("#uploaded_user_photo").html("<input type='hidden' name='hidden_uploaded_user_photo' value='' />");
+        <?php
+            }
+        }
+        ?>
+
+        $('#user_profile_form').parsley();
+
+        $('#user_profile_form').on('click', function(event) {
+            console.log("submit clicked");
+            event.preventDefault();
+
+            if ($('#user_profile_form').parsley().isValid()) {
+                $.ajax({
+                    url: "profile_action.php",
+                    method: "POST",
+                    data: new FormData(this),
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#edit_button').attr('disabled', 'disabled');
+                        $('#edit_button').html('wait...');
+                    },
+                    success: function(data) {
+                        $('#edit_button').attr('disabled', false);
+                        $('#edit_button').html('<i class="fas fa-edit"></i> Edit');
+
+                        if (data.error != '') {
+                            $('#message').html(data.error);
+                        } else {
+
+                            $('#user_password').val(data.password);
+                            $('#user_name').val(data.name);
+                            $('#user_phone_no').val(data.phone);
+                            $('#user_roll_no').val(data.roll);
+                            $('#user_department').val(data.department);
+                            $('#user_address').val(data.address);
+
+                            $('#message').html(data.success);
+
+                            setTimeout(function() {
+
+                                $('#message').html('');
+
+                            }, 5000);
+                        }
+                    }
+                })
+            }
+        });
+
+    });
+</script>

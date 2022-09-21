@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+include('class/DbData.php');
+
+$object = new DbData;
+
+if (!$object->is_login()) {
+    header("location:" . "/");
+}
+
+?>
+
 <head>
 
     <meta charset="utf-8">

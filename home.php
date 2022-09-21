@@ -1,13 +1,5 @@
 <?php
 
-include('class/DbData.php');
-
-$object = new DbData;
-
-if (!$object->is_login()) {
-    header("location:" . "/");
-}
-
 include('basehome.php');
 
 ?>

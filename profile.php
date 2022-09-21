@@ -16,7 +16,7 @@ $result = $object->get_result();
 
 <!-- DataTales Example -->
 
-<form method="post" id="profile_form" enctype="multipart/form-data">
+<form method="post" id="user_profile_form" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-8"><span id="message"></span>
             <div class="card shadow mb-4">
@@ -27,66 +27,63 @@ $result = $object->get_result();
                         </div>
                         <div clas="col" align="right">
                             <input type="hidden" name="action" value="user_profile" />
-                            <button name="edit_button" id="edit_button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
+                            <button type="submit" name="edit_button" id="edit_button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
                             &nbsp;&nbsp;
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" id="user_profile_form" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>User Email Address<span class="text-danger">*</span></label>
-                            <input type="text" name="user_email_address" id="user_email_address" class="form-control" required autofocus data-parsley-type="email" data-parsley-trigger="keyup" readonly />
-                        </div>
-                        <div class="form-group">
-                            <label>User Password<span class="text-danger">*</span></label>
-                            <input type="password" name="user_password" id="user_password" class="form-control" required data-parsley-trigger="keyup" />
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>User Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="user_name" id="user_name" class="form-control" required data-parsley-trigger="keyup" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>User Phone No.<span class="text-danger">*</span></label>
-                                    <input type="text" name="user_phone_no" id="user_phone_no" class="form-control" required data-parsley-trigger="keyup" />
-                                </div>
+                    <div class="form-group">
+                        <label>User Email Address<span class="text-danger">*</span></label>
+                        <input type="text" name="user_email_address" id="user_email_address" class="form-control" required autofocus data-parsley-type="email" data-parsley-trigger="keyup" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>User Password<span class="text-danger">*</span></label>
+                        <input type="password" name="user_password" id="user_password" class="form-control" required data-parsley-trigger="keyup" />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>User Name<span class="text-danger">*</span></label>
+                                <input type="text" name="user_name" id="user_name" class="form-control" required data-parsley-trigger="keyup" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>User Roll No.<span class="text-danger">*</span></label>
-                                    <input type="text" name="user_roll_no" id="user_roll_no" class="form-control" required data-parsley-trigger="keyup" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>User Department<span class="text-danger">*</span></label>
-                                    <select name="user_department" id="user_department" class="form-control">
-                                        <option value="ice">ICE</option>
-                                        <option value="cste">CSTE</option>
-                                        <option value="eee">EEE</option>
-                                    </select>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>User Phone No.<span class="text-danger">*</span></label>
+                                <input type="text" name="user_phone_no" id="user_phone_no" class="form-control" required data-parsley-trigger="keyup" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Complete Address<span class="text-danger">*</span></label>
-                            <textarea name="user_address" id="user_address" class="form-control" required data-parsley-trigger="keyup"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>User Roll No.<span class="text-danger">*</span></label>
+                                <input type="text" name="user_roll_no" id="user_roll_no" class="form-control" required data-parsley-trigger="keyup" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>User Photo</label><br />
-                            <input type="file" name="user_photo" id="user_photo" />
-                            </br>
-                            </br>
-                            <span id="uploaded_user_photo"></span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>User Department<span class="text-danger">*</span></label>
+                                <select name="user_department" id="user_department" class="form-control">
+                                    <option value="ice">ICE</option>
+                                    <option value="cste">CSTE</option>
+                                    <option value="eee">EEE</option>
+                                </select>
+                            </div>
                         </div>
-
-                    </form>
+                    </div>
+                    <div class="form-group">
+                        <label>Complete Address<span class="text-danger">*</span></label>
+                        <textarea name="user_address" id="user_address" class="form-control" required data-parsley-trigger="keyup"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>User Photo</label><br />
+                        <input type="file" name="user_photo" id="user_photo" />
+                        </br>
+                        </br>
+                        <span id="uploaded_user_photo"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,8 +123,7 @@ include('footer.php');
 
         $('#user_profile_form').parsley();
 
-        $('#user_profile_form').on('click', function(event) {
-            console.log("submit clicked");
+        $('#user_profile_form').on('submit', function(event) {
             event.preventDefault();
 
             if ($('#user_profile_form').parsley().isValid()) {
@@ -149,7 +145,6 @@ include('footer.php');
                         if (data.error != '') {
                             $('#message').html(data.error);
                         } else {
-
                             $('#user_password').val(data.password);
                             $('#user_name').val(data.name);
                             $('#user_phone_no').val(data.phone);
@@ -160,11 +155,15 @@ include('footer.php');
                             $('#message').html(data.success);
 
                             setTimeout(function() {
-
                                 $('#message').html('');
-
                             }, 5000);
                         }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        $('#message').html('Something went wrong.');
+                        $('#edit_button').attr('disabled', false);
+                        $('#edit_button').html('<i class="fas fa-edit"></i> Edit');
                     }
                 })
             }

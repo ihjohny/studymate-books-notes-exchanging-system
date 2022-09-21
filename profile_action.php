@@ -28,6 +28,7 @@ if ($_POST["action"] == 'user_profile') {
 		phone = :phone, 
 		roll = :roll,
 		department = :department,
+        address = :address
 		WHERE id = '" . $_SESSION["user_id"] . "'
 		";
         $object->execute($data);

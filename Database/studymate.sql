@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2022 at 09:13 AM
+-- Generation Time: Sep 21, 2022 at 06:17 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `conversations` (
   `id` int(11) NOT NULL,
   `postId` int(11) NOT NULL,
-  `givenUserId` int(11) NOT NULL,
-  `takenUserId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `otherUserId` int(11) NOT NULL,
   `isSuccess` tinyint(1) NOT NULL,
-  `dateTime` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -47,7 +47,7 @@ CREATE TABLE `messages` (
   `conversationId` int(11) NOT NULL,
   `message` varchar(500) NOT NULL,
   `userId` int(11) NOT NULL,
-  `dateTime` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -62,13 +62,12 @@ CREATE TABLE `posts` (
   `writerName` varchar(100) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `tag` varchar(50) DEFAULT NULL,
-  `type` tinyint(1) NOT NULL,
-  `givenUserId` int(11) DEFAULT NULL,
-  `takenUserId` int(11) DEFAULT NULL,
-  `isSuccess` tinyint(1) NOT NULL,
+  `type` varchar(15) NOT NULL,
+  `otherUserId` int(11) DEFAULT NULL,
+  `isSuccess` tinyint(1) NOT NULL DEFAULT 0,
   `userId` int(11) NOT NULL,
   `photo` longblob DEFAULT NULL,
-  `dateTime` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,13 +137,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -22,7 +22,7 @@ include('basehome.php');
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="student_table" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="request_post_table" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Photo</th>
@@ -34,28 +34,9 @@ include('basehome.php');
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td><img src="../img/demo_book.svg" class="img-thumbnail" width="100" /></td>
-                        <td>This is Sample Data</td>
-                        <td>Computer Programming</td>
-                        <td>
-                            <span class="badge badge-warning">Request</span>
-                        </td>
-                        <td><button type="button" id="view_button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="data_id" data-status="data_status">View</button></td>
-                    </tr>
+
                 </tbody>
 
-                <tbody>
-                    <tr>
-                        <td><img src="../img/demo_book.svg" class="img-thumbnail" width="100" /></td>
-                        <td>This is Sample Data 2</td>
-                        <td>Software Engineering</td>
-                        <td>
-                            <span class="badge badge-warning">Request</span>
-                        </td>
-                        <td><button type="button" id="view_button" name="status_button" class="btn btn-primary btn-sm status_button" data-id="data_id" data-status="data_status">View</button></td>
-                    </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -64,6 +45,31 @@ include('basehome.php');
 <?php
 include('footer.php');
 ?>
+
+<script>
+    var dateTable;
+
+    $(document).ready(function() {
+
+        dataTable = $('#request_post_table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                url: "requestposts_action.php",
+                type: "POST",
+                data: {
+                    action: 'fetch_request'
+                }
+            },
+            "columnDefs": [{
+                "targets": [0, 1, 2, 3, 4],
+                "orderable": false,
+            }, ],
+        });
+
+    });
+</script>
 
 <?php
 include('addpost.php');

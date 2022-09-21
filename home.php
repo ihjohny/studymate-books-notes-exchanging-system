@@ -82,9 +82,11 @@ include('footer.php');
 ?>
 
 <script>
+    var dateTable;
+
     $(document).ready(function() {
 
-        var dataTable = $('#all_post_table').DataTable({
+        dataTable = $('#all_post_table').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],

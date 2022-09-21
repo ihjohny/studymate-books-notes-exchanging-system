@@ -13,8 +13,8 @@
                             <label class="col-md-3 text-right">Type<span class="text-danger">*</span></label>
                             <div class="col-md-9">
                                 <select name="post_type" id="post_type" class="form-control" required>
-                                    <option value="offer">Offer</option>
-                                    <option value="request">Request</option>
+                                    <option value="Offer">Offer</option>
+                                    <option value="Request">Request</option>
                                 </select>
                             </div>
                         </div>

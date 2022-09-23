@@ -94,13 +94,68 @@ if ($_POST["action"] == 'fetch_single') {
         </div>
     </div>
     <div class="modal-footer">
-        <input type="submit" name="accept_post" id="accept_post" class="btn btn-success" value="Accept" />
+        <input type="submit" name="accept_post" id="accept_post" class="btn btn-success" data-id="' . $post_row["id"] . '" value="Accept" />
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
-</div>
+    </div>
             ';
         }
     }
 
     echo $html;
+}
+
+if ($_POST["action"] == 'accept_post') {
+    $error = '';
+    $payload = '';
+    $conversation_id = '';
+
+    $object->query = "
+    SELECT * FROM conversations 
+    WHERE postId = '" . $_POST["accepted_post_id"] . "' AND accepterUserId = '" . $_SESSION['user_id'] . "'
+    ";
+    $conversation = $object->execute();
+    $conversation_rows = $object->row_count();
+
+    if ($conversation_rows < 1) {
+        $poster_id;
+        $object->query = "
+        SELECT * FROM posts 
+        WHERE id = '" . $_POST["accepted_post_id"] . "'
+        ";
+        $post_data = $object->get_result();
+        foreach ($post_data as $post_row) {
+            $poster_id = $post_row["userId"];
+        }
+
+        $object->query = "
+        INSERT INTO `conversations` 
+        (`postId`, `accepterUserId`, `posterUserId`) 
+        VALUES ('" . $_POST["accepted_post_id"] . "', '" . $_SESSION['user_id'] . "', '$poster_id');
+        ";
+        $object->execute();
+
+        $error = '';
+        $payload = '<div class="alert alert-success">Post Accept Successful</div>';
+    } else {
+        $error = 'post already accepted';
+        $payload = '<div class="alert alert-success">Post Already Accepted</div>';
+    }
+
+    $object->query = "
+    SELECT * FROM conversations 
+    WHERE postId = '" . $_POST["accepted_post_id"] . "' AND accepterUserId = '" . $_SESSION['user_id'] . "'
+    ";
+    $conversation_data = $object->get_result();
+    foreach ($conversation_data as $c_row) {
+        $conversation_id = $c_row["id"];
+    }
+
+    $output = array(
+        'error' => $error,
+        'payload' => $payload,
+        'conversation_id' => $conversation_id,
+    );
+
+    echo json_encode($output);
 }

@@ -83,10 +83,7 @@ include('footer.php');
 
     $(document).on('click', '#view_accepted', function() {
 
-        var conversation_id = $(this).data('id');
-
-        console.log(conversation_id);
-        window.location='conversation.php';
+        window.location = 'conversation.php?id=' + $(this).data('id');
 
     });
 

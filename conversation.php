@@ -2,13 +2,37 @@
 
 include('basehome.php');
 
+if (!isset($_GET["id"])) {
+
+    header("location:" . "/index.php");
+}
+
+$object->query = "
+    SELECT * FROM conversations 
+    WHERE id = '" . $_GET["id"] . "'
+";
+$conversation_result = $object->get_result();
+$conversation_row;
+$post_row;
+foreach ($conversation_result as $c_row) {
+    $conversation_row = $c_row;
+    $object->query = "
+        SELECT * FROM posts 
+        WHERE id = '" . $c_row["postId"] . "'
+    ";
+    $post_result = $object->get_result();
+    foreach ($post_result as $p_row) {
+        $post_row = $p_row;
+    }
+}
+
 ?>
 
 <!-- Page Heading -->
 
 <div class="row mb-3">
     <div class="col-sm-8">
-        <h1 class="h3 text-gray-800">Book Title Here</h1>
+        <h1 class="h3 text-gray-800"><?php echo $post_row["title"]; ?></h1>
     </div>
     <div align="center" class="col-sm-4">
         <input type="submit" name="save_appointment" id="save_appointment" class="btn btn-success mr-2" value="Received" />

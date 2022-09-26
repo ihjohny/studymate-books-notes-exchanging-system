@@ -89,3 +89,14 @@ if ($_POST["action"] == 'fetch_my_post') {
 
     echo json_encode($output);
 }
+
+if ($_POST["action"] == 'delete_post') {
+    $object->query = "
+    DELETE FROM posts 
+    WHERE id = '" . $_POST["id"] . "'
+    ";
+
+    $object->execute();
+
+    echo '<div class="alert alert-success">Post Delete Successful</div>';
+}

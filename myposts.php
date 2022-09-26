@@ -68,13 +68,6 @@ include('footer.php');
         });
     });
 
-    $(document).on('click', '.edit_button', function() {
-        $('#modal_title').text('Edit Post');
-        $('#action').val('Add');
-        $('#submit_button').val('Add');
-        $('#addPostModal').modal('show');
-    });
-
     $(document).on('click', '.delete_button', function() {
         var id = $(this).data('id');
         if (confirm("Are you sure you want to delete it?")) {

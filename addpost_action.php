@@ -36,3 +36,28 @@ if ($_POST["action"] == 'add_new_post') {
 
     echo json_encode($output);
 }
+
+if ($_POST["action"] == 'fetch_single') {
+
+    $object->query = "
+    SELECT * FROM posts 
+    WHERE id = '" . $_POST["post_id"] . "'
+    ";
+
+    $post_data = $object->get_result();
+
+    $data = array();
+
+    foreach($post_data as $row) {
+        $data['id'] = $row['id'];
+        $data['type'] = $row['type'];
+        $data['title'] = $row["title"];
+        $data['tag'] = $row["tag"];
+        $data['writerName'] = $row["writerName"];
+        $data['description'] = $row["description"];
+        $data['photo'] = $row["photo"];
+    }
+
+    echo json_encode($data);
+
+}

@@ -136,4 +136,42 @@
         });
 
     });
+
+    $(document).on('click', '.edit_button', function() {
+
+        $('#post_form')[0].reset();
+
+        $('#post_form').parsley().reset();
+
+        $('#modal_title').text('Edit Post');
+
+        $('#action').val('Edit');
+
+        $('#submit_button').val('Edit');
+
+        $('#addPostModal').modal('show');
+
+        $.ajax({
+            url: "addpost_action.php",
+            method: "POST",
+            data: {
+                post_id: $(this).data('id'),
+                action: 'fetch_single'
+            },
+            dataType: 'JSON',
+            success: function(data) {
+
+                $('#post_title').val(data.title);
+                $('#post_type').val(data.type);
+                $('#post_tag').val(data.tag);
+                $('#writer_name').val(data.writerName);
+                $('#description').val(data.description);
+                $('#post_photo').val(data.photo);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    });
 </script>

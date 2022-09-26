@@ -35,21 +35,23 @@ foreach ($conversation_result as $c_row) {
     </div>
     <div align="center" class="col-sm-4">
         <?php
-        if (
-            (($post_row["type"] == "Request") and ($conversation_row["posterUserId"] == $_SESSION['user_id']))
-            or
-            (($post_row["type"] == "Offer") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
-        ) {
-            echo
-            '
-                <input type="submit" name="received" id="received" class="btn btn-success mr-2" value="Received" />
-                <input type="submit" name="discard" id="discard" class="btn btn-warning ml-2" value="Discard" />
-            ';
-        } else {
-            echo
-            '
-                <div class="alert alert-success">You will get 1 Point</div>
-            ';
+        if (!$conversation_row["isSuccess"]) {
+            if (
+                (($post_row["type"] == "Request") and ($conversation_row["posterUserId"] == $_SESSION['user_id']))
+                or
+                (($post_row["type"] == "Offer") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
+            ) {
+                echo
+                '
+                    <input type="submit" name="received" id="received" class="btn btn-success mr-2" value="Received" />
+                    <input type="submit" name="discard" id="discard" class="btn btn-warning ml-2" value="Discard" />
+                ';
+            } else {
+                echo
+                '
+                    <div class="alert alert-success">You will get 1 Point</div>
+                ';
+            }
         }
         ?>
         <div id="message" align="center"></div>

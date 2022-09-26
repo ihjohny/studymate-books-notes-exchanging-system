@@ -19,49 +19,7 @@ include('basehome.php');
         </div>
     </div>
     <div class="card-body">
-        <div id="table_status">
-            <div class="row">
-                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
-                    <div class=" card bg-warning text-white shadow" id="view_conversation">
-                        <div class="card-body">
-                            This is a Test Book
-                            <div class="mt-1 text-white small">Offered by Another User</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
-                    <div class=" card bg-success text-white shadow" id="view_conversation">
-                        <div class="card-body">
-                            This is a Test Book
-                            <div class="mt-1 text-white small">Offered by Another User</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
-                    <div class=" card bg-success text-white shadow" id="view_conversation">
-                        <div class="card-body">
-                            This is a Test Book
-                            <div class="mt-1 text-white small">Offered by Another User</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
-                    <div class=" card bg-warning text-white shadow" id="view_conversation">
-                        <div class="card-body">
-                            This is a Test Book
-                            <div class="mt-1 text-white small">Offered by Another User</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-3" onclick="window.location='conversation.php';" style="cursor: pointer;">
-                    <div class=" card bg-success text-white shadow" id="view_conversation">
-                        <div class="card-body">
-                            This is a Test Book
-                            <div class="mt-1 text-white small">Offered by Another User</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="previous_converstation_list">
         </div>
     </div>
 </div>
@@ -69,3 +27,28 @@ include('basehome.php');
 <?php
 include('footer.php');
 ?>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "history_action.php",
+            method: "POST",
+            data: {
+                action: 'fetch_previous_converstation'
+            },
+            success: function(data) {
+                $('#previous_converstation_list').html(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    });
+
+    $(document).on('click', '#view_accepted', function() {
+
+        window.location = 'conversation.php?id=' + $(this).data('id');
+
+    });
+    
+</script>

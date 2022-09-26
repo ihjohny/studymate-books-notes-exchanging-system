@@ -98,5 +98,12 @@ if ($_POST["action"] == 'delete_post') {
 
     $object->execute();
 
+    $object->query = "
+    DELETE FROM conversations 
+    WHERE postId = '" . $_POST["id"] . "'
+    ";
+
+    $object->execute();
+
     echo '<div class="alert alert-success">Post Delete Successful</div>';
 }

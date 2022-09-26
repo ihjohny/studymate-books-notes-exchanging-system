@@ -132,7 +132,7 @@ if ($_POST["action"] == 'fetch_current_converstation') {
 
         $html .=
             '
-            <div id="view_accepted" name="view_accepted" class="col-lg-3 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
+            <div id="view_accepted" name="view_accepted" class="col-lg-4 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
                 <div class=" card bg-' . $bg_color . ' text-white shadow" id="view_conversation">
                     <div class="card-body">
                         ' . $post_name . '

@@ -13,6 +13,8 @@ $object->query = "
 $conversation_result = $object->get_result();
 $conversation_row;
 $post_row;
+$user_id;
+$user_row;
 foreach ($conversation_result as $c_row) {
     $conversation_row = $c_row;
     $object->query = "
@@ -23,6 +25,27 @@ foreach ($conversation_result as $c_row) {
     foreach ($post_result as $p_row) {
         $post_row = $p_row;
     }
+
+    if ($conversation_row["accepterUserId"] == $_SESSION['user_id']) {
+        $user_id = $conversation_row["posterUserId"];
+    } else if ($conversation_row["posterUserId"] == $_SESSION['user_id']) {
+        $user_id = $conversation_row["accepterUserId"];
+    }
+    $object->query = "
+        SELECT * FROM users 
+        WHERE id = '" . $user_id . "'
+    ";
+    $user_result = $object->get_result();
+    foreach ($user_result as $u_row) {
+        $user_row = $u_row;
+    }
+}
+
+$post_type_color = '';
+if ($post_row["type"] == 'Request') {
+    $post_type_color = 'warning';
+} else {
+    $post_type_color = 'success';
 }
 
 ?>
@@ -114,13 +137,13 @@ foreach ($conversation_result as $c_row) {
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-column">
-                        <img src="../img/demo_book.svg" alt="Photo" class="flex-fill rounded" width="80">
+                        <img src="<?php echo $post_row["photo"]; ?>" alt="Photo" class="flex-fill rounded" width="80">
                         <div class="mt-3">
-                            <h5><strong>This is A Sample Book</strong> </h5>
-                            <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-success lead">Offer</span></p>
-                            <p class="text-secondary mb-1"><strong>Tag: </strong>Computer Programming</p>
-                            <p class="text-secondary mb-1"><strong>Writer Name: </strong>Mr. X</p>
-                            <p class="text-secondary mb-1"><strong>Description: </strong>Lorem Ipsum is simply.</p>
+                            <h5><strong><?php echo $post_row["title"]; ?></strong></h5>
+                            <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-<?php echo $post_type_color ?> lead"><?php echo $post_row["type"]; ?></span></p>
+                            <p class="text-secondary mb-1"><strong>Tag: </strong><?php echo $post_row["tag"]; ?></p>
+                            <p class="text-secondary mb-1"><strong>Writer Name: </strong><?php echo $post_row["writerName"]; ?></p>
+                            <p class="text-secondary mb-1"><strong>Description: </strong><?php echo $post_row["description"]; ?></p>
                         </div>
                     </div>
                 </div>
@@ -136,15 +159,15 @@ foreach ($conversation_result as $c_row) {
                 <div class="card-body">
                     <div>
                         <div class="d-flex flex-column">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Profile" class="rounded-circle" width="80">
+                            <img src="<?php echo $user_row["photo"]; ?>" alt="Profile" class="rounded-circle" width="80">
                             <div class="mt-3">
-                                <h5><strong>Another User</strong> <span><button class="btn btn-outline-success btn-sm" disabled>Points: 9</button> </span>
+                                <h5><strong><?php echo $user_row["name"]; ?></strong> <span><button class="btn btn-outline-success btn-sm" disabled>Points: <?php echo $user_row["point"]; ?></button> </span>
                                 </h5>
-                                <p class="text-secondary mb-1"><strong>Email: </strong>sampleuser@nstu.edu.bd</p>
-                                <p class="text-secondary mb-1"><strong>Phone: </strong>017652328722</p>
-                                <p class="text-secondary mb-1"><strong>Department: </strong>EEE</p>
-                                <p class="text-secondary mb-1"><strong>Roll: </strong>ASH23423432</p>
-                                <p class="text-secondary mb-1"><strong>Address: </strong>Sample User Address</p>
+                                <p class="text-secondary mb-1"><strong>Email: </strong><?php echo $user_row["email"]; ?></p>
+                                <p class="text-secondary mb-1"><strong>Phone: </strong><?php echo $user_row["phone"]; ?></p>
+                                <p class="text-secondary mb-1"><strong>Department: </strong><?php echo $user_row["department"]; ?></p>
+                                <p class="text-secondary mb-1"><strong>Roll: </strong><?php echo $user_row["roll"]; ?></p>
+                                <p class="text-secondary mb-1"><strong>Address: </strong><?php echo $user_row["address"]; ?></p>
                             </div>
                         </div>
                     </div>

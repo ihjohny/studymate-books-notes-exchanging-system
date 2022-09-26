@@ -61,6 +61,8 @@
             },
             error: function(error) {
                 console.log(error);
+                $('#accept_post').attr('disabled', false);
+                $('#accept_post').val('Accept');
             }
         })
     });

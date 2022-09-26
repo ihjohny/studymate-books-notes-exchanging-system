@@ -3,7 +3,6 @@
 include('basehome.php');
 
 if (!isset($_GET["id"])) {
-
     header("location:" . "/index.php");
 }
 
@@ -35,8 +34,25 @@ foreach ($conversation_result as $c_row) {
         <h1 class="h3 text-gray-800"><?php echo $post_row["title"]; ?></h1>
     </div>
     <div align="center" class="col-sm-4">
-        <input type="submit" name="save_appointment" id="save_appointment" class="btn btn-success mr-2" value="Received" />
-        <input type="submit" name="save_appointment" id="save_appointment" class="btn btn-warning ml-2" value="Discard" />
+        <?php
+        if (
+            (($post_row["type"] == "Request") and ($conversation_row["posterUserId"] == $_SESSION['user_id']))
+            or
+            (($post_row["type"] == "Offer") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
+        ) {
+            echo
+            '
+                <input type="submit" name="received" id="received" class="btn btn-success mr-2" value="Received" />
+                <input type="submit" name="discard" id="discard" class="btn btn-warning ml-2" value="Discard" />
+            ';
+        } else {
+            echo
+            '
+                <div class="alert alert-success">You will get 1 Point</div>
+            ';
+        }
+        ?>
+        <div id="message" align="center"></div>
     </div>
 </div>
 
@@ -139,3 +155,70 @@ foreach ($conversation_result as $c_row) {
 <?php
 include('footer.php');
 ?>
+
+<script>
+    $(document).on('click', '#received', function() {
+        $.ajax({
+            url: "conversation_action.php",
+            method: "POST",
+            data: {
+                conversation_id: <?php echo $_GET["id"]; ?>,
+                action: 'received'
+            },
+            beforeSend: function() {
+                $('#received').attr('disabled', 'disabled');
+                $('#received').val('wait...');
+            },
+            success: function(data) {
+                const result = JSON.parse(data);
+                console.log(data);
+                $('#received').attr('disabled', false);
+                $('#received').val('Received');
+                if (!result.error) {
+                    window.location.replace("/");
+                }
+                $('#message').html(result.msg);
+                setTimeout(function() {
+                    $('#message').html('');
+                }, 5000);
+            },
+            error: function(error) {
+                console.log(error);
+                $('#received').attr('disabled', false);
+                $('#received').val('Received');
+            }
+        })
+
+    });
+
+    $(document).on('click', '#discard', function() {
+        $.ajax({
+            url: "conversation_action.php",
+            method: "POST",
+            data: {
+                conversation_id: <?php echo $_GET["id"]; ?>,
+                action: 'discard'
+            },
+            beforeSend: function() {
+                $('#discard').attr('disabled', 'disabled');
+                $('#discard').val('wait...');
+            },
+            success: function(data) {
+                $('#discard').attr('disabled', false);
+                $('#discard').val('Discard');
+                $('#message').html(data);
+                setTimeout(function() {
+                    $('#message').html('');
+                }, 5000);
+
+                window.location.replace("/");
+            },
+            error: function(error) {
+                console.log(error);
+                $('#discard').attr('disabled', false);
+                $('#discard').val('Discard');
+            }
+        })
+
+    });
+</script>

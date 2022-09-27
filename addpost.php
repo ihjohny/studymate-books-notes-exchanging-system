@@ -59,14 +59,15 @@
                             <label class="col-md-3 text-right">Photo</label>
                             <div class="col-md-9">
                                 <input type="file" name="post_photo" id="post_photo" />
-                                <span id="user_uploaded_image"></span>
+                                <div id="uploaded_post_photo" class="mt-3"></div>
+                                <input type="hidden" name="hidden_post_photo" id="hidden_post_photo" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="hidden_id" id="hidden_id" />
-                    <input type="hidden" name="action" value="add_new_post" />
+                    <input type="hidden" name="action" id="action" value="" />
                     <input type="submit" name="submit" id="submit_button" class="btn btn-success" value="Add" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -86,11 +87,19 @@
 
             $('#modal_title').text('Add New Post');
 
-            $('#action').val('Add');
+            $('#action').val('add_new_post');
 
             $('#submit_button').val('Add');
 
             $('#addPostModal').modal('show');
+
+            $('#form_message').html('');
+
+            $('#uploaded_post_photo').html('');
+
+            $('#hidden_post_photo').val('');
+
+            $('#hidden_id').val('');
 
         });
 
@@ -112,7 +121,7 @@
                     },
                     success: function(data) {
                         $('#submit_button').attr('disabled', false);
-                        $('#submit_button').val('Add');
+                        $('#submit_button').val('Submit');
                         if (data.error != '') {
                             $('#form_message').html(data.error);
                         } else {
@@ -129,7 +138,7 @@
                         console.log(error);
                         $('#form_message').html('Something went wrong.');
                         $('#submit_button').attr('disabled', false);
-                        $('#submit_button').val('Add');
+                        $('#submit_button').val('Submit');
                     }
                 })
             }
@@ -139,23 +148,29 @@
 
     $(document).on('click', '.edit_button', function() {
 
+        var post_id = $(this).data('id');
+
         $('#post_form')[0].reset();
 
         $('#post_form').parsley().reset();
 
         $('#modal_title').text('Edit Post');
 
-        $('#action').val('Edit');
+        $('#action').val('edit_post');
 
         $('#submit_button').val('Edit');
 
         $('#addPostModal').modal('show');
 
+        $('#form_message').html('');
+
+        $('#hidden_id').val(post_id);
+
         $.ajax({
             url: "addpost_action.php",
             method: "POST",
             data: {
-                post_id: $(this).data('id'),
+                post_id: post_id,
                 action: 'fetch_single'
             },
             dataType: 'JSON',
@@ -166,7 +181,8 @@
                 $('#post_tag').val(data.tag);
                 $('#writer_name').val(data.writerName);
                 $('#description').val(data.description);
-                $('#post_photo').val(data.photo);
+                $('#uploaded_post_photo').html('<img src="' + data.photo + '" class="img-fluid img-thumbnail" width="100" />')
+                $('#hidden_post_photo').val(data.photo);
 
             },
             error: function(error) {

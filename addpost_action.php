@@ -48,7 +48,7 @@ if ($_POST["action"] == 'fetch_single') {
 
     $data = array();
 
-    foreach($post_data as $row) {
+    foreach ($post_data as $row) {
         $data['id'] = $row['id'];
         $data['type'] = $row['type'];
         $data['title'] = $row["title"];
@@ -59,5 +59,41 @@ if ($_POST["action"] == 'fetch_single') {
     }
 
     echo json_encode($data);
+}
 
+if ($_POST["action"] == 'edit_post') {
+
+    $error = '';
+    $success = '';
+
+    $data = array(
+        ':type'            =>    $object->clean_input($_POST["post_type"]),
+        ':title'            =>    $object->clean_input($_POST["post_title"]),
+        ':tag'            =>    $object->clean_input($_POST["post_tag"]),
+        ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
+        ':description'            =>    $object->clean_input($_POST["description"]),
+        ':photo'            =>    '../img/demo_book.svg'
+    );
+
+    $object->query = "
+        UPDATE posts  
+        SET type = :type, 
+        title = :title, 
+        tag = :tag, 
+        writerName = :writerName, 
+        description = :description, 
+        photo = :photo 
+        WHERE id = '" . $_POST['hidden_id'] . "'
+    ";
+
+    $object->execute($data);
+
+    $success = '<div class="alert alert-success">Post Edited Successfully</div>';
+
+    $output = array(
+        'error'        =>    $error,
+        'success'    =>    $success
+    );
+
+    echo json_encode($output);
 }

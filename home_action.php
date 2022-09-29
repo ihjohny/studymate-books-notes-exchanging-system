@@ -11,7 +11,7 @@ if ($_POST["action"] == 'fetch_all') {
     $output = array();
 
     $main_query = "
-    SELECT * FROM posts WHERE userId != '" . $_SESSION['user_id'] . "'
+    SELECT * FROM posts WHERE userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0)
     ";
 
     $search_query = '';

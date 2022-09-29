@@ -121,6 +121,7 @@ if (!$object->is_login()) {
                     $user_name = '';
                     $user_profile_img = '';
                     $point = '';
+                    $point_color = 'success';
 
                     $object->query = "
                     SELECT * FROM users 
@@ -133,6 +134,9 @@ if (!$object->is_login()) {
                         $user_name = $row['name'];
                         $user_profile_img = $row['photo'];
                         $point = $row['point'];
+                        if ($point < 1) {
+                            $point_color = 'danger';
+                        }
                     }
                     ?>
 
@@ -142,7 +146,7 @@ if (!$object->is_login()) {
 
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <button class="btn btn-outline-success btn-sm" disabled>Points: <?php echo $point; ?></button>
+                                <button class="btn btn-outline-<?php echo $point_color; ?> btn-sm" disabled>Points: <?php echo $point; ?></button>
                             </a>
                         </li>
 

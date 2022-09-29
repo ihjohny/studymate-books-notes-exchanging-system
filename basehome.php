@@ -146,8 +146,14 @@ if (!$object->is_login()) {
 
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <button class="btn btn-outline-<?php echo $point_color; ?> btn-sm" disabled>Points: <?php echo $point; ?></button>
+                                <button class="btn btn-outline-<?php echo $point_color; ?> btn-sm">Points: <?php echo $point; ?></button>
                             </a>
+
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <span class="dropdown-item">+2 Points for Registration</span>
+                                <span class="dropdown-item">+1 Point for Successful Offer</span>
+                                <span class="dropdown-item">-1 Point for Successful Request</span>
+                            </div>
                         </li>
 
                         <!-- Nav Item - User Information -->

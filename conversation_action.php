@@ -111,3 +111,44 @@ if ($_POST["action"] == 'discard') {
 
     echo '<div class="alert alert-success">Discard Successful</div>';
 }
+
+
+if ($_POST["action"] == 'send_message') {
+    $object->query = "
+    INSERT INTO `messages` 
+    (`conversationId`, `message`, `userId`) 
+    VALUES ('" . $_POST["conversation_id"] . "', '" . $_POST["message"] . "', '" . $_SESSION['user_id'] . "')
+    ";
+
+    $object->execute();
+}
+
+
+if ($_POST["action"] == 'get_messages') {
+    $object->query = "
+    SELECT * FROM `messages`
+    WHERE conversationId = '" . $_POST["conversation_id"] . "'
+    ";
+
+    $msg_result = $object->get_result();
+    $data = '';
+    foreach($msg_result as $msg_row) {
+        if($msg_row["userId"] == $_SESSION['user_id']) {
+            // outgoing message
+            $data .= '
+                    <div align="right" class="outgoing_msg">
+                        '.$msg_row["message"].'
+                    </div>
+                    ';
+        } else {
+            // incoming message
+            $data .= '
+                    <div class="incoming_msg">
+                        <span><strong>Another User: </strong></span> '.$msg_row["message"].'
+                    </div>
+                    ';
+        }
+    }
+
+    echo $data;
+}

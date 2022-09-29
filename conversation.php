@@ -55,6 +55,19 @@ if ($post_row["type"] == 'Request') {
 <div class="row mb-3">
     <div class="col-sm-8">
         <h1 class="h3 text-gray-800"><?php echo $post_row["title"]; ?></h1>
+        <span class="ml-1"><strong><?php echo $post_row["type"] ?>ed by <?php
+                                                                        if ($conversation_row["posterUserId"] == $user_row["id"]) {
+                                                                            echo $user_row["name"];
+                                                                        } else {
+                                                                            echo $user_name;
+                                                                        }
+                                                                        ?></strong> -> <strong>Accepted by <?php
+                                                                                                            if ($conversation_row["accepterUserId"] == $user_row["id"]) {
+                                                                                                                echo $user_row["name"];
+                                                                                                            } else {
+                                                                                                                echo $user_name;
+                                                                                                            }
+                                                                                                            ?></strong></span>
     </div>
     <div align="center" class="col-sm-4">
         <?php
@@ -92,34 +105,14 @@ if ($post_row["type"] == 'Request') {
                 </div>
             </div>
             <div class="card-body">
-                <div class="flex-grow-0 px-4 msg_history" style="overflow-y: scroll; height:250px;">
-                    <div class="incoming_msg">
-                        <span><strong>Another User: </strong></span> How are you?
-                    </div>
-                    <div align="right" class="outgoing_msg">
-                        I am fine. Thank You.
-                    </div>
-                    <div class="incoming_msg">
-                        <span><strong>Another User: </strong></span> How are you?
-                    </div>
-                    <div class="incoming_msg">
-                        <span><strong>Another User: </strong></span> How are you?
-                    </div>
-                    <div class="incoming_msg">
-                        <span><strong>Another User: </strong></span> How are you?
-                    </div>
-                    <div align="right" class="outgoing_msg">
-                        I am fine. Thank You.
-                    </div>
-                    <div align="right" class="outgoing_msg">
-                        I am fine. Thank You.
-                    </div>
+                <div id="message_list" class="flex-grow-0 px-4 msg_history" style="overflow-y: scroll; height:250px;">
+                    <div id="rander_messages"></div>
                 </div>
 
                 <div class="flex-grow-0 py-3 px-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Type your message">
-                        <button class="btn btn-primary ml-2">Send</button>
+                        <input name="type_message" id="type_message" type="text" class="form-control" placeholder="Type your message">
+                        <button id="btn_send" class="btn btn-primary ml-2">Send</button>
                     </div>
                 </div>
             </div>
@@ -182,6 +175,39 @@ include('footer.php');
 ?>
 
 <script>
+    $(document).ready(function() {
+        loadMessages();
+    });
+
+    $(document).on('click', '#btn_send', function() {
+        if (type_message.value.trim() != '') {
+            $.ajax({
+                url: "conversation_action.php",
+                method: "POST",
+                data: {
+                    message: type_message.value.trim(),
+                    conversation_id: <?php echo $_GET["id"]; ?>,
+                    action: 'send_message'
+                },
+                beforeSend: function() {
+                    $('#btn_send').attr('disabled', 'disabled');
+                    $('#btn_send').val('wait...');
+                },
+                success: function(data) {
+                    $('#type_message').val('');
+                    $('#btn_send').attr('disabled', false);
+                    $('#btn_send').val('Send');
+                    loadMessages();
+                },
+                error: function(error) {
+                    console.log(error);
+                    $('#btn_send').attr('disabled', false);
+                    $('#btn_send').val('Send');
+                }
+            })
+        }
+    });
+
     $(document).on('click', '#received', function() {
         $.ajax({
             url: "conversation_action.php",
@@ -246,4 +272,26 @@ include('footer.php');
         })
 
     });
+
+    function loadMessages() {
+        $('#rander_messages').html(
+            $.ajax({
+            url: "conversation_action.php",
+            method: "POST",
+            data: {
+                action: 'get_messages',
+                conversation_id: <?php echo $_GET["id"]; ?>
+            },
+            success: function(data) {
+                $('#rander_messages').html(data);
+                var messageList = document.getElementById('message_list');
+                messageList.scrollTop = messageList.scrollHeight;
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+        );
+    }
+
 </script>

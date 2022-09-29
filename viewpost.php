@@ -47,20 +47,26 @@
                 $('#accept_post').val('wait...');
             },
             success: function(data) {
-                console.log(data);
+                const result = JSON.parse(data);
+                if(result.error == "already_received") {
+                    alert(result.payload);
+                    $('#accept_post').attr('disabled', false);
+                    $('#accept_post').val('Accept');
+                } else {
+                    $('#accept_post').attr('disabled', false);
+                    $('#accept_post').val('Accept');
+                    $('#viewPostModel').modal('hide');
+                    $('#message').html(data.payload);
+                    setTimeout(function() {
+                        $('#message').html('');
+                    }, 5000);
 
-                $('#accept_post').attr('disabled', false);
-                $('#accept_post').val('Accept');
-                $('#viewPostModel').modal('hide');
-                $('#message').html(data.payload);
-                setTimeout(function() {
-                    $('#message').html('');
-                }, 5000);
-
-                window.location.replace("/");
+                    window.location.replace("/conversation.php?id="+result.conversation_id);
+                }
             },
             error: function(error) {
                 console.log(error);
+                alert(error);
                 $('#accept_post').attr('disabled', false);
                 $('#accept_post').val('Accept');
             }

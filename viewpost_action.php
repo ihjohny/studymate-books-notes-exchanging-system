@@ -116,39 +116,53 @@ if ($_POST["action"] == 'accept_post') {
     ";
     $conversation = $object->execute();
     $conversation_rows = $object->row_count();
+    
+    $object->query = "
+    SELECT * FROM posts 
+    WHERE id = '" . $_POST["accepted_post_id"] . "' AND isSuccess = 1
+    ";
+    $isSuccess = $object->execute();
+    $isSuccess_rows = $object->row_count();
 
-    if ($conversation_rows < 1) {
-        $poster_id;
-        $object->query = "
-        SELECT * FROM posts 
-        WHERE id = '" . $_POST["accepted_post_id"] . "'
-        ";
-        $post_data = $object->get_result();
-        foreach ($post_data as $post_row) {
-            $poster_id = $post_row["userId"];
+    if($isSuccess_rows < 1) {
+        
+        if ($conversation_rows < 1) {
+            $poster_id;
+            $object->query = "
+            SELECT * FROM posts 
+            WHERE id = '" . $_POST["accepted_post_id"] . "'
+            ";
+            $post_data = $object->get_result();
+            foreach ($post_data as $post_row) {
+                $poster_id = $post_row["userId"];
+            }
+
+            $object->query = "
+            INSERT INTO `conversations` 
+            (`postId`, `accepterUserId`, `posterUserId`) 
+            VALUES ('" . $_POST["accepted_post_id"] . "', '" . $_SESSION['user_id'] . "', '$poster_id');
+            ";
+            $object->execute();
+
+            $error = '';
+            $payload = '<div class="alert alert-success">Post Accept Successful</div>';
+        } else {
+            $error = 'already_accepted';
+            $payload = '<div class="alert alert-success">Post Already Accepted</div>';
         }
 
         $object->query = "
-        INSERT INTO `conversations` 
-        (`postId`, `accepterUserId`, `posterUserId`) 
-        VALUES ('" . $_POST["accepted_post_id"] . "', '" . $_SESSION['user_id'] . "', '$poster_id');
+        SELECT * FROM conversations 
+        WHERE postId = '" . $_POST["accepted_post_id"] . "' AND accepterUserId = '" . $_SESSION['user_id'] . "'
         ";
-        $object->execute();
+        $conversation_data = $object->get_result();
+        foreach ($conversation_data as $c_row) {
+            $conversation_id = $c_row["id"];
+        }
 
-        $error = '';
-        $payload = '<div class="alert alert-success">Post Accept Successful</div>';
     } else {
-        $error = 'post already accepted';
-        $payload = '<div class="alert alert-success">Post Already Accepted</div>';
-    }
-
-    $object->query = "
-    SELECT * FROM conversations 
-    WHERE postId = '" . $_POST["accepted_post_id"] . "' AND accepterUserId = '" . $_SESSION['user_id'] . "'
-    ";
-    $conversation_data = $object->get_result();
-    foreach ($conversation_data as $c_row) {
-        $conversation_id = $c_row["id"];
+        $error = 'already_received';
+        $payload = 'This Post Already Received By User.';
     }
 
     $output = array(

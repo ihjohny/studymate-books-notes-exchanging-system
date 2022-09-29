@@ -188,7 +188,7 @@ include('footer.php');
         loadMessages();
         setInterval(function() {
             loadMessages();
-        }, 2000);
+        }, 1500);
     });
 
     $(document).on('click', '#btn_send', function() {

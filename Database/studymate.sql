@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 06:17 PM
+-- Generation Time: Sep 29, 2022 at 09:25 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `conversations` (
   `id` int(11) NOT NULL,
   `postId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `otherUserId` int(11) NOT NULL,
+  `posterUserId` int(11) NOT NULL,
+  `accepterUserId` int(11) NOT NULL,
   `isSuccess` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -63,7 +63,6 @@ CREATE TABLE `posts` (
   `description` varchar(500) DEFAULT NULL,
   `tag` varchar(50) DEFAULT NULL,
   `type` varchar(15) NOT NULL,
-  `otherUserId` int(11) DEFAULT NULL,
   `isSuccess` tinyint(1) NOT NULL DEFAULT 0,
   `userId` int(11) NOT NULL,
   `photo` longblob DEFAULT NULL,
@@ -88,6 +87,13 @@ CREATE TABLE `users` (
   `roll` varchar(50) NOT NULL,
   `photo` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`) VALUES
+(3, 'user one', 'userone@gmail.com', 'address for user one.', '01763183401', 2, 'userone', 'ice', 'ASH16111111', 0x2e2e2f696d672f756e647261775f70726f66696c652e737667);
 
 --
 -- Indexes for dumped tables
@@ -143,7 +149,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

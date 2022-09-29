@@ -65,30 +65,44 @@ if ($_POST["action"] == 'edit_post') {
 
     $error = '';
     $success = '';
-
-    $data = array(
-        ':type'            =>    $object->clean_input($_POST["post_type"]),
-        ':title'            =>    $object->clean_input($_POST["post_title"]),
-        ':tag'            =>    $object->clean_input($_POST["post_tag"]),
-        ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
-        ':description'            =>    $object->clean_input($_POST["description"]),
-        ':photo'            =>    '../img/demo_book.svg'
-    );
+    $isValid = true;
 
     $object->query = "
-        UPDATE posts  
-        SET type = :type, 
-        title = :title, 
-        tag = :tag, 
-        writerName = :writerName, 
-        description = :description, 
-        photo = :photo 
-        WHERE id = '" . $_POST['hidden_id'] . "'
+    SELECT * FROM conversations 
+    WHERE postId = '" . $_POST["hidden_id"] . "'
     ";
+    $c_data = $object->get_result();
+    foreach($c_data as $c_row) {
+        $isValid = false;
+    }
 
-    $object->execute($data);
-
-    $success = '<div class="alert alert-success">Post Edited Successfully</div>';
+    if($isValid) {
+        $data = array(
+            ':type'            =>    $object->clean_input($_POST["post_type"]),
+            ':title'            =>    $object->clean_input($_POST["post_title"]),
+            ':tag'            =>    $object->clean_input($_POST["post_tag"]),
+            ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
+            ':description'            =>    $object->clean_input($_POST["description"]),
+            ':photo'            =>    '../img/demo_book.svg'
+        );
+    
+        $object->query = "
+            UPDATE posts  
+            SET type = :type, 
+            title = :title, 
+            tag = :tag, 
+            writerName = :writerName, 
+            description = :description, 
+            photo = :photo 
+            WHERE id = '" . $_POST['hidden_id'] . "'
+        ";
+    
+        $object->execute($data);
+    
+        $success = '<div class="alert alert-success">Post Edited Successfully</div>';
+    } else {
+        $error = 'already_accepted';
+    }
 
     $output = array(
         'error'        =>    $error,

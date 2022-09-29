@@ -3,7 +3,11 @@
 include('basehome.php');
 
 if (!isset($_GET["id"])) {
-    header("location:" . "/index.php");
+?>
+    <script>
+        location.replace("/");
+    </script>
+<?php
 }
 
 $object->query = "
@@ -15,7 +19,18 @@ $conversation_row;
 $post_row;
 $user_id;
 $user_row;
+$isValid = false;
 foreach ($conversation_result as $c_row) {
+    if (
+        ($c_row["posterUserId"] != $_SESSION['user_id'])
+        and
+        ($c_row["accepterUserId"] != $_SESSION['user_id'])
+    ) {
+        $isValid = false;
+    } else {
+        $isValid = true;
+    }
+
     $conversation_row = $c_row;
     $object->query = "
         SELECT * FROM posts 
@@ -46,6 +61,14 @@ if ($post_row["type"] == 'Request') {
     $post_type_color = 'warning';
 } else {
     $post_type_color = 'success';
+}
+
+if (!$isValid) {
+?>
+    <script>
+        location.replace("/");
+    </script>
+<?php
 }
 
 ?>
@@ -111,14 +134,14 @@ if ($post_row["type"] == 'Request') {
 
                 <div class="flex-grow-0 py-3 px-4">
                     <?php
-                        if(!$conversation_row["isSuccess"]) {
-                            ?>
-                             <div class="input-group">
-                                <input name="type_message" id="type_message" type="text" class="form-control" placeholder="Type your message">
-                                <button id="btn_send" class="btn btn-primary ml-2">Send</button>
-                            </div>
-                            <?php
-                        }
+                    if (!$conversation_row["isSuccess"]) {
+                    ?>
+                        <div class="input-group">
+                            <input name="type_message" id="type_message" type="text" class="form-control" placeholder="Type your message">
+                            <button id="btn_send" class="btn btn-primary ml-2">Send</button>
+                        </div>
+                    <?php
+                    }
                     ?>
                 </div>
             </div>
@@ -181,7 +204,6 @@ include('footer.php');
 ?>
 
 <script>
-
     var messageData;
 
     $(document).ready(function() {
@@ -295,7 +317,7 @@ include('footer.php');
                 conversation_id: <?php echo $_GET["id"]; ?>
             },
             success: function(data) {
-                if(messageData != data) {
+                if (messageData != data) {
                     $('#rander_messages').html(data);
                     var messageList = document.getElementById('message_list');
                     messageList.scrollTop = messageList.scrollHeight;
@@ -307,5 +329,4 @@ include('footer.php');
             }
         });
     }
-
 </script>

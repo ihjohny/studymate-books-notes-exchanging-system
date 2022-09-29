@@ -122,8 +122,9 @@
                     success: function(data) {
                         $('#submit_button').attr('disabled', false);
                         $('#submit_button').val('Submit');
-                        if (data.error != '') {
-                            $('#form_message').html(data.error);
+                        if (data.error == 'already_accepted') {
+                            alert("This post already accepted by user.")
+                            $('#form_message').html('This post already accepted by user.');
                         } else {
                             $('#addPostModal').modal('hide');
                             $('#message').html(data.success);

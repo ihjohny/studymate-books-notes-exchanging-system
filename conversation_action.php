@@ -116,8 +116,8 @@ if ($_POST["action"] == 'discard') {
 if ($_POST["action"] == 'send_message') {
     $object->query = "
     INSERT INTO `messages` 
-    (`conversationId`, `message`, `userId`) 
-    VALUES ('" . $_POST["conversation_id"] . "', '" . $_POST["message"] . "', '" . $_SESSION['user_id'] . "')
+    (`conversationId`, `message`, `userId`, `userName`) 
+    VALUES ('" . $_POST["conversation_id"] . "', '" . $_POST["message"] . "', '" . $_SESSION['user_id'] . "', '" . $_POST["user_name"] . "')
     ";
 
     $object->execute();
@@ -144,10 +144,18 @@ if ($_POST["action"] == 'get_messages') {
             // incoming message
             $data .= '
                     <div class="incoming_msg">
-                        <span><strong>Another User: </strong></span> '.$msg_row["message"].'
+                        <span><strong>'.$msg_row["userName"].': </strong></span> '.$msg_row["message"].'
                     </div>
                     ';
         }
+    }
+
+    if($data =='') {
+        $data = '
+                    <div align="center">
+                        <span><strong>No Messages<strong></span>
+                    </div>
+                ';
     }
 
     echo $data;

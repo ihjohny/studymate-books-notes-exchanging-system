@@ -110,10 +110,16 @@ if ($post_row["type"] == 'Request') {
                 </div>
 
                 <div class="flex-grow-0 py-3 px-4">
-                    <div class="input-group">
-                        <input name="type_message" id="type_message" type="text" class="form-control" placeholder="Type your message">
-                        <button id="btn_send" class="btn btn-primary ml-2">Send</button>
-                    </div>
+                    <?php
+                        if(!$conversation_row["isSuccess"]) {
+                            ?>
+                             <div class="input-group">
+                                <input name="type_message" id="type_message" type="text" class="form-control" placeholder="Type your message">
+                                <button id="btn_send" class="btn btn-primary ml-2">Send</button>
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -175,8 +181,14 @@ include('footer.php');
 ?>
 
 <script>
+
+    var messageData;
+
     $(document).ready(function() {
         loadMessages();
+        setInterval(function() {
+            loadMessages();
+        }, 2000);
     });
 
     $(document).on('click', '#btn_send', function() {
@@ -187,6 +199,7 @@ include('footer.php');
                 data: {
                     message: type_message.value.trim(),
                     conversation_id: <?php echo $_GET["id"]; ?>,
+                    user_name: '<?php echo $user_name ?>',
                     action: 'send_message'
                 },
                 beforeSend: function() {
@@ -274,8 +287,7 @@ include('footer.php');
     });
 
     function loadMessages() {
-        $('#rander_messages').html(
-            $.ajax({
+        $.ajax({
             url: "conversation_action.php",
             method: "POST",
             data: {
@@ -283,15 +295,17 @@ include('footer.php');
                 conversation_id: <?php echo $_GET["id"]; ?>
             },
             success: function(data) {
-                $('#rander_messages').html(data);
-                var messageList = document.getElementById('message_list');
-                messageList.scrollTop = messageList.scrollHeight;
+                if(messageData != data) {
+                    $('#rander_messages').html(data);
+                    var messageList = document.getElementById('message_list');
+                    messageList.scrollTop = messageList.scrollHeight;
+                    messageData = data;
+                }
             },
             error: function(error) {
                 console.log(error);
             }
-        })
-        );
+        });
     }
 
 </script>

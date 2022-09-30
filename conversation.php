@@ -90,7 +90,21 @@ if (!$isValid) {
                                                                                                             } else {
                                                                                                                 echo $user_name;
                                                                                                             }
-                                                                                                            ?></strong></span>
+                                                                                                            ?></strong>
+            <?php
+            if ($conversation_row["isSuccess"]) {
+            ?>
+                -> <strong>Received by <?php
+                                        if ($conversation_row["receiverUserId"] == $user_row["id"]) {
+                                            echo $user_row["name"];
+                                        } else {
+                                            echo $user_name;
+                                        }
+                                        ?></strong>
+            <?php
+            } ?>
+
+        </span>
     </div>
     <div align="center" class="col-sm-4">
         <?php

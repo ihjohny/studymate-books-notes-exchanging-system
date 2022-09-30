@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2022 at 09:25 AM
+-- Generation Time: Sep 30, 2022 at 11:06 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -32,6 +32,7 @@ CREATE TABLE `conversations` (
   `postId` int(11) NOT NULL,
   `posterUserId` int(11) NOT NULL,
   `accepterUserId` int(11) NOT NULL,
+  `receiverUserId` int(11) DEFAULT NULL,
   `isSuccess` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -47,6 +48,7 @@ CREATE TABLE `messages` (
   `conversationId` int(11) NOT NULL,
   `message` varchar(500) NOT NULL,
   `userId` int(11) NOT NULL,
+  `userName` varchar(100) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -89,13 +91,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`) VALUES
-(3, 'user one', 'userone@gmail.com', 'address for user one.', '01763183401', 2, 'userone', 'ice', 'ASH16111111', 0x2e2e2f696d672f756e647261775f70726f66696c652e737667);
-
---
 -- Indexes for dumped tables
 --
 
@@ -131,25 +126,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

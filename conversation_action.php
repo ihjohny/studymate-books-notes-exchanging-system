@@ -69,7 +69,7 @@ if ($_POST["action"] == 'received') {
         $object->query =
             "
             UPDATE conversations 
-            SET isSuccess = 1
+            SET isSuccess = 1, receiverUserId = '" . $_SESSION['user_id'] . "'
             WHERE id = '" . $conversation["id"] . "'
         ";
         $object->execute();

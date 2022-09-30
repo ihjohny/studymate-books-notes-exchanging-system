@@ -121,6 +121,14 @@ if ($_POST["action"] == 'send_message') {
     ";
 
     $object->execute();
+
+    $object->query = "
+    UPDATE conversations 
+    SET pendingMsgUserId = '" . $_SESSION['user_id'] . "'
+    WHERE id = '" . $_POST["conversation_id"] . "'
+    ";
+
+    $object->execute();
 }
 
 
@@ -132,30 +140,51 @@ if ($_POST["action"] == 'get_messages') {
 
     $msg_result = $object->get_result();
     $data = '';
-    foreach($msg_result as $msg_row) {
-        if($msg_row["userId"] == $_SESSION['user_id']) {
+    foreach ($msg_result as $msg_row) {
+        if ($msg_row["userId"] == $_SESSION['user_id']) {
             // outgoing message
             $data .= '
                     <div align="right" class="outgoing_msg">
-                        '.$msg_row["message"].'
+                        ' . $msg_row["message"] . '
                     </div>
                     ';
         } else {
             // incoming message
             $data .= '
                     <div class="incoming_msg">
-                        <span><strong>'.$msg_row["userName"].': </strong></span> '.$msg_row["message"].'
+                        <span><strong>' . $msg_row["userName"] . ': </strong></span> ' . $msg_row["message"] . '
                     </div>
                     ';
         }
     }
 
-    if($data =='') {
+    if ($data == '') {
         $data = '
                     <div align="center">
                         <span><strong>No Messages<strong></span>
                     </div>
                 ';
+    }
+
+    $object->query = "
+    SELECT * FROM `conversations`
+    WHERE id = '" . $_POST["conversation_id"] . "'
+    ";
+
+    $c_result = $object->get_result();
+
+    foreach ($c_result as $c_row) {
+
+        if ($c_row["pendingMsgUserId"] != $_SESSION['user_id']) {
+            $object->query = "
+            UPDATE conversations 
+            SET pendingMsgUserId = null
+            WHERE id = '" . $_POST["conversation_id"] . "'
+            ";
+
+            $object->execute();
+        }
+        
     }
 
     echo $data;

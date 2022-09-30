@@ -130,10 +130,26 @@ if ($_POST["action"] == 'fetch_current_converstation') {
             }
         }
 
+        $pending_msg = '';
+
+        if (
+            $conversation_row["pendingMsgUserId"] != null
+            and
+            $conversation_row["pendingMsgUserId"] != $_SESSION['user_id']
+        ) {
+            $pending_msg =
+                '
+                <span class="position-absolute top-0 start-100 translate-middle badge badge-primary">
+                    New Message
+                </span>
+            ';
+        }
+
         $html .=
             '
             <div id="view_accepted" name="view_accepted" class="col-lg-4 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
-                <div class=" card bg-' . $bg_color . ' text-white shadow" id="view_conversation">
+            <div class=" card bg-' . $bg_color . ' text-white shadow" id="view_conversation"> 
+                    ' . $pending_msg . '    
                     <div class="card-body">
                         ' . $post_name . '
                         <div class="mt-1 text-white small">' . $post_type . 'ed by ' . $creater_name . '</div>

@@ -94,7 +94,7 @@ if ($_POST["action"] == 'fetch_single') {
         </div>
     </div>
     <div class="modal-footer">
-        <input type="submit" name="accept_post" id="accept_post" class="btn btn-success" data-id="' . $post_row["id"] . '" value="Accept" />
+        <input type="submit" name="accept_post" id="accept_post" class="btn btn-' . $tag_color . '" data-id="' . $post_row["id"] . '" value="Accept" />
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
     </div>

@@ -33,7 +33,7 @@ include('basehome.php');
                 <h6 class="m-0 font-weight-bold text-primary">All Posts By Other Users</h6>
             </div>
             <div class="col" align="right">
-                <button type="button" name="add_post" id="add_post" class="btn btn-success btn-sm"><i class="fas fa-plus"> Add New Post</i></button>
+                <button type="button" name="add_post" id="add_post" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Add New Post</i></button>
             </div>
         </div>
     </div>

@@ -142,14 +142,32 @@ if ($_POST["action"] == 'fetch_current_converstation') {
                 <span class="position-absolute top-0 start-100 translate-middle badge badge-primary">
                     New Message
                 </span>
-            ';
+                ';
+        }
+
+        $pending_action = '';
+
+        if (
+            (($post_row["type"] == "Request") and ($conversation_row["posterUserId"] == $_SESSION['user_id']))
+            or
+            (($post_row["type"] == "Offer") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
+        ) {
+            $pending_action =
+                '
+                <span class="position-absolute top-0 end-100 translate-middle badge badge-danger">
+                    Received Pending
+                </span>
+                ';
         }
 
         $html .=
             '
             <div id="view_accepted" name="view_accepted" class="col-lg-4 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
-            <div class=" card bg-' . $bg_color . ' text-white shadow" id="view_conversation"> 
-                    ' . $pending_msg . '    
+            <div class=" card bg-' . $bg_color . ' text-white shadow" id="view_conversation">
+                    <div class="row">
+                        <div class="col-7">'. $pending_msg .'</div>
+                        <div class="col-5">'. $pending_action .'</div>
+                    </div> 
                     <div class="card-body">
                         ' . $post_name . '
                         <div class="mt-1 text-white small">' . $post_type . 'ed by ' . $creater_name . '</div>

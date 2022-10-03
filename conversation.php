@@ -147,16 +147,10 @@ if (!$isValid) {
                 </div>
 
                 <div class="flex-grow-0 py-3 px-4">
-                    <?php
-                    if (!$conversation_row["isSuccess"]) {
-                    ?>
                         <div class="input-group">
                             <input name="type_message" id="type_message" type="text" class="form-control" placeholder="Type your message">
                             <button id="btn_send" class="btn btn-primary ml-2">Send</button>
                         </div>
-                    <?php
-                    }
-                    ?>
                 </div>
             </div>
         </div>

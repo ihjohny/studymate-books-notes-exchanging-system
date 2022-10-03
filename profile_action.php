@@ -11,6 +11,13 @@ if ($_POST["action"] == 'user_profile') {
     $success = '';
 
     if ($error == '') {
+
+        $user_photo = $_POST["hidden_uploaded_user_photo"];
+        if($_FILES["user_photo"]["name"] != '')
+        {
+            $user_photo = upload_image();
+        }
+
         $data = array(
             ':password'                =>    $_POST["user_password"],
             ':name'        =>    $object->clean_input($_POST["user_name"]),
@@ -18,6 +25,7 @@ if ($_POST["action"] == 'user_profile') {
             ':roll'        =>    $object->clean_input($_POST["user_roll_no"]),
             ':department'        =>    $object->clean_input($_POST["user_department"]),
             ':address'        =>    $object->clean_input($_POST["user_address"]),
+            ':photo'		=>	$user_photo
         );
 
         $object->query = "
@@ -28,7 +36,8 @@ if ($_POST["action"] == 'user_profile') {
 		phone = :phone, 
 		roll = :roll,
 		department = :department,
-        address = :address
+        address = :address,
+        photo = :photo
 		WHERE id = '" . $_SESSION["user_id"] . "'
 		";
         $object->execute($data);
@@ -43,7 +52,8 @@ if ($_POST["action"] == 'user_profile') {
             'phone'            =>    $_POST["user_phone_no"],
             'roll'            =>    $_POST["user_roll_no"],
             'department'        =>    $_POST["user_department"],
-            'address'    =>    $_POST["user_address"]
+            'address'    =>    $_POST["user_address"],
+            'photo'      => $user_photo
         );
 
         echo json_encode($output);
@@ -56,3 +66,17 @@ if ($_POST["action"] == 'user_profile') {
         echo json_encode($output);
     }
 }
+
+
+function upload_image()
+{
+	if(isset($_FILES["user_photo"]))
+	{
+		$extension = explode('.', $_FILES['user_photo']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = 'images/' . $new_name;
+		move_uploaded_file($_FILES['user_photo']['tmp_name'], $destination);
+		return $destination;
+	}
+}
+

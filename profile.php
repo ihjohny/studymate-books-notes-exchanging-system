@@ -165,11 +165,14 @@ include('footer.php');
                             $('#user_department').val(data.department);
                             $('#user_address').val(data.address);
 
+                            $('#uploaded_user_photo').html('<img src="'+data.photo+'" class="img-thumbnail" width="100" /><input type="hidden" name="hidden_uploaded_user_photo" value="'+data.photo+'" />');
+
                             $('#message').html(data.success);
 
                             setTimeout(function() {
                                 $('#message').html('');
-                            }, 5000);
+                                window.location.replace("/profile.php");
+                            }, 3000);
                         }
                     },
                     error: function(error) {

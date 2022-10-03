@@ -69,7 +69,8 @@ include('footer.php');
             url: "home_action.php",
             method: "POST",
             data: {
-                action: 'fetch_current_converstation'
+                action: 'fetch_current_converstation',
+                user_name: '<?php echo $user_name ?>'
             },
             success: function(data) {
                 $('#current_converstation_list').html(data);

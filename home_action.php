@@ -101,8 +101,9 @@ if ($_POST["action"] == 'fetch_current_converstation') {
 
         $post_name = '';
         $post_type = '';
-        $creater_name = '';
-        $bg_color = '';
+        $card_user_id = '';
+        $card_user_name = '';
+        $card_user_type = '';
 
         $object->query = "
         SELECT * FROM posts
@@ -113,21 +114,24 @@ if ($_POST["action"] == 'fetch_current_converstation') {
         foreach ($post_data as $post_row) {
             $post_name = $post_row["title"];
             $post_type = $post_row["type"];
-            if ($post_type == "Offer") {
-                $bg_color = "success";
-            } else {
-                $bg_color = "warning";
-            }
+        }
 
-            $object->query = "
-            SELECT * FROM users
-            WHERE id = '" . $post_row["userId"] . "'
-            ";
-            $user_data = $object->get_result();
+        if ($conversation_row["posterUserId"] == $_SESSION['user_id']) {
+            $card_user_id = $conversation_row["accepterUserId"];
+            $card_user_type = "Accept";
+        } else {
+            $card_user_id = $conversation_row["posterUserId"];
+            $card_user_type = $post_type;
+        }
 
-            foreach ($user_data as $user_row) {
-                $creater_name = $user_row["name"];
-            }
+        $object->query = "
+        SELECT * FROM users
+        WHERE id = '" . $card_user_id . "'
+        ";
+        $user_data = $object->get_result();
+
+        foreach ($user_data as $user_row) {
+            $card_user_name = $user_row["name"];
         }
 
         $pending_msg = '';
@@ -170,7 +174,7 @@ if ($_POST["action"] == 'fetch_current_converstation') {
                     </div> 
                     <div class="card-body">
                         ' . $post_name . '
-                        <div class="mt-1 text-white small">' . $post_type . 'ed by ' . $creater_name . '</div>
+                        <div class="mt-1 text-white small">' . $card_user_type . 'ed by ' . $card_user_name . '</div>
                     </div>
                 </div>
             </div>

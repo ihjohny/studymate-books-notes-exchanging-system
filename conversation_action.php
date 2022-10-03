@@ -82,6 +82,15 @@ if ($_POST["action"] == 'received') {
             WHERE id = '" . $conversation["postId"] . "'
         ";
         $object->execute();
+
+        // delete related conversations for this post
+        $object->query = "
+        DELETE FROM conversations 
+        WHERE (postId = '" . $conversation["postId"] . "') AND (id != '" . $_POST["conversation_id"] . "')
+        ";
+    
+        $object->execute();
+
     }
 
     $msg;

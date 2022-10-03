@@ -24,6 +24,13 @@ if (isset($_POST["user_email_address"])) {
     if ($object->row_count() > 0) {
         $error = '<div class="alert alert-danger">Email Address Already Exists</div>';
     } else {
+
+        $user_photo = '../img/undraw_profile.svg';
+        if($_FILES["user_photo"]["name"] != '')
+        {
+            $user_photo = upload_image();
+        }
+
         $data = array(
             ':email'        =>    $object->clean_input($_POST["user_email_address"]),
             ':password'                =>    $_POST["user_password"],
@@ -32,7 +39,7 @@ if (isset($_POST["user_email_address"])) {
             ':roll'        =>    $object->clean_input($_POST["user_roll_no"]),
             ':department'        =>    $object->clean_input($_POST["user_department"]),
             ':address'        =>    $object->clean_input($_POST["user_address"]),
-            ':photo'        =>    '../img/undraw_profile.svg'
+            ':photo'        =>  $user_photo
         );
 
         $object->query = "
@@ -52,3 +59,17 @@ if (isset($_POST["user_email_address"])) {
     );
     echo json_encode($output);
 }
+
+
+function upload_image()
+{
+	if(isset($_FILES["user_photo"]))
+	{
+		$extension = explode('.', $_FILES['user_photo']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = './images/' . $new_name;
+		move_uploaded_file($_FILES['user_photo']['tmp_name'], $destination);
+		return $destination;
+	}
+}
+

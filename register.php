@@ -96,9 +96,11 @@ include('footer.php');
         if ($('#user_register_form').parsley().isValid()) {
             $.ajax({
                 url: "register_action.php",
-                method: "POST",
-                data: $(this).serialize(),
-                dataType: 'json',
+                method:"POST",
+				data:new FormData(this),
+                dataType:'json',
+                contentType:false,
+                processData:false,
                 beforeSend: function() {
                     $('#user_register_button').attr('disabled', 'disabled');
                 },
@@ -120,4 +122,18 @@ include('footer.php');
         }
 
     });
+
+    $('#user_photo').change(function(){
+            var extension = $('#user_photo').val().split('.').pop().toLowerCase();
+            if(extension != '')
+            {
+                if(jQuery.inArray(extension, ['png','jpg']) == -1)
+                {
+                    alert("Invalid Image File");
+                    $('#user_photo').val('');
+                    return false;
+                }
+            }
+        });
+
 </script>

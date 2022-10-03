@@ -121,6 +121,19 @@ include('footer.php');
         }
         ?>
 
+        $('#user_photo').change(function(){
+            var extension = $('#user_photo').val().split('.').pop().toLowerCase();
+            if(extension != '')
+            {
+                if(jQuery.inArray(extension, ['png','jpg']) == -1)
+                {
+                    alert("Invalid Image File");
+                    $('#user_photo').val('');
+                    return false;
+                }
+            }
+        });
+
         $('#user_profile_form').parsley();
 
         $('#user_profile_form').on('submit', function(event) {

@@ -36,13 +36,8 @@ if ($_POST["action"] == 'fetch_previous_converstation') {
             $post_type = $post_row["type"];
         }
 
-        if ($conversation_row["posterUserId"] == $_SESSION['user_id']) {
-            $card_user_id = $conversation_row["receiverUserId"];
-            $card_user_type = "Receiv";
-        } else {
-            $card_user_id = $conversation_row["posterUserId"];
-            $card_user_type = $post_type;
-        }
+        $card_user_id = $conversation_row["posterUserId"];
+        $card_user_type = $post_type;
 
         $object->query = "
         SELECT * FROM users
@@ -72,7 +67,7 @@ if ($_POST["action"] == 'fetch_previous_converstation') {
         $html .=
             '
             <div id="view_accepted" name="view_accepted" class="col-lg-4 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
-            <div class=" card bg-gradient-primary text-white shadow" id="view_conversation">
+            <div class=" card bg-gradient-secondary text-white shadow" id="view_conversation">
                     <div class="row">
                         <div class="col-7">'. $pending_msg .'</div>
                     </div> 

@@ -21,8 +21,9 @@ if ($_POST["action"] == 'fetch_previous_converstation') {
 
         $post_name = '';
         $post_type = '';
-        $creater_name = '';
-        $bg_color = '';
+        $card_user_id = '';
+        $card_user_name = '';
+        $card_user_type = '';
 
         $object->query = "
         SELECT * FROM posts
@@ -33,30 +34,51 @@ if ($_POST["action"] == 'fetch_previous_converstation') {
         foreach ($post_data as $post_row) {
             $post_name = $post_row["title"];
             $post_type = $post_row["type"];
-            if ($post_type == "Offer") {
-                $bg_color = "success";
-            } else {
-                $bg_color = "warning";
-            }
+        }
 
-            $object->query = "
-            SELECT * FROM users
-            WHERE id = '" . $post_row["userId"] . "'
-            ";
-            $user_data = $object->get_result();
+        if ($conversation_row["posterUserId"] == $_SESSION['user_id']) {
+            $card_user_id = $conversation_row["receiverUserId"];
+            $card_user_type = "Receiv";
+        } else {
+            $card_user_id = $conversation_row["posterUserId"];
+            $card_user_type = $post_type;
+        }
 
-            foreach ($user_data as $user_row) {
-                $creater_name = $user_row["name"];
-            }
+        $object->query = "
+        SELECT * FROM users
+        WHERE id = '" . $card_user_id . "'
+        ";
+        $user_data = $object->get_result();
+
+        foreach ($user_data as $user_row) {
+            $card_user_name = $user_row["name"];
+        }
+
+        $pending_msg = '';
+
+        if (
+            $conversation_row["pendingMsgUserId"] != null
+            and
+            $conversation_row["pendingMsgUserId"] != $_SESSION['user_id']
+        ) {
+            $pending_msg =
+                '
+                <span class="position-absolute top-0 start-100 translate-middle badge badge-primary">
+                    New Message
+                </span>
+                ';
         }
 
         $html .=
             '
-            <div id="view_accepted" name="view_accepted" class="col-lg-3 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
-                <div class=" card bg-' . $bg_color . ' text-white shadow" id="view_conversation">
+            <div id="view_accepted" name="view_accepted" class="col-lg-4 mb-3" style="cursor: pointer;" data-id="' . $conversation_row["id"] . '">
+            <div class=" card bg-gradient-primary text-white shadow" id="view_conversation">
+                    <div class="row">
+                        <div class="col-7">'. $pending_msg .'</div>
+                    </div> 
                     <div class="card-body">
                         ' . $post_name . '
-                        <div class="mt-1 text-white small">' . $post_type . 'ed by ' . $creater_name . '</div>
+                        <div class="mt-1 text-white small">' . $card_user_type . 'ed by ' . $card_user_name . '</div>
                     </div>
                 </div>
             </div>

@@ -105,6 +105,17 @@
 
         $('#post_form').parsley();
 
+        $('#post_photo').change(function() {
+            var extension = $('#post_photo').val().split('.').pop().toLowerCase();
+            if (extension != '') {
+                if (jQuery.inArray(extension, ['png', 'jpg']) == -1) {
+                    alert("Invalid Image File");
+                    $('#post_photo').val('');
+                    return false;
+                }
+            }
+        });
+
         $('#post_form').on('submit', function(event) {
 
             event.preventDefault();
@@ -113,8 +124,10 @@
                 $.ajax({
                     url: "addpost_action.php",
                     method: "POST",
-                    data: $(this).serialize(),
                     dataType: 'json',
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
                     beforeSend: function() {
                         $('#submit_button').attr('disabled', 'disabled');
                         $('#submit_button').val('wait...');

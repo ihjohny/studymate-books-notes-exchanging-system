@@ -9,13 +9,19 @@ if ($_POST["action"] == 'add_new_post') {
     $error = '';
     $success = '';
 
+    $post_photo = '../img/demo_book.svg';
+    if($_FILES["post_photo"]["name"] != '')
+    {
+        $post_photo = upload_image();
+    }
+
     $data = array(
         ':type'            =>    $object->clean_input($_POST["post_type"]),
         ':title'            =>    $object->clean_input($_POST["post_title"]),
         ':tag'            =>    $object->clean_input($_POST["post_tag"]),
         ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
         ':description'            =>    $object->clean_input($_POST["description"]),
-        ':photo'            =>    '../img/demo_book.svg',
+        ':photo'            =>    $post_photo,
         ':userId'    =>    $_SESSION['user_id']
     );
 
@@ -77,13 +83,20 @@ if ($_POST["action"] == 'edit_post') {
     }
 
     if($isValid) {
+
+        $post_photo = $_POST["hidden_post_photo"];
+        if($_FILES["post_photo"]["name"] != '')
+        {
+            $post_photo = upload_image();
+        }
+
         $data = array(
             ':type'            =>    $object->clean_input($_POST["post_type"]),
             ':title'            =>    $object->clean_input($_POST["post_title"]),
             ':tag'            =>    $object->clean_input($_POST["post_tag"]),
             ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
             ':description'            =>    $object->clean_input($_POST["description"]),
-            ':photo'            =>    '../img/demo_book.svg'
+            ':photo'            =>    $post_photo
         );
     
         $object->query = "
@@ -110,4 +123,17 @@ if ($_POST["action"] == 'edit_post') {
     );
 
     echo json_encode($output);
+}
+
+
+function upload_image()
+{
+	if(isset($_FILES["post_photo"]))
+	{
+		$extension = explode('.', $_FILES['post_photo']['name']);
+		$new_name = rand() . '.' . $extension[1];
+		$destination = './images/' . $new_name;
+		move_uploaded_file($_FILES['post_photo']['tmp_name'], $destination);
+		return $destination;
+	}
 }

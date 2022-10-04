@@ -95,6 +95,8 @@
 
             $('#form_message').html('');
 
+            $('#post_photo').html('');
+
             $('#uploaded_post_photo').html('');
 
             $('#hidden_post_photo').val('');

@@ -165,10 +165,76 @@ if ($_POST["action"] == 'accept_post') {
         $payload = 'This Post Already Received By User.';
     }
 
+
+    //////////////////////////////////////////////////
+    $post_user_email = '';
+    $post_title = '';
+    
+    $object->query = "
+    SELECT * FROM posts 
+    WHERE id = '" . $_POST["accepted_post_id"] . "'
+    ";
+    $post_result = $object->get_result();
+    foreach($post_result as $post_row) {
+        $post_title = $post_row["title"];
+
+        $object->query = "
+        SELECT * FROM users 
+        WHERE id = '" . $post_row["userId"] . "'
+        ";
+        $user_result = $object->get_result();
+        foreach($user_result as $user_row) {
+            $post_user_email = $user_row["email"];
+        }
+    }
+
+	require 'class/class.phpmailer.php';
+	$mail = new PHPMailer;
+	$mail->IsSMTP();
+	$mail->Host = 'smtp.gmail.com';
+	$mail->Port = '587';
+	$mail->SMTPAuth = true;
+	$mail->Username = 'nstustudymate@gmail.com';
+	$mail->Password = 'sdgrmpylehkkmkqh';
+	$mail->SMTPSecure = 'tls';
+	$mail->From = 'nstustudymate@gmail.com';
+	$mail->FromName = 'Studymate';
+	$mail->AddAddress($post_user_email);
+	$mail->WordWrap = 50;
+	$mail->IsHTML(true);
+	$mail->Subject = 'Studymate Post has been Accepted.';
+
+	$message_body = '
+    <p>Hi, Congratulations Your Studymate Post has been accepted by another user.</p>
+    <strong>'.$post_title.'</strong>
+    </br>
+    <p><a href="http://localhost/conversation.php?id='.$conversation_id.'">
+    <b>Click here to see details.</b></a></p>
+    </br>
+    </br>
+    </br>
+    <p>Sincerely,</p>
+    <p>Studymate</p>
+    ';
+
+	$mail->Body = $message_body;
+
+    $message = '';
+	if($mail->Send())
+	{
+		$message = 'Mail Success';
+	}
+	else
+	{
+        $message = 'Mail Unsuccess';
+	}
+
+
     $output = array(
         'error' => $error,
         'payload' => $payload,
         'conversation_id' => $conversation_id,
+        'message' => $message
     );
 
     echo json_encode($output);

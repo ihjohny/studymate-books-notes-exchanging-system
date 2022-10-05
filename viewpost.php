@@ -62,6 +62,8 @@
                     }, 5000);
 
                     window.location.replace("/conversation.php?id="+result.conversation_id);
+
+                    sendMail(accepted_post_id, result.conversation_id);
                 }
             },
             error: function(error) {
@@ -72,4 +74,23 @@
             }
         })
     });
+
+    function sendMail(accepted_post_id, conversation_id) {
+        $.ajax({
+            url: "viewpost_action.php",
+            method: "POST",
+            data: {
+                accepted_post_id: accepted_post_id,
+                conversation_id : conversation_id,
+                action: 'send_accepted_email'
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
 </script>

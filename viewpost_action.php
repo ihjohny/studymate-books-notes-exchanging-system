@@ -165,8 +165,17 @@ if ($_POST["action"] == 'accept_post') {
         $payload = 'This Post Already Received By User.';
     }
 
+    $output = array(
+        'error' => $error,
+        'payload' => $payload,
+        'conversation_id' => $conversation_id,
+    );
 
-    //////////////////////////////////////////////////
+    echo json_encode($output);
+}
+
+if ($_POST["action"] == 'send_accepted_email') {
+    
     $post_user_email = '';
     $post_title = '';
     
@@ -208,7 +217,7 @@ if ($_POST["action"] == 'accept_post') {
     <p>Hi, Congratulations Your Studymate Post has been accepted by another user.</p>
     <strong>'.$post_title.'</strong>
     </br>
-    <p><a href="http://localhost/conversation.php?id='.$conversation_id.'">
+    <p><a href="http://localhost/conversation.php?id='. $_POST["conversation_id"] .'">
     <b>Click here to see details.</b></a></p>
     </br>
     </br>
@@ -229,13 +238,5 @@ if ($_POST["action"] == 'accept_post') {
         $message = 'Mail Unsuccess';
 	}
 
-
-    $output = array(
-        'error' => $error,
-        'payload' => $payload,
-        'conversation_id' => $conversation_id,
-        'message' => $message
-    );
-
-    echo json_encode($output);
+    echo $message;
 }

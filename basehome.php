@@ -55,7 +55,7 @@ if (!$object->is_login()) {
                 <div class="sidebar-brand-icon rotate-n-15">
 
                 </div>
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fas fa-book-open"></i>
                 <div class="sidebar-brand-text mx-3">Studymate</div>
             </a>
 
@@ -65,22 +65,22 @@ if (!$object->is_login()) {
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="home.php">
-                    <i class="fas fa-tachometer-alt"></i>
+                    <i class="fas fa-home"></i>
                     <span>Home</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="offerposts.php">
-                    <i class="fas fa-procedures"></i>
+                    <i class="fas fa-upload"></i>
                     <span>Offer Posts</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="requestposts.php">
-                    <i class="fas fa-user-md"></i>
+                    <i class="fas fa-download"></i>
                     <span>Request Posts</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="myposts.php">
-                    <i class="fas fa-user-clock"></i>
+                    <i class="fas fa-book"></i>
                     <span>My Posts</span></a>
             </li>
             <li class="nav-item">
@@ -91,7 +91,7 @@ if (!$object->is_login()) {
 
             <li class="nav-item">
                 <a class="nav-link" href="history.php">
-                    <i class="fas fa-notes-medical"></i>
+                    <i class="fas fa-history"></i>
                     <span>History</span></a>
             </li>
             <!-- Sidebar Toggler (Sidebar) -->

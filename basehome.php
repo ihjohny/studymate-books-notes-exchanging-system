@@ -83,6 +83,11 @@ if (!$object->is_login()) {
                     <i class="fas fa-user-clock"></i>
                     <span>My Posts</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="subscriptions.php">
+                    <i class="fas fa-star"></i>
+                    <span>Subscriptions</span></a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="history.php">

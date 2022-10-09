@@ -5,7 +5,9 @@ include('basehome.php');
 ?>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Subscriptions</h1>
+<h1 class="h3 mb-2 text-gray-800">Subscriptions</h1>
+<p>If you subscribe any category you will get email for new post on that category.</p>
+
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">

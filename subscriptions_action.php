@@ -11,13 +11,39 @@ if ($_POST["action"] == 'fetch_subscriptions') {
     ";
     $categories_data = $object->get_result();
 
-    $isDataFound = false;
-    $html = '';
-    foreach ($categories_data as $category_row) {
-        $isDataFound = true;
+    $object->query = "
+    SELECT * FROM categories
+    ";
+    $object->execute();
+    $row_count = $object->row_count();
 
-        $html .=''.$category_row["name"].'';
+    $isDataFound = false;
+    $html = '<div class="container">
+                <div class="row">
+                    <div class="col">
+            ';
+
+    foreach ($categories_data as $index => $category_row) {
+        if ($index == $row_count/2) {
+            $html .= '</div>
+                        <div class="col">
+                    ';
+        }
+
+        $html .= '
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="switch_'.$category_row["name"].'">
+                    <label class="custom-control-label" for="switch_'.$category_row["name"].'"><strong>'.$category_row["name"].'</strong></label>
+                </div>
+                </br>
+            ';
+
+        $isDataFound = true;
     }
+
+    $html .= '      </div>
+                </div>
+            </div>';
 
     if (!$isDataFound) {
         $html =

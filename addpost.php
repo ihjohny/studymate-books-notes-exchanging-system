@@ -27,11 +27,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-3 text-right">Tag<span class="text-danger">*</span></label>
+                            <label class="col-md-3 text-right">Category<span class="text-danger">*</span></label>
                             <div class="col-md-9">
-                                <input type="text" name="post_tag" id="post_tag" class="form-control" data-parsley-maxlength="30" required data-parsley-trigger="keyup" />
+                                <select name="post_category" id="post_category" class="form-control" required>
+
+                                </select>                            
                             </div>
                         </div>
                     </div>
@@ -78,6 +81,21 @@
 
 <script>
     $(document).ready(function() {
+
+        
+        $.ajax({
+            url: "addpost_action.php",
+            method: "POST",
+            data: {
+                action: 'fetch_category'
+            },
+            success: function(data) {
+                $('#post_category').html(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
 
         $('#add_post').click(function() {
 
@@ -194,7 +212,7 @@
 
                 $('#post_title').val(data.title);
                 $('#post_type').val(data.type);
-                $('#post_tag').val(data.tag);
+                $('#post_category').val(data.tag);
                 $('#writer_name').val(data.writerName);
                 $('#description').val(data.description);
                 $('#uploaded_post_photo').html('<img src="' + data.photo + '" class="img-fluid img-thumbnail" width="100" />')

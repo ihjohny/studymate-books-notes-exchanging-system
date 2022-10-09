@@ -44,7 +44,7 @@ include('basehome.php');
                     <tr>
                         <th>Photo</th>
                         <th>Title</th>
-                        <th>Tag</th>
+                        <th>Category</th>
                         <th>Type</th>
                         <th>Action</th>
                     </tr>

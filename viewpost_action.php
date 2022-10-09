@@ -45,7 +45,7 @@ if ($_POST["action"] == 'fetch_single') {
                                 <div class="mt-3">
                                 <h5><strong>' . $post_row["title"] . '</strong> </h5>
                                 <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-' . $tag_color . ' lead">' . $post_row["type"] . '</span></p>
-                                <p class="text-secondary mb-1"><strong>Tag: </strong>' . $post_row["tag"] . '</p>
+                                <p class="text-secondary mb-1"><strong>Category: </strong>' . $post_row["tag"] . '</p>
                                 <p class="text-secondary mb-1"><strong>Writer Name: </strong>' . $post_row["writerName"] . '</p>
                                 <p class="text-secondary mb-1"><strong>Description: </strong>' . $post_row["description"] . '</p>
                         </div>

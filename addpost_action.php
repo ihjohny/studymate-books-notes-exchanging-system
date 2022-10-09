@@ -43,6 +43,7 @@ if ($_POST["action"] == 'add_new_post') {
     echo json_encode($output);
 }
 
+
 if ($_POST["action"] == 'fetch_single') {
 
     $object->query = "
@@ -66,6 +67,25 @@ if ($_POST["action"] == 'fetch_single') {
 
     echo json_encode($data);
 }
+
+
+if ($_POST["action"] == 'fetch_category') {
+
+    $object->query = "
+    SELECT * FROM categories
+    ";
+
+    $category_data = $object->get_result();
+
+    $html = '';
+
+    foreach ($category_data as $row) {
+        $html .= '<option value="'.$row["name"].'">'.$row["name"].'</option>';
+    }
+
+    echo $html;
+}
+
 
 if ($_POST["action"] == 'edit_post') {
 

@@ -47,4 +47,27 @@ include('footer.php');
         })
     });
     
+    $(document).on('change', '.custom-control-input', function() {
+        const category = $(this).data('id');
+        const isChecked = $(this).prop('checked');
+        
+        $.ajax({
+            url: "subscriptions_action.php",
+            method: "POST",
+            data: {
+                action: 'toggle_subscription',
+                category: category,
+                isChecked: isChecked
+            },
+            success: function(data) {
+                console.log(category, " isSubscribed ", isChecked);
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    });
+
 </script>
+

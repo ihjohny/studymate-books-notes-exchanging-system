@@ -49,7 +49,7 @@ if ($_POST["action"] == 'fetch_subscriptions') {
 
         $html .= '
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switch_'.$category_row["name"].'" '.$check_status.'>
+                    <input type="checkbox" class="custom-control-input" data-id="' . $category_row["name"] . '" id="switch_'.$category_row["name"].'" '.$check_status.'>
                     <label class="custom-control-label" for="switch_'.$category_row["name"].'"><strong>'.$category_row["name"].'</strong></label>
                 </div>
                 </br>
@@ -74,5 +74,38 @@ if ($_POST["action"] == 'fetch_subscriptions') {
     }
 
     echo $html;
+}
+
+
+if ($_POST["action"] == 'toggle_subscription') {
+
+    $data = array(
+        ':userId'            =>    $_SESSION['user_id'],
+        ':category'            =>  $_POST['category']
+    );
+
+    if ($_POST["isChecked"] == 'true' ) {
+        
+        $object->query = "
+        INSERT INTO user_category 
+        (userId, category) 
+        VALUES (:userId, :category)
+        ";
+        
+        $object->execute($data);
+
+    } else {
+
+        $object->query = "
+        DELETE FROM user_category 
+        WHERE userId = '".$_SESSION['user_id']."' AND category = '".$_POST['category']."'
+        ";
+    
+        $object->execute();
+
+    }
+
+    echo "success";
+
 }
 

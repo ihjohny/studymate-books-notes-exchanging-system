@@ -17,6 +17,16 @@ if ($_POST["action"] == 'fetch_subscriptions') {
     $object->execute();
     $row_count = $object->row_count();
 
+    $object->query = "
+    SELECT * FROM user_category
+    WHERE userId = '" . $_SESSION['user_id'] . "'
+    ";
+    $user_category_data = $object->get_result();
+    $user_cate = array();
+    foreach ($user_category_data as $cate) {
+        array_push($user_cate, $cate['category']);
+    }
+
     $isDataFound = false;
     $html = '<div class="container">
                 <div class="row">
@@ -30,9 +40,16 @@ if ($_POST["action"] == 'fetch_subscriptions') {
                     ';
         }
 
+        $check_status = '';
+        foreach($user_cate as $user_category) {
+            if($user_category == $category_row['name']) {
+                $check_status = 'checked';
+            }
+        }
+
         $html .= '
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="switch_'.$category_row["name"].'">
+                    <input type="checkbox" class="custom-control-input" id="switch_'.$category_row["name"].'" '.$check_status.'>
                     <label class="custom-control-label" for="switch_'.$category_row["name"].'"><strong>'.$category_row["name"].'</strong></label>
                 </div>
                 </br>
@@ -58,3 +75,4 @@ if ($_POST["action"] == 'fetch_subscriptions') {
 
     echo $html;
 }
+

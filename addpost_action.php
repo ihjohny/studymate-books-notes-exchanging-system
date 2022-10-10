@@ -31,13 +31,14 @@ if ($_POST["action"] == 'add_new_post') {
         VALUES (:type, :title, :tag, :writerName, :description, :photo, :userId)
         ";
 
-    $result = $object->execute($data);
+    $insert_id = $object->executeWithReturn($data);
 
     $success = '<div class="alert alert-success">Post Added Successfully</div>';
 
     $output = array(
         'error'        =>    $error,
-        'success'    =>    $success
+        'success'    =>    $success,
+        'insert_id'  =>    $insert_id
     );
 
     echo json_encode($output);

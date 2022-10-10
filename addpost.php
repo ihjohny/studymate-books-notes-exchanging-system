@@ -168,7 +168,7 @@
                             }, 5000);
 
                             if(document.getElementById("action").value == "add_new_post") {
-                                sendNewPostEmail(10);
+                                sendNewPostEmail(data.insert_id);
                             }
                         }
                     },

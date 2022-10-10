@@ -23,6 +23,17 @@ class DbData
 		}
 	}
 
+	function executeWithReturn($data = null)
+	{
+		$this->statement = $this->connect->prepare($this->query);
+		if ($data) {
+			$this->statement->execute($data);
+		} else {
+			$this->statement->execute();
+		}
+		return $this->connect->lastInsertId();
+	}
+
 	function row_count()
 	{
 		return $this->statement->rowCount();

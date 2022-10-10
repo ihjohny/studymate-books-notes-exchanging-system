@@ -199,47 +199,5 @@ if ($_POST["action"] == 'send_new_post_email') {
         }
     }
 
-
-	require 'class/class.phpmailer.php';
-	$mail = new PHPMailer;
-	$mail->IsSMTP();
-	$mail->Host = 'smtp.gmail.com';
-	$mail->Port = '587';
-	$mail->SMTPAuth = true;
-	$mail->Username = 'nstustudymate@gmail.com';
-	$mail->Password = 'qjxaeiscemnqsbob';
-	$mail->SMTPSecure = 'tls';
-	$mail->From = 'nstustudymate@gmail.com';
-	$mail->FromName = 'Studymate';
-    $mail->AddAddress('ihjohny10@gmail.com');
-	$mail->WordWrap = 50;
-	$mail->IsHTML(true);
-	$mail->Subject = 'A New Post Added on Studymate with Category '. $post_category .'.';
-
-	$message_body = '
-    <p>Hi, A new post has been added related to your subscribed category.</p>
-    <strong>'.$post_title.'</strong> with Category <strong>'.$post_category.'</strong>
-    </br>
-    <p><a href="http://localhost/home.php?post='. $_POST["post_id"] .'">
-    <b>Click here to see details.</b></a></p>
-    </br>
-    </br>
-    </br>
-    <p>Sincerely,</p>
-    <p>Studymate</p>
-    ';
-
-	$mail->Body = $message_body;
-
-    $message = '';
-	if($mail->Send())
-	{
-		$message = 'Mail Success';
-	}
-	else
-	{
-        $message = 'Mail Unsuccess';
-	}
-
-    echo $message;
+    echo json_encode($users_email);
 }

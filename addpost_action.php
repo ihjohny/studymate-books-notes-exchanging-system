@@ -18,7 +18,7 @@ if ($_POST["action"] == 'add_new_post') {
     $data = array(
         ':type'            =>    $object->clean_input($_POST["post_type"]),
         ':title'            =>    $object->clean_input($_POST["post_title"]),
-        ':tag'            =>    $object->clean_input($_POST["post_tag"]),
+        ':tag'            =>    $object->clean_input($_POST["post_category"]),
         ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
         ':description'            =>    $object->clean_input($_POST["description"]),
         ':photo'            =>    $post_photo,
@@ -113,7 +113,7 @@ if ($_POST["action"] == 'edit_post') {
         $data = array(
             ':type'            =>    $object->clean_input($_POST["post_type"]),
             ':title'            =>    $object->clean_input($_POST["post_title"]),
-            ':tag'            =>    $object->clean_input($_POST["post_tag"]),
+            ':tag'            =>    $object->clean_input($_POST["post_category"]),
             ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
             ':description'            =>    $object->clean_input($_POST["description"]),
             ':photo'            =>    $post_photo

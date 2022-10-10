@@ -31,7 +31,7 @@ if ($_POST["action"] == 'add_new_post') {
         VALUES (:type, :title, :tag, :writerName, :description, :photo, :userId)
         ";
 
-    $object->execute($data);
+    $result = $object->execute($data);
 
     $success = '<div class="alert alert-success">Post Added Successfully</div>';
 
@@ -156,4 +156,89 @@ function upload_image()
 		move_uploaded_file($_FILES['post_photo']['tmp_name'], $destination);
 		return $destination;
 	}
+}
+
+
+if ($_POST["action"] == 'send_new_post_email') {
+
+    $post_id = '';
+    $post_title = '';
+    $post_category = '';
+    
+    $object->query = "
+    SELECT * FROM posts 
+    WHERE id = '" . $_POST["post_id"] . "'
+    ";
+    $post_result = $object->get_result();
+    foreach($post_result as $post_row) {
+        $post_id = $post_row["id"];
+        $post_title = $post_row["title"];
+        $post_category = $post_row["tag"];
+    }
+
+    $users_id = array();
+    $users_email = array();
+
+    $object->query = "
+    SELECT * FROM user_category 
+    WHERE category = '".$post_category."'
+    ";
+    $user_cate_result = $object->get_result();
+    foreach($user_cate_result as $user_cate_row) {
+        array_push($users_id, $user_cate_row["userId"]);
+    }
+    foreach($users_id as $user_id) {
+        $object->query = "
+        SELECT * FROM users 
+        WHERE id = '".$user_id."'
+        ";
+        $user_result = $object->get_result();
+        foreach($user_result as $user_row) {
+            array_push($users_email, $user_row["email"]);
+        }
+    }
+
+
+	require 'class/class.phpmailer.php';
+	$mail = new PHPMailer;
+	$mail->IsSMTP();
+	$mail->Host = 'smtp.gmail.com';
+	$mail->Port = '587';
+	$mail->SMTPAuth = true;
+	$mail->Username = 'nstustudymate@gmail.com';
+	$mail->Password = 'qjxaeiscemnqsbob';
+	$mail->SMTPSecure = 'tls';
+	$mail->From = 'nstustudymate@gmail.com';
+	$mail->FromName = 'Studymate';
+    $mail->AddAddress('ihjohny10@gmail.com');
+	$mail->WordWrap = 50;
+	$mail->IsHTML(true);
+	$mail->Subject = 'A New Post Added on Studymate with Category '. $post_category .'.';
+
+	$message_body = '
+    <p>Hi, A new post has been added related to your subscribed category.</p>
+    <strong>'.$post_title.'</strong> with Category <strong>'.$post_category.'</strong>
+    </br>
+    <p><a href="http://localhost/home.php?post='. $_POST["post_id"] .'">
+    <b>Click here to see details.</b></a></p>
+    </br>
+    </br>
+    </br>
+    <p>Sincerely,</p>
+    <p>Studymate</p>
+    ';
+
+	$mail->Body = $message_body;
+
+    $message = '';
+	if($mail->Send())
+	{
+		$message = 'Mail Success';
+	}
+	else
+	{
+        $message = 'Mail Unsuccess';
+	}
+
+    echo $message;
 }

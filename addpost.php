@@ -166,6 +166,10 @@
                             setTimeout(function() {
                                 $('#message').html('');
                             }, 5000);
+
+                            if(document.getElementById("action").value == "add_new_post") {
+                                sendNewPostEmail(10);
+                            }
                         }
                     },
                     error: function(error) {
@@ -224,4 +228,22 @@
             }
         })
     });
+
+    function sendNewPostEmail(postId) {
+        $.ajax({
+            url: "addpost_action.php",
+            method: "POST",
+            data: {
+                post_id: postId,
+                action: 'send_new_post_email'
+            },
+            success: function(data) {
+                console.log("Emailed ", data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
 </script>

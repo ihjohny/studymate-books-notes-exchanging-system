@@ -204,7 +204,7 @@ if ($_POST["action"] == 'send_accepted_email') {
 	$mail->Port = '587';
 	$mail->SMTPAuth = true;
 	$mail->Username = 'nstustudymate@gmail.com';
-	$mail->Password = 'sdgrmpylehkkmkqh';
+	$mail->Password = 'qjxaeiscemnqsbob';
 	$mail->SMTPSecure = 'tls';
 	$mail->From = 'nstustudymate@gmail.com';
 	$mail->FromName = 'Studymate';

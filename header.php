@@ -48,7 +48,7 @@
 	</div>
 
 	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-		<h1 class="display-4">Intra University Books, Notes Sharing Platform</h1>
+		<h1 class="display-4">Books, Notes Sharing Platform</h1>
 	</div>
 	<br />
 	<br />

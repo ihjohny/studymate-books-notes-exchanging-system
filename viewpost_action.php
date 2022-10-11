@@ -12,10 +12,12 @@ if ($_POST["action"] == 'fetch_single') {
     ";
 
     $post_data = $object->get_result();
+    $post_user_id = '';
 
     $html = '<div class="modal-content">';
 
     foreach ($post_data as $post_row) {
+        $post_user_id = $post_row["userId"];
         $tag_color = '';
         if ($post_row["type"] == 'Request') {
             $tag_color .= 'warning';
@@ -53,6 +55,16 @@ if ($_POST["action"] == 'fetch_single') {
                 </div>
             </div>
         ';
+
+        $model_footer = '';
+        if($post_user_id != $_SESSION['user_id']) {
+            $model_footer = '
+                <div class="modal-footer">
+                    <input type="submit" name="accept_post" id="accept_post" class="btn btn-' . $tag_color . '" data-id="' . $post_row["id"] . '" value="Accept" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            ';
+        }
 
         $object->query = "
         SELECT * FROM users 
@@ -93,10 +105,7 @@ if ($_POST["action"] == 'fetch_single') {
             </div>
         </div>
     </div>
-    <div class="modal-footer">
-        <input type="submit" name="accept_post" id="accept_post" class="btn btn-' . $tag_color . '" data-id="' . $post_row["id"] . '" value="Accept" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
+            '.$model_footer.'
     </div>
             ';
         }

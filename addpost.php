@@ -238,7 +238,7 @@
                 action: 'send_new_post_email'
             },
             success: function(data) {
-                console.log("Emailed ", data);
+                console.log("Email ", data);
             },
             error: function(error) {
                 console.log(error);

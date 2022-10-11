@@ -119,3 +119,31 @@ include('addpost.php');
 <?php
 include('viewpost.php');
 ?>
+
+<?php
+if (isset($_GET["post"])) {
+    ?>
+        <script>
+            $.ajax({
+                url: "viewpost_action.php",
+                method: "POST",
+                data: {
+                    post_id: <?php echo $_GET["post"]; ?>,
+                    action: 'fetch_single'
+                },
+                success: function(data) {
+                    $('#viewPostModel').modal('show');
+
+                    $('#post_details').html(data);
+
+                    $('#hidden_post_id').val(post_id);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+        });
+        </script>
+    <?php
+    }
+?>
+

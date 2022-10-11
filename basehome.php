@@ -117,7 +117,7 @@ if (!$object->is_login()) {
                     </button>
 
                     <div class="text-center">
-                        <h2>Intra University Books, Notes Sharing Platform</h2>
+                        <h2>Books, Notes Sharing Platform</h2>
                     </div>
 
                     <!-- Topbar Navbar -->

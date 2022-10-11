@@ -57,6 +57,14 @@ class DbData
 		return false;
 	}
 
+	function is_admin_login()
+	{
+		if (isset($_SESSION['admin_id'])) {
+			return true;
+		}
+		return false;
+	}
+
 	function clean_input($string)
 	{
 		$string = trim($string);

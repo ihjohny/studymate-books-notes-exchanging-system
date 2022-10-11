@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Studymate - Intra University Books, Notes Sharing Platform</title>
+	<title>Studymate - Books, Notes Sharing Platform</title>
 
 	<!-- Custom styles for this page -->
 	<link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">

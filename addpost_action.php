@@ -1,6 +1,7 @@
 <?php
 
 include('class/DbData.php');
+include('class/SendEmail.php');
 
 $object = new DbData;
 
@@ -165,6 +166,7 @@ if ($_POST["action"] == 'send_new_post_email') {
     $post_id = '';
     $post_title = '';
     $post_category = '';
+    $post_type = '';
     
     $object->query = "
     SELECT * FROM posts 
@@ -175,6 +177,7 @@ if ($_POST["action"] == 'send_new_post_email') {
         $post_id = $post_row["id"];
         $post_title = $post_row["title"];
         $post_category = $post_row["tag"];
+        $post_type = $post_row["type"];
     }
 
     $users_id = array();
@@ -202,6 +205,38 @@ if ($_POST["action"] == 'send_new_post_email') {
     }
 
     // send batch email
-    
-    echo json_encode($users_email);
+    $message_body = '
+    <p>Hi, A new '.$post_type.' post added on studymate related to your subscribed category.</p>
+    <strong>'.$post_title.'</strong> with category <strong>'.$post_category.'</strong>
+    </br>
+    <p><a href="http://localhost/home.php?post='. $post_id .'">
+    <b>Click here to see details.</b></a></p>
+    </br>
+    </br>
+    </br>
+    <p>Sincerely,</p>
+    <p>Studymate</p>
+    ';
+
+    $email = new SendEmail;
+
+    $isSuccess = $email->send(
+        $users_email,
+        'New '.$post_type.' Post on Studymate with Category '.$post_category.'.',
+        $message_body 
+    );
+
+    $message = '';
+
+	if($isSuccess)
+	{
+		$message = 'Mail Success ';
+        $message .= json_encode($users_email);
+	}
+	else
+	{
+        $message = 'Mail Unsuccess';
+	}
+
+    echo $message;
 }

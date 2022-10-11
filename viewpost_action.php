@@ -1,6 +1,7 @@
 <?php
 
 include('class/DbData.php');
+include('class/SendEmail.php');
 
 $object = new DbData;
 
@@ -206,22 +207,6 @@ if ($_POST["action"] == 'send_accepted_email') {
         }
     }
 
-	require 'class/class.phpmailer.php';
-	$mail = new PHPMailer;
-	$mail->IsSMTP();
-	$mail->Host = 'smtp.gmail.com';
-	$mail->Port = '587';
-	$mail->SMTPAuth = true;
-	$mail->Username = 'nstustudymate@gmail.com';
-	$mail->Password = 'qjxaeiscemnqsbob';
-	$mail->SMTPSecure = 'tls';
-	$mail->From = 'nstustudymate@gmail.com';
-	$mail->FromName = 'Studymate';
-	$mail->AddAddress($post_user_email);
-	$mail->WordWrap = 50;
-	$mail->IsHTML(true);
-	$mail->Subject = 'Studymate Post has been Accepted.';
-
 	$message_body = '
     <p>Hi, Congratulations Your Studymate Post has been accepted by another user.</p>
     <strong>'.$post_title.'</strong>
@@ -235,10 +220,17 @@ if ($_POST["action"] == 'send_accepted_email') {
     <p>Studymate</p>
     ';
 
-	$mail->Body = $message_body;
+    $email = new SendEmail;
+
+    $isSuccess = $email->send(
+        array($post_user_email),
+        'Studymate Post has been Accepted.',
+        $message_body 
+    );
 
     $message = '';
-	if($mail->Send())
+
+	if($isSuccess)
 	{
 		$message = 'Mail Success';
 	}
@@ -249,3 +241,4 @@ if ($_POST["action"] == 'send_accepted_email') {
 
     echo $message;
 }
+

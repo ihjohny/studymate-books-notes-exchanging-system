@@ -60,8 +60,7 @@ include('footer.php');
                 isChecked: isChecked
             },
             success: function(data) {
-                console.log(category, " isSubscribed ", isChecked);
-                console.log(data);
+                console.log(data, " isSubscribed ", isChecked);
             },
             error: function(error) {
                 console.log(error);

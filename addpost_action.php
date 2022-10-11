@@ -195,9 +195,13 @@ if ($_POST["action"] == 'send_new_post_email') {
         ";
         $user_result = $object->get_result();
         foreach($user_result as $user_row) {
-            array_push($users_email, $user_row["email"]);
+            if($user_row["id"] != $_SESSION['user_id']) {
+                array_push($users_email, $user_row["email"]);
+            }
         }
     }
 
+    // send batch email
+    
     echo json_encode($users_email);
 }

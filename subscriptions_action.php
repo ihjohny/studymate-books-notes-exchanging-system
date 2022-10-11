@@ -34,7 +34,7 @@ if ($_POST["action"] == 'fetch_subscriptions') {
             ';
 
     foreach ($categories_data as $index => $category_row) {
-        if ($index == $row_count/2) {
+        if ($index == intval($row_count/2)) {
             $html .= '</div>
                         <div class="col">
                     ';

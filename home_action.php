@@ -89,7 +89,7 @@ if ($_POST["action"] == 'fetch_current_converstation') {
     $object->query = "
     SELECT * FROM conversations
     WHERE ((accepterUserId = '" . $_SESSION['user_id'] . "') OR 
-    (posterUserId = '" . $_SESSION['user_id'] . "')) AND (isSuccess = 0)
+    (posterUserId = '" . $_SESSION['user_id'] . "')) AND (isSuccess = 0) AND (isBlock = 0)
     ";
     $conversations_data = $object->get_result();
 

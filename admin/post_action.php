@@ -87,6 +87,14 @@ if ($_POST["action"] == 'inactive_post') {
 
     $object->execute();
 
+    $object->query = "
+    UPDATE conversations
+    SET isBlock = 1
+    WHERE postId = '" . $_POST['post_id'] . "' AND isSuccess = 0
+    ";
+
+    $object->execute();
+
     echo '<div class="alert alert-success">Post Inactive Successful</div>';
 
 }
@@ -98,6 +106,14 @@ if ($_POST["action"] == 'active_post') {
     UPDATE posts
     SET isBlock = 0
     WHERE id = '" . $_POST['post_id'] . "'
+    ";
+
+    $object->execute();
+
+    $object->query = "
+    UPDATE conversations
+    SET isBlock = 0
+    WHERE postId = '" . $_POST['post_id'] . "' AND isSuccess = 0
     ";
 
     $object->execute();

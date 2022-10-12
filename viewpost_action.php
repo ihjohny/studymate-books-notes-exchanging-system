@@ -134,7 +134,14 @@ if ($_POST["action"] == 'accept_post') {
     $isSuccess = $object->execute();
     $isSuccess_rows = $object->row_count();
 
-    if($isSuccess_rows < 1) {
+    $object->query = "
+    SELECT * FROM posts 
+    WHERE id = '" . $_POST["accepted_post_id"] . "' AND isBlock = 1
+    ";
+    $isBlock = $object->execute();
+    $isBlock_rows = $object->row_count();
+
+    if($isSuccess_rows < 1 && $isBlock_rows < 1) {
         
         if ($conversation_rows < 1) {
             $poster_id;
@@ -172,7 +179,11 @@ if ($_POST["action"] == 'accept_post') {
 
     } else {
         $error = 'already_received';
-        $payload = 'This Post Already Received By User.';
+        if($isBlock_rows < 1) {
+            $payload = 'This Post Already Received By User.';
+        } else {
+            $payload = 'This Post Blocked Admin.';
+        }
     }
 
     $output = array(

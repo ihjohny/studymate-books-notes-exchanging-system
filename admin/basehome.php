@@ -85,7 +85,7 @@ if (!$object->is_admin_login()) {
                     <span>Categories List</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="subscriptions.php">
+                <a class="nav-link" href="department.php">
                     <i class="fas fa-school"></i>
                     <span>Departments List</span></a>
             </li>

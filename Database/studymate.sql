@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2022 at 06:43 AM
+-- Generation Time: Oct 12, 2022 at 06:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `studymate`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `email` varchar(120) NOT NULL,
+  `name` varchar(120) NOT NULL,
+  `password` varchar(120) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `email`, `name`, `password`) VALUES
+(1, 'admin@email.com', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -42,7 +62,9 @@ INSERT INTO `categories` (`name`) VALUES
 ('Mathematics'),
 ('Economics'),
 ('Data Structure'),
-('Algorithms');
+('Algorithms'),
+('Poem'),
+('Science');
 
 -- --------------------------------------------------------
 
@@ -59,6 +81,16 @@ CREATE TABLE `conversations` (
   `pendingMsgUserId` int(11) DEFAULT NULL,
   `isSuccess` tinyint(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE `departments` (
+  `name` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -87,7 +119,7 @@ CREATE TABLE `posts` (
   `title` varchar(100) NOT NULL,
   `writerName` varchar(100) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `tag` varchar(50) DEFAULT NULL,
+  `category` varchar(120) DEFAULT NULL,
   `type` varchar(15) NOT NULL,
   `isSuccess` tinyint(1) NOT NULL DEFAULT 0,
   `userId` int(11) NOT NULL,
@@ -131,6 +163,12 @@ CREATE TABLE `user_category` (
 --
 
 --
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `conversations`
 --
 ALTER TABLE `conversations`
@@ -165,34 +203,40 @@ ALTER TABLE `user_category`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_category`
 --
 ALTER TABLE `user_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

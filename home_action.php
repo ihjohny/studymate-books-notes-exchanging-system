@@ -11,7 +11,7 @@ if ($_POST["action"] == 'fetch_all') {
     $output = array();
 
     $main_query = "
-    SELECT * FROM posts WHERE userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0) AND (isBlock = 0)
+    SELECT * FROM posts WHERE userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0) AND (isBlock = 0) AND (userBlock = 0)
     ";
 
     $search_query = '';
@@ -89,7 +89,7 @@ if ($_POST["action"] == 'fetch_current_converstation') {
     $object->query = "
     SELECT * FROM conversations
     WHERE ((accepterUserId = '" . $_SESSION['user_id'] . "') OR 
-    (posterUserId = '" . $_SESSION['user_id'] . "')) AND (isSuccess = 0) AND (isBlock = 0)
+    (posterUserId = '" . $_SESSION['user_id'] . "')) AND (isSuccess = 0) AND (isBlock = 0) AND (userBlock = 0)
     ";
     $conversations_data = $object->get_result();
 

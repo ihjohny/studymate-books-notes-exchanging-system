@@ -87,6 +87,22 @@ if ($_POST["action"] == 'inactive_user') {
 
     $object->execute();
 
+    $object->query = "
+    UPDATE posts
+    SET userBlock = 1
+    WHERE userId = '" . $_POST['user_id'] . "'
+    ";
+
+    $object->execute();
+
+    $object->query = "
+    UPDATE conversations
+    SET userBlock = 1
+    WHERE (posterUserId = '" . $_POST['user_id'] . "') OR (accepterUserId = '" . $_POST['user_id'] . "')
+    ";
+
+    $object->execute();
+
     echo '<div class="alert alert-success">User Block Successful</div>';
 
 }
@@ -98,6 +114,22 @@ if ($_POST["action"] == 'active_user') {
     UPDATE users
     SET isBlock = 0
     WHERE id = '" . $_POST['user_id'] . "'
+    ";
+
+    $object->execute();
+
+    $object->query = "
+    UPDATE posts
+    SET userBlock = 0
+    WHERE userId = '" . $_POST['user_id'] . "'
+    ";
+
+    $object->execute();
+
+    $object->query = "
+    UPDATE conversations
+    SET userBlock = 0
+    WHERE (posterUserId = '" . $_POST['user_id'] . "') OR (accepterUserId = '" . $_POST['user_id'] . "')
     ";
 
     $object->execute();

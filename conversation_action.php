@@ -17,87 +17,96 @@ if ($_POST["action"] == 'received') {
     $conversation;
     foreach ($c_result as $c_row) {
         $conversation = $c_row;
-    }
-
-    $sender_id;
-    if ($conversation["accepterUserId"] == $_SESSION['user_id']) {
-        $sender_id = $conversation["posterUserId"];
-    } else if ($conversation["posterUserId"] == $_SESSION['user_id']) {
-        $sender_id = $conversation["accepterUserId"];
-    }
-
-    // receiver points update
-    $object->query = "
-    SELECT * FROM users 
-    WHERE id = '" . $_SESSION['user_id'] . "'
-    ";
-    $receiver = $object->get_result();
-    foreach ($receiver as $user_row) {
-        if ($user_row["point"] > 0) {
-            $receiver_new_points = $user_row["point"] - 1;
-            $object->query = "
-            UPDATE users 
-            SET point = '" . $receiver_new_points . "' 
-            WHERE id = '" . $_SESSION['user_id'] . "'
-            ";
-            $object->execute();
-        } else {
+        if($c_row['isBlock']) {
             $error = true;
         }
     }
 
-    if (!$error) {
-        // sender points update
-        $object->query =
-            "
-            SELECT * FROM users 
-            WHERE id = '" . $sender_id . "'
-        ";
-        $sender = $object->get_result();
-        foreach ($sender as $sender_row) {
-            $sender_new_points = $sender_row["point"] + 1;
-            $object->query =
-                "
-                UPDATE users 
-                SET point = '" . $sender_new_points . "' 
-                WHERE id = '" . $sender_id . "'
-            ";
-            $object->execute();
+    if(!$error) {
+        
+        $sender_id;
+        if ($conversation["accepterUserId"] == $_SESSION['user_id']) {
+            $sender_id = $conversation["posterUserId"];
+        } else if ($conversation["posterUserId"] == $_SESSION['user_id']) {
+            $sender_id = $conversation["accepterUserId"];
         }
 
-        // mark converstation as success
-        $object->query =
-            "
-            UPDATE conversations 
-            SET isSuccess = 1, receiverUserId = '" . $_SESSION['user_id'] . "'
-            WHERE id = '" . $conversation["id"] . "'
-        ";
-        $object->execute();
-
-        // mark post as success
-        $object->query =
-            "
-            UPDATE posts 
-            SET isSuccess = 1
-            WHERE id = '" . $conversation["postId"] . "'
-        ";
-        $object->execute();
-
-        // delete related conversations for this post
+        // receiver points update
         $object->query = "
-        DELETE FROM conversations 
-        WHERE (postId = '" . $conversation["postId"] . "') AND (id != '" . $_POST["conversation_id"] . "')
+        SELECT * FROM users 
+        WHERE id = '" . $_SESSION['user_id'] . "'
         ";
-    
-        $object->execute();
+        $receiver = $object->get_result();
+        foreach ($receiver as $user_row) {
+            if ($user_row["point"] > 0) {
+                $receiver_new_points = $user_row["point"] - 1;
+                $object->query = "
+                UPDATE users 
+                SET point = '" . $receiver_new_points . "' 
+                WHERE id = '" . $_SESSION['user_id'] . "'
+                ";
+                $object->execute();
+            } else {
+                $error = true;
+            }
+        }
 
-    }
+        if (!$error) {
+            // sender points update
+            $object->query =
+                "
+                SELECT * FROM users 
+                WHERE id = '" . $sender_id . "'
+            ";
+            $sender = $object->get_result();
+            foreach ($sender as $sender_row) {
+                $sender_new_points = $sender_row["point"] + 1;
+                $object->query =
+                    "
+                    UPDATE users 
+                    SET point = '" . $sender_new_points . "' 
+                    WHERE id = '" . $sender_id . "'
+                ";
+                $object->execute();
+            }
 
-    $msg;
-    if ($error) {
-        $msg = '<div class="alert alert-danger mt-3">No point available</div>';
+            // mark converstation as success
+            $object->query =
+                "
+                UPDATE conversations 
+                SET isSuccess = 1, receiverUserId = '" . $_SESSION['user_id'] . "'
+                WHERE id = '" . $conversation["id"] . "'
+            ";
+            $object->execute();
+
+            // mark post as success
+            $object->query =
+                "
+                UPDATE posts 
+                SET isSuccess = 1
+                WHERE id = '" . $conversation["postId"] . "'
+            ";
+            $object->execute();
+
+            // delete related conversations for this post
+            $object->query = "
+            DELETE FROM conversations 
+            WHERE (postId = '" . $conversation["postId"] . "') AND (id != '" . $_POST["conversation_id"] . "')
+            ";
+        
+            $object->execute();
+
+        }
+
+        $msg;
+        if ($error) {
+            $msg = '<div class="alert alert-danger mt-3">No point available</div>';
+        } else {
+            $msg = '';
+        }
+
     } else {
-        $msg = '';
+        $msg = '<div class="alert alert-danger mt-3">Post Blocked By Admin</div>';
     }
 
     $output = array(

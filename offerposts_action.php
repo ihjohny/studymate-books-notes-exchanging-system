@@ -6,7 +6,7 @@ $object = new DbData;
 
 if ($_POST["action"] == 'fetch_offer') {
 
-    $order_column = array('tag', 'type');
+    $order_column = array('category', 'type');
 
     $output = array();
 
@@ -19,7 +19,7 @@ if ($_POST["action"] == 'fetch_offer') {
     if (isset($_POST["search"]["value"])) {
         $search_query .= 'AND(';
         $search_query .= 'title LIKE "%' . $_POST["search"]["value"] . '%" ';
-        $search_query .= 'OR tag LIKE "%' . $_POST["search"]["value"] . '%" ';
+        $search_query .= 'OR category LIKE "%' . $_POST["search"]["value"] . '%" ';
         $search_query .= 'OR writerName LIKE "%' . $_POST["search"]["value"] . '%" ';
         $search_query .= ')';
     }
@@ -59,7 +59,7 @@ if ($_POST["action"] == 'fetch_offer') {
 
         $sub_array[] = '<img src="' . $row["photo"] . '" class="img-thumbnail" width="100" />';
         $sub_array[] = $row["title"];
-        $sub_array[] = $row["tag"];
+        $sub_array[] = $row["category"];
 
         $status = '';
         if ($row["type"] == 'Offer') {

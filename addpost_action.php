@@ -19,7 +19,7 @@ if ($_POST["action"] == 'add_new_post') {
     $data = array(
         ':type'            =>    $object->clean_input($_POST["post_type"]),
         ':title'            =>    $object->clean_input($_POST["post_title"]),
-        ':tag'            =>    $object->clean_input($_POST["post_category"]),
+        ':category'            =>    $object->clean_input($_POST["post_category"]),
         ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
         ':description'            =>    $object->clean_input($_POST["description"]),
         ':photo'            =>    $post_photo,
@@ -28,8 +28,8 @@ if ($_POST["action"] == 'add_new_post') {
 
     $object->query = "
         INSERT INTO posts 
-        (type, title, tag, writerName, description, photo, userId) 
-        VALUES (:type, :title, :tag, :writerName, :description, :photo, :userId)
+        (type, title, category, writerName, description, photo, userId) 
+        VALUES (:type, :title, :category, :writerName, :description, :photo, :userId)
         ";
 
     $insert_id = $object->executeWithReturn($data);
@@ -61,7 +61,7 @@ if ($_POST["action"] == 'fetch_single') {
         $data['id'] = $row['id'];
         $data['type'] = $row['type'];
         $data['title'] = $row["title"];
-        $data['tag'] = $row["tag"];
+        $data['category'] = $row["category"];
         $data['writerName'] = $row["writerName"];
         $data['description'] = $row["description"];
         $data['photo'] = $row["photo"];
@@ -115,7 +115,7 @@ if ($_POST["action"] == 'edit_post') {
         $data = array(
             ':type'            =>    $object->clean_input($_POST["post_type"]),
             ':title'            =>    $object->clean_input($_POST["post_title"]),
-            ':tag'            =>    $object->clean_input($_POST["post_category"]),
+            ':category'            =>    $object->clean_input($_POST["post_category"]),
             ':writerName'            =>    $object->clean_input($_POST["writer_name"]),
             ':description'            =>    $object->clean_input($_POST["description"]),
             ':photo'            =>    $post_photo
@@ -125,7 +125,7 @@ if ($_POST["action"] == 'edit_post') {
             UPDATE posts  
             SET type = :type, 
             title = :title, 
-            tag = :tag, 
+            category = :category, 
             writerName = :writerName, 
             description = :description, 
             photo = :photo 
@@ -176,7 +176,7 @@ if ($_POST["action"] == 'send_new_post_email') {
     foreach($post_result as $post_row) {
         $post_id = $post_row["id"];
         $post_title = $post_row["title"];
-        $post_category = $post_row["tag"];
+        $post_category = $post_row["category"];
         $post_type = $post_row["type"];
     }
 

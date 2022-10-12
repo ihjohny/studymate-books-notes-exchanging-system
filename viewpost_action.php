@@ -19,14 +19,14 @@ if ($_POST["action"] == 'fetch_single') {
 
     foreach ($post_data as $post_row) {
         $post_user_id = $post_row["userId"];
-        $tag_color = '';
+        $category_color = '';
         if ($post_row["type"] == 'Request') {
-            $tag_color .= 'warning';
+            $category_color .= 'warning';
         } else {
-            $tag_color .= 'success';
+            $category_color .= 'success';
         }
 
-        $html .= '<div class="modal-header bg-' . $tag_color . '">';
+        $html .= '<div class="modal-header bg-' . $category_color . '">';
         $html .= '
         <h4 class="modal-title text-white" id="modal_title">' . $post_row["title"] . '</h4>
         <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
@@ -47,8 +47,8 @@ if ($_POST["action"] == 'fetch_single') {
                                 <img src="' . $post_row["photo"] . '" alt="Photo" class="flex-fill rounded" width="80">
                                 <div class="mt-3">
                                 <h5><strong>' . $post_row["title"] . '</strong> </h5>
-                                <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-' . $tag_color . ' lead">' . $post_row["type"] . '</span></p>
-                                <p class="text-secondary mb-1"><strong>Category: </strong>' . $post_row["tag"] . '</p>
+                                <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-' . $category_color . ' lead">' . $post_row["type"] . '</span></p>
+                                <p class="text-secondary mb-1"><strong>Category: </strong>' . $post_row["category"] . '</p>
                                 <p class="text-secondary mb-1"><strong>Writer Name: </strong>' . $post_row["writerName"] . '</p>
                                 <p class="text-secondary mb-1"><strong>Description: </strong>' . $post_row["description"] . '</p>
                         </div>
@@ -61,7 +61,7 @@ if ($_POST["action"] == 'fetch_single') {
         if($post_user_id != $_SESSION['user_id']) {
             $model_footer = '
                 <div class="modal-footer">
-                    <input type="submit" name="accept_post" id="accept_post" class="btn btn-' . $tag_color . '" data-id="' . $post_row["id"] . '" value="Accept" />
+                    <input type="submit" name="accept_post" id="accept_post" class="btn btn-' . $category_color . '" data-id="' . $post_row["id"] . '" value="Accept" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             ';

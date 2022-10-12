@@ -216,7 +216,7 @@
 
                 $('#post_title').val(data.title);
                 $('#post_type').val(data.type);
-                $('#post_category').val(data.tag);
+                $('#post_category').val(data.category);
                 $('#writer_name').val(data.writerName);
                 $('#description').val(data.description);
                 $('#uploaded_post_photo').html('<img src="' + data.photo + '" class="img-fluid img-thumbnail" width="100" />')

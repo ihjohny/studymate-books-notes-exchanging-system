@@ -171,7 +171,7 @@ if (!$isValid) {
                         <div class="mt-3">
                             <h5><strong><?php echo $post_row["title"]; ?></strong></h5>
                             <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-<?php echo $post_type_color ?> lead"><?php echo $post_row["type"]; ?></span></p>
-                            <p class="text-secondary mb-1"><strong>Category: </strong><?php echo $post_row["tag"]; ?></p>
+                            <p class="text-secondary mb-1"><strong>Category: </strong><?php echo $post_row["category"]; ?></p>
                             <p class="text-secondary mb-1"><strong>Writer Name: </strong><?php echo $post_row["writerName"]; ?></p>
                             <p class="text-secondary mb-1"><strong>Description: </strong><?php echo $post_row["description"]; ?></p>
                         </div>

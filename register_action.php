@@ -73,3 +73,20 @@ function upload_image()
 	}
 }
 
+
+if ($_POST["action"] == 'fetch_departments') {
+
+    $object->query = "
+    SELECT * FROM departments
+    ";
+
+    $department_data = $object->get_result();
+
+    $html = '';
+
+    foreach ($department_data as $row) {
+        $html .= '<option value="'.$row["name"].'">'.$row["name"].'</option>';
+    }
+
+    echo $html;
+}

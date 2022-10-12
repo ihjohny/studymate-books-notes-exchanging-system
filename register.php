@@ -44,11 +44,6 @@ include('header.php');
                                 <div class="form-group">
                                     <label>User Department<span class="text-danger">*</span></label>
                                     <select name="user_department" id="user_department" class="form-control">
-                                        <option value="ice">ICE</option>
-                                        <option value="cste">CSTE</option>
-                                        <option value="eee">EEE</option>
-                                        <option value="se">SE</option>
-                                        <option value="math">Math</option>
                                     </select>
                                 </div>
                             </div>
@@ -87,6 +82,25 @@ include('footer.php');
 ?>
 
 <script>
+
+    $(document).ready(function() {
+        
+        $.ajax({
+            url: "register_action.php",
+            method: "POST",
+            data: {
+                action: 'fetch_departments'
+            },
+            success: function(data) {
+                $('#user_department').html(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+    });
+
     $('#user_register_form').parsley();
 
     $('#user_register_form').on('submit', function(event) {

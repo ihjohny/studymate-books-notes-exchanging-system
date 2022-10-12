@@ -88,7 +88,7 @@ include('footer.php');
 
     });
 
-    var dateTable;
+    var dataTable;
 
     $(document).ready(function() {
 

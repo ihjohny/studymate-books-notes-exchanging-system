@@ -47,7 +47,7 @@ include('footer.php');
 ?>
 
 <script>
-    var dateTable;
+    var dataTable;
 
     $(document).ready(function() {
 

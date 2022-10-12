@@ -70,12 +70,12 @@ if (!$object->is_admin_login()) {
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="offerposts.php">
+                <a class="nav-link" href="user.php">
                     <i class="fas fa-users"></i>
                     <span>Users List</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="requestposts.php">
+                <a class="nav-link" href="post.php">
                     <i class="fas fa-database"></i>
                     <span>Posts List</span></a>
             </li>

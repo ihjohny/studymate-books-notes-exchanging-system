@@ -16,7 +16,7 @@ $result = $object->get_result();
 
 <!-- DataTales Example -->
 
-<form method="post" id="user_profile_form" enctype="multipart/form-data">
+<form method="post" id="user_profile_form" enctype="multipart/form-data" autocomplete="off">
     <div class="row">
         <div class="col-md-8"><span id="message"></span>
             <div class="card shadow mb-4">
@@ -66,9 +66,7 @@ $result = $object->get_result();
                             <div class="form-group">
                                 <label>User Department<span class="text-danger">*</span></label>
                                 <select name="user_department" id="user_department" class="form-control">
-                                    <option value="ice">ICE</option>
-                                    <option value="cste">CSTE</option>
-                                    <option value="eee">EEE</option>
+                         
                                 </select>
                             </div>
                         </div>
@@ -89,6 +87,7 @@ $result = $object->get_result();
         </div>
     </div>
 </form>
+
 <?php
 include('footer.php');
 ?>
@@ -96,30 +95,20 @@ include('footer.php');
 <script>
     $(document).ready(function() {
 
-        <?php
-        foreach ($result as $row) {
-        ?>
-            $('#user_email_address').val("<?php echo $row['email']; ?>");
-            $('#user_password').val("<?php echo $row['password']; ?>");
-            $('#user_name').val("<?php echo $row['name']; ?>");
-            $('#user_phone_no').val("<?php echo $row['phone']; ?>");
-            $('#user_roll_no').val("<?php echo $row['roll']; ?>");
-            $('#user_department').val("<?php echo $row['department']; ?>");
-            $('#user_address').val("<?php echo $row['address']; ?>");
-
-            <?php
-            if ($row['photo'] != '') {
-            ?>
-                $("#uploaded_user_photo").html("<img src='<?php echo $row["photo"]; ?>' class='img-thumbnail' width='100' /><input type='hidden' name='hidden_uploaded_user_photo' value='<?php echo $row['photo']; ?>' />");
-
-            <?php
-            } else {
-            ?>
-                $("#uploaded_user_photo").html("<input type='hidden' name='hidden_uploaded_user_photo' value='' />");
-        <?php
+        $.ajax({
+            url: "register_action.php",
+            method: "POST",
+            data: {
+                action: 'fetch_departments'
+            },
+            success: function(data) {
+                $('#user_department').html(data);
+                fillUpData();
+            },
+            error: function(error) {
+                console.log(error);
             }
-        }
-        ?>
+        });
 
         $('#user_photo').change(function(){
             var extension = $('#user_photo').val().split('.').pop().toLowerCase();
@@ -186,4 +175,33 @@ include('footer.php');
         });
 
     });
+
+    function fillUpData() {
+        <?php
+        foreach ($result as $row) {
+        ?>
+            $('#user_email_address').val("<?php echo $row['email']; ?>");
+            $('#user_password').val("<?php echo $row['password']; ?>");
+            $('#user_name').val("<?php echo $row['name']; ?>");
+            $('#user_phone_no').val("<?php echo $row['phone']; ?>");
+            $('#user_roll_no').val("<?php echo $row['roll']; ?>");
+            $('#user_department').val("<?php echo $row['department']; ?>");
+            $('#user_address').val("<?php echo $row['address']; ?>");
+
+            <?php
+            if ($row['photo'] != '') {
+            ?>
+                $("#uploaded_user_photo").html("<img src='<?php echo $row["photo"]; ?>' class='img-thumbnail' width='100' /><input type='hidden' name='hidden_uploaded_user_photo' value='<?php echo $row['photo']; ?>' />");
+
+            <?php
+            } else {
+            ?>
+                $("#uploaded_user_photo").html("<input type='hidden' name='hidden_uploaded_user_photo' value='' />");
+        <?php
+            }
+        }
+        ?>
+    }
+
 </script>
+

@@ -11,7 +11,7 @@ if ($_POST["action"] == 'fetch_offer') {
     $output = array();
 
     $main_query = "
-    SELECT * FROM posts WHERE type = 'Offer' AND userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0)
+    SELECT * FROM posts WHERE type = 'Offer' AND userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0) AND (isBlock = 0)
     ";
 
     $search_query = '';

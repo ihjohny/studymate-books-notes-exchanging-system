@@ -136,7 +136,7 @@ if ($_POST["action"] == 'accept_post') {
 
     $object->query = "
     SELECT * FROM posts 
-    WHERE id = '" . $_POST["accepted_post_id"] . "' AND isBlock = 1
+    WHERE id = '" . $_POST["accepted_post_id"] . "' AND ((isBlock = 1) OR (userBlock = 1))
     ";
     $isBlock = $object->execute();
     $isBlock_rows = $object->row_count();

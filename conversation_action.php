@@ -20,6 +20,9 @@ if ($_POST["action"] == 'received') {
         if($c_row['isBlock']) {
             $error = true;
         }
+        if($c_row['userBlock']) {
+            $error = true;
+        }
     }
 
     if(!$error) {

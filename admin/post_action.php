@@ -57,9 +57,9 @@ if ($_POST["action"] == 'fetch_all_current_post') {
 
         $status = '';
         if ($row["isBlock"]) {
-            $status = '<button type="button" id="inactive_btn" name="inactive_btn" class="btn btn-danger btn-sm" data-id="' . $row["id"] . '"> Inactive </button>';
+            $status = '<button type="button" id="inactive_btn" name="inactive_btn" class="btn btn-sm btn-success" data-id="' . $row["id"] . '"> Active </button>';
         } else {
-            $status = '<button type="button" id="active_btn" name="active_btn" class="btn btn-sm btn-success" data-id="' . $row["id"] . '"> Active </button>';
+            $status = '<button type="button" id="active_btn" name="active_btn" class="btn btn-danger btn-sm" data-id="' . $row["id"] . '"> Inactive </button>';
         }
         $sub_array[] = $status;
 

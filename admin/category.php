@@ -5,22 +5,22 @@ include('basehome.php');
 ?>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Department</h1>
+<h1 class="h3 mb-4 text-gray-800">Category</h1>
 
 <span id="message"></span>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-info">Departments List</h6>
+                <h6 class="m-0 font-weight-bold text-info">Categories List</h6>
             </div>
             <div class="col" align="right">
-                <button type="button" name="add_department" id="add_department" class="btn btn-info btn-sm"><i class="fas fa-plus"> Add New Department</i></button>
+                <button type="button" name="add_category" id="add_category" class="btn btn-info btn-sm"><i class="fas fa-plus"> Add New Category</i></button>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <div id="departments_list">
+        <div id="categories_list">
 
         </div>
     </div>
@@ -30,12 +30,12 @@ include('basehome.php');
 include('footer.php');
 ?>
 
-<div class="modal fade" id="add_department_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add_category_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-        <form method="post" id="department_form" enctype="multipart/form-data">
+        <form method="post" id="category_form" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Department</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -44,7 +44,7 @@ include('footer.php');
                 <span id="form_message"></span>
                     <div class="form-group">
                         <div class="col">
-                            <label class="col">Department Name<span class="text-danger">*</span></label>
+                            <label class="col">Category Name<span class="text-danger">*</span></label>
                             <div class="col">
                                 <input type="text" name="name" id="name" class="form-control" required autofocus data-parsley-trigger="keyup" />
                             </div>
@@ -55,7 +55,7 @@ include('footer.php');
                 </div>
 
                 <div class="modal-footer">
-                        <input type="hidden" name="action" id="action" value="add_new_department" />
+                        <input type="hidden" name="action" id="action" value="add_new_category" />
                         <input type="submit" name="submit" id="submit_button" class="btn btn-info" value="Add" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -66,15 +66,15 @@ include('footer.php');
 
 <script>
     $(document).ready(function() {
-        loadDepartmentsList();
+        loadCategoryList();
 
-        $('#department_form').on('submit', function(event) {
+        $('#category_form').on('submit', function(event) {
 
             event.preventDefault();
 
-            if ($('#department_form').parsley().isValid()) {
+            if ($('#category_form').parsley().isValid()) {
                 $.ajax({
-                    url: "department_action.php",
+                    url: "category_action.php",
                     method: "POST",
                     data: new FormData(this),
                     contentType: false,
@@ -86,8 +86,8 @@ include('footer.php');
                     success: function(data) {
                         $('#submit_button').attr('disabled', false);
                         $('#submit_button').val('Add');
-                        $('#add_department_modal').modal('hide');
-                        loadDepartmentsList();
+                        $('#add_category_modal').modal('hide');
+                        loadCategoryList();
                     },
                     error: function(error) {
                         console.log(error);
@@ -105,14 +105,14 @@ include('footer.php');
         const name = $(this).data('id');
         if (confirm("Are you sure you want to delete it?")) {
             $.ajax({
-                url: "department_action.php",
+                url: "category_action.php",
                 method: "POST",
                 data: {
                     name: name,
-                    action: 'delete_department'
+                    action: 'delete_category'
                 },
                 success: function(data) {
-                    loadDepartmentsList();
+                    loadCategoryList();
                     $('#message').html(data);
                     setTimeout(function() {
                         $('#message').html('');
@@ -122,15 +122,15 @@ include('footer.php');
         }
     });
     
-    function loadDepartmentsList() {
+    function loadCategoryList() {
         $.ajax({
-            url: "department_action.php",
+            url: "category_action.php",
             method: "POST",
             data: {
-                action: 'fetch_departments_list'
+                action: 'fetch_categories_list'
             },
             success: function(data) {
-                $('#departments_list').html(data);
+                $('#categories_list').html(data);
             },
             error: function(error) {
                 console.log(error);
@@ -138,12 +138,12 @@ include('footer.php');
         })
     };
 
-    $(document).on('click', '#add_department', function() {
-        $('#department_form')[0].reset();
+    $(document).on('click', '#add_category', function() {
+        $('#category_form')[0].reset();
 
-        $('#department_form').parsley().reset();
+        $('#category_form').parsley().reset();
         
-        $('#add_department_modal').modal('show');
+        $('#add_category_modal').modal('show');
 
         $('#form_message').html('');
     });

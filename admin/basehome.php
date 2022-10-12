@@ -80,7 +80,7 @@ if (!$object->is_admin_login()) {
                     <span>Posts List</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="myposts.php">
+                <a class="nav-link" href="category.php">
                     <i class="fas fa-tablets"></i>
                     <span>Categories List</span></a>
             </li>

@@ -27,7 +27,7 @@ include('basehome.php');
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Point</th>
-                        <th>Make</th>
+                        <th>Switch</th>
                     </tr>
                 </thead>
 

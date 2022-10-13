@@ -174,6 +174,7 @@ if (!$isValid) {
                             <p class="text-secondary mb-1"><strong>Category: </strong><?php echo $post_row["category"]; ?></p>
                             <p class="text-secondary mb-1"><strong>Writer Name: </strong><?php echo $post_row["writerName"]; ?></p>
                             <p class="text-secondary mb-1"><strong>Description: </strong><?php echo $post_row["description"]; ?></p>
+                            <p class="text-secondary mb-1"><strong>Created At: </strong><?php echo date_format(date_create($post_row["createdAt"]), 'F j, Y, g:i a') ?></p>
                         </div>
                     </div>
                 </div>

@@ -50,6 +50,7 @@ if ($_POST["action"] == 'fetch_single') {
                                 <p class="text-secondary mb-1"><strong>Category: </strong>' . $post_row["category"] . '</p>
                                 <p class="text-secondary mb-1"><strong>Writer Name: </strong>' . $post_row["writerName"] . '</p>
                                 <p class="text-secondary mb-1"><strong>Description: </strong>' . $post_row["description"] . '</p>
+                                <p class="text-secondary mb-1"><strong>Created At: </strong>' . date_format(date_create($post_row["createdAt"]), 'F j, Y, g:i a'). '</p>
                         </div>
                     </div>
                 </div>

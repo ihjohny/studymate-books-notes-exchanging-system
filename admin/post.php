@@ -26,7 +26,7 @@ include('basehome.php');
                         <th>Title</th>
                         <th>Category</th>
                         <th>Action</th>
-                        <th>Make</th>
+                        <th>Switch</th>
                     </tr>
                 </thead>
 

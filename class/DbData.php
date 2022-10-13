@@ -2,6 +2,7 @@
 
 class DbData
 {
+	public $base_url = 'http://localhost/';
 	public $connect;
 	public $query;
 	public $statement;

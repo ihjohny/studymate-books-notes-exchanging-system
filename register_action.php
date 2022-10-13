@@ -1,6 +1,7 @@
 <?php
 
 include('class/DbData.php');
+include('class/SendEmail.php');
 
 $object = new DbData;
 
@@ -24,6 +25,7 @@ if (isset($_POST["user_email_address"])) {
     if ($object->row_count() > 0) {
         $error = '<div class="alert alert-danger">Email Address Already Exists</div>';
     } else {
+        $verification_code = md5(uniqid());
 
         $user_photo = '../img/undraw_profile.svg';
         if($_FILES["user_photo"]["name"] != '')
@@ -39,18 +41,38 @@ if (isset($_POST["user_email_address"])) {
             ':roll'        =>    $object->clean_input($_POST["user_roll_no"]),
             ':department'        =>    $object->clean_input($_POST["user_department"]),
             ':address'        =>    $object->clean_input($_POST["user_address"]),
-            ':photo'        =>  $user_photo
+            ':photo'        =>  $user_photo,
+            ':verificationCode'	=>	$verification_code
         );
 
         $object->query = "
         INSERT INTO `users` 
-        (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`) 
-        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll, :photo);
+        (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`, `verificationCode`) 
+        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll, :photo, :verificationCode);
         ";
 
         $object->execute($data);
 
-        $url = '/';
+        $message_body = '
+        <p>For verify your email address, <a href="'.$object->base_url.'verify.php?code='.$verification_code.'"><b>Please click on this link</b></a>.</p>
+        </br>
+        </br>
+        </br>
+        <p>Sincerely,</p>
+        <p>Studymate</p>
+        ';
+
+        $email = new SendEmail;
+
+        $isSuccess = $email->send(
+            array(
+                $object->clean_input($_POST["user_email_address"])
+            ),
+            'Studymate Verification code for Verify Email Address',
+            $message_body 
+        );
+
+        $url = '/?verification';
     }
 
     $output = array(

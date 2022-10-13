@@ -209,7 +209,7 @@ if ($_POST["action"] == 'send_new_post_email') {
     <p>Hi, A new '.$post_type.' post added on studymate related to your subscribed category.</p>
     <strong>'.$post_title.'</strong> with category <strong>'.$post_category.'</strong>
     </br>
-    <p><a href="http://localhost/home.php?post='. $post_id .'">
+    <p><a href="'.$object->base_url.'home.php?post='. $post_id .'">
     <b>Click here to see details.</b></a></p>
     </br>
     </br>

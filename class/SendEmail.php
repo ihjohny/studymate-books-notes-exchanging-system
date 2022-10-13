@@ -14,7 +14,7 @@ class SendEmail
         $this->mail->Port = '587';
         $this->mail->SMTPAuth = true;
         $this->mail->Username = 'nstustudymate@gmail.com';
-        $this->mail->Password = 'qjxaeiscemnqsbob';
+        $this->mail->Password = 'gpkcjgdyaniygmkw';
         $this->mail->SMTPSecure = 'tls';
         $this->mail->From = 'nstustudymate@gmail.com';
         $this->mail->FromName = 'Studymate';

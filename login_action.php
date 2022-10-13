@@ -34,12 +34,16 @@ if(isset($_POST["user_email_address"]))
 		{
 			if($_POST["user_password"] == $row["password"])
 			{
-				if(!$object->isUserBlocked($row['id'])) {
-					$_SESSION['user_id'] = $row['id'];
-					$_SESSION['type'] = 'user';
-					$url = 'home.php';
+				if($row['verify']) {
+					if(!$object->isUserBlocked($row['id'])) {
+						$_SESSION['user_id'] = $row['id'];
+						$_SESSION['type'] = 'user';
+						$url = 'home.php';
+					} else {
+						$error = '<div class="alert alert-danger">User Blocked By Admin</div>';
+					}
 				} else {
-					$error = '<div class="alert alert-danger">User Blocked By Admin</div>';
+					$error = '<div class="alert alert-success">Please Check Your Email Inbox for Email Verification Link</div>';
 				}
 			}
 			else

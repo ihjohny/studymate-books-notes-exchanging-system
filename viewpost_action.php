@@ -226,7 +226,7 @@ if ($_POST["action"] == 'send_accepted_email') {
     <p>Hi, Congratulations Your Studymate Post has been accepted by another user.</p>
     <strong>'.$post_title.'</strong>
     </br>
-    <p><a href="http://localhost/conversation.php?id='. $_POST["conversation_id"] .'">
+    <p><a href="'.$object->base_url.'conversation.php?id='. $_POST["conversation_id"] .'">
     <b>Click here to see details.</b></a></p>
     </br>
     </br>

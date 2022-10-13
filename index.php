@@ -13,7 +13,7 @@ include('header.php');
 ?>
 
 <div class="container">
-	<div class="row justify-content-md-center">
+	<div class="row justify-content-md-center" id="input_view">
 		<div class="col col-md-4">
 			<span id="message"></span>
 			<div class="card">
@@ -53,6 +53,26 @@ include('footer.php');
 
 <script>
 	$(document).ready(function() {
+
+		<?php
+		if (isset($_GET["verification"])) {
+		?>
+			$('#input_view').html(
+				'<div class="alert alert-success mb-4">Registration Successful. Please Check Your Email Inbox for Email Verification Link</div>'
+			);
+		<?php
+		}
+		?>
+
+		<?php
+		if (isset($_GET["success-verify"])) {
+		?>
+			$('#message').html(
+				'<div class="alert alert-success mb-4">Your Email has been verified, now you can login into system</div>'
+			);
+		<?php
+		}
+		?>
 
 		$('#user_login_form').parsley();
 

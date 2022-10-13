@@ -42,37 +42,46 @@ if (isset($_POST["user_email_address"])) {
             ':department'        =>    $object->clean_input($_POST["user_department"]),
             ':address'        =>    $object->clean_input($_POST["user_address"]),
             ':photo'        =>  $user_photo,
+            ':verify'        =>  $object->email_verify,
             ':verificationCode'	=>	$verification_code
         );
 
         $object->query = "
         INSERT INTO `users` 
-        (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`, `verificationCode`) 
-        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll, :photo, :verificationCode);
+        (`name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`, `verify`, `verificationCode`) 
+        VALUES (:name, :email, :address, :phone, '2', :password, :department, :roll, :photo, :verify, :verificationCode);
         ";
 
         $object->execute($data);
 
-        $message_body = '
-        <p>For verify your email address, <a href="'.$object->base_url.'verify.php?code='.$verification_code.'"><b>Please click on this link</b></a>.</p>
-        </br>
-        </br>
-        </br>
-        <p>Sincerely,</p>
-        <p>Studymate</p>
-        ';
+        if(!$object->email_verify) {
+            $message_body = '
+            <p>For verify your email address, <a href="'.$object->base_url.'verify.php?code='.$verification_code.'"><b>Please click on this link</b></a>.</p>
+            </br>
+            </br>
+            </br>
+            <p>Sincerely,</p>
+            <p>Studymate</p>
+            ';
+    
+            $email = new SendEmail;
+    
+            $isSuccess = $email->send(
+                array(
+                    $object->clean_input($_POST["user_email_address"])
+                ),
+                'Studymate Verification code for Verify Email Address',
+                $message_body 
+            );
+            
+            $url = '/?verification';
 
-        $email = new SendEmail;
+        } else {
 
-        $isSuccess = $email->send(
-            array(
-                $object->clean_input($_POST["user_email_address"])
-            ),
-            'Studymate Verification code for Verify Email Address',
-            $message_body 
-        );
+            $url = '/';
 
-        $url = '/?verification';
+        }
+
     }
 
     $output = array(

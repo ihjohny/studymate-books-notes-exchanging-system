@@ -2,6 +2,7 @@
 
 class DbData
 {
+	public $email_verify = 1;
 	public $base_url = 'http://localhost/';
 	public $connect;
 	public $query;

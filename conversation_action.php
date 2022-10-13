@@ -45,7 +45,7 @@ if ($_POST["action"] == 'received') {
                 $receiver_new_points = $user_row["point"] - 1;
                 $object->query = "
                 UPDATE users 
-                SET point = '" . $receiver_new_points . "' 
+                SET point = '" . $receiver_new_points . "', takeCount = takeCount + 1 
                 WHERE id = '" . $_SESSION['user_id'] . "'
                 ";
                 $object->execute();
@@ -67,7 +67,7 @@ if ($_POST["action"] == 'received') {
                 $object->query =
                     "
                     UPDATE users 
-                    SET point = '" . $sender_new_points . "' 
+                    SET point = '" . $sender_new_points . "' , giveCount = giveCount + 1
                     WHERE id = '" . $sender_id . "'
                 ";
                 $object->execute();

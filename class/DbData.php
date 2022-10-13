@@ -72,4 +72,20 @@ class DbData
 		$string = htmlspecialchars($string);
 		return $string;
 	}
+
+	function isUserBlocked($user_id) {
+		$isBlock = false;
+		$this->query = "
+		SELECT * FROM users
+		WHERE id = '".$user_id."'
+		";
+		$data = $this->get_result();
+		foreach($data as $row) {
+			if($row['isBlock']){
+				$isBlock = true;
+			}
+		}
+		return $isBlock;
+	}
+
 }

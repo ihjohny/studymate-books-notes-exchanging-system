@@ -11,6 +11,10 @@ if (!$object->is_login()) {
     header("location:" . "/");
 }
 
+if($object->isUserBlocked($_SESSION['user_id'])) {
+    header("location:" . "logout.php");
+}
+
 ?>
 
 <head>

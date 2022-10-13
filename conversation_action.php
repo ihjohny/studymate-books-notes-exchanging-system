@@ -182,7 +182,7 @@ if ($_POST["action"] == 'get_messages') {
     if ($data == '') {
         $data = '
                     <div align="center">
-                        <span><strong>No Messages<strong></span>
+                        <h3><strong>No Messages<strong></h3>
                     </div>
                 ';
     }

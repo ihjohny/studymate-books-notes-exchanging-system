@@ -122,7 +122,7 @@ if (!$isValid) {
             } else {
                 echo
                 '
-                    <div class="alert alert-success">You will get 1 Point</div>
+                    <div class="alert alert-success">You will get 1 Point after success</div>
                 ';
             }
         }

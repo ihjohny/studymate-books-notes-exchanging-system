@@ -17,7 +17,7 @@ include('basehome.php');
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             Total User
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">
                             <span id="total_user"></span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ include('basehome.php');
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             Total Active Post
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">
                             <span id="total_active_post"></span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ include('basehome.php');
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             Total Successful Request
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">
                             <span id="total_successful_request"></span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@ include('basehome.php');
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             Total Successful Offer
                         </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <div class="h4 mb-0 font-weight-bold text-gray-800">
                             <span id="total_successful_offer"></span>
                         </div>
                     </div>

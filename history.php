@@ -11,7 +11,7 @@ include('basehome.php');
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">Previous Accepted Posts</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Successful Received Posts</h6>
             </div>
             <div class="col" align="right">
 

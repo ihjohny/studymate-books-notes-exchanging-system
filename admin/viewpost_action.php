@@ -43,7 +43,7 @@ if ($_POST["action"] == 'fetch_single') {
                         </div>
                         <div class="card-body">
                             <div class="d-flex flex-column">
-                                <img src="' . $post_row["photo"] . '" alt="Photo" class="flex-fill rounded" width="80">
+                                <img src="'. $object->base_url.'' . $post_row["photo"] . '" alt="Photo" class="flex-fill rounded" width="80">
                                 <div class="mt-3">
                                 <h5><strong>' . $post_row["title"] . '</strong> </h5>
                                 <p class="text-secondary mb-1"><strong>Type: </strong><span class="badge badge-' . $category_color . ' lead">' . $post_row["type"] . '</span></p>

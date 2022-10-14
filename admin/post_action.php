@@ -49,7 +49,7 @@ if ($_POST["action"] == 'fetch_all_current_post') {
     foreach ($result as $row) {
         $sub_array = array();
 
-        $sub_array[] = '<img src="' . $row["photo"] . '" class="img-thumbnail" width="100" />';
+        $sub_array[] = '<img src="'. $object->base_url.'' . $row["photo"] . '" class="img-thumbnail" width="100" />';
         $sub_array[] = $row["title"];
         $sub_array[] = $row["category"];
 

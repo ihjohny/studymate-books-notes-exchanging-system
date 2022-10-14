@@ -167,6 +167,7 @@ if ($_POST["action"] == 'get_messages') {
             $data .= '
                     <div align="right" class="outgoing_msg">
                         ' . $msg_row["message"] . '
+                        <div style="font-size:10px;">'.date_format(date_create($msg_row["createdAt"]), 'F j, g:i a').'</div>
                     </div>
                     ';
         } else {
@@ -174,6 +175,7 @@ if ($_POST["action"] == 'get_messages') {
             $data .= '
                     <div class="incoming_msg">
                         <span><strong>' . $msg_row["userName"] . ': </strong></span> ' . $msg_row["message"] . '
+                        <div style="font-size:10px;">'.date_format(date_create($msg_row["createdAt"]), 'F j, g:i a').'</div>
                     </div>
                     ';
         }

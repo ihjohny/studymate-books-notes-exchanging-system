@@ -3,7 +3,7 @@
     width: 70%;
     border-radius: 3px;
     color: #646464;
-    font-size: 14px;
+    font-size: 16px;
     margin: 5px;
     padding: 5px 10px 5px 12px;
     display: inline-block;
@@ -12,7 +12,7 @@
 .outgoing_msg {
     background: #4e73df none repeat scroll 0 0;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 16px;
     margin: 5px;
     color: #fff;
     padding: 5px 10px 5px 12px;

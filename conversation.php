@@ -142,7 +142,7 @@ if (!$isValid) {
                 </div>
             </div>
             <div class="card-body">
-                <div id="message_list" class="flex-grow-0 px-4 msg_history" style="overflow-y: scroll; height:250px;">
+                <div id="message_list" class="flex-grow-0 px-4 msg_history" style="overflow-y: scroll; height:320px;">
                     <div id="rander_messages"></div>
                 </div>
 

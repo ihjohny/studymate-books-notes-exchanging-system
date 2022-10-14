@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2022 at 01:59 PM
+-- Generation Time: Oct 14, 2022 at 07:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,7 +39,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `email`, `name`, `password`) VALUES
-(1, 'admin@email.com', 'admin', 'admin');
+(1, 'admin@studymate.com', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -56,12 +56,20 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`name`) VALUES
+('Accounting'),
 ('Algorithms'),
+('Artificial intelligence'),
+('Bangla Novel'),
+('Computer Networking'),
 ('Computer Programming'),
-('Data Structure'),
-('Economics'),
-('English Novel'),
-('Science');
+('Data structure'),
+('Electronics'),
+('English Literature'),
+('Horror Story'),
+('Java'),
+('Self Improvement'),
+('Thriller Novel'),
+('Web Programming');
 
 -- --------------------------------------------------------
 
@@ -82,21 +90,6 @@ CREATE TABLE `conversations` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `conversations`
---
-
-INSERT INTO `conversations` (`id`, `postId`, `posterUserId`, `accepterUserId`, `receiverUserId`, `pendingMsgUserId`, `isSuccess`, `isBlock`, `userBlock`, `createdAt`) VALUES
-(15, 15, 4, 5, 5, NULL, 1, 0, 0, '2022-10-12 05:14:22'),
-(17, 18, 4, 5, 4, NULL, 1, 0, 0, '2022-10-12 17:54:05'),
-(18, 14, 4, 5, 4, NULL, 1, 0, 0, '2022-10-13 05:20:51'),
-(19, 20, 5, 4, 5, NULL, 1, 0, 0, '2022-10-13 06:49:52'),
-(20, 21, 5, 4, 5, NULL, 1, 0, 0, '2022-10-13 06:50:17'),
-(21, 17, 5, 4, 4, NULL, 1, 0, 0, '2022-10-13 07:16:21'),
-(22, 22, 4, 5, 4, NULL, 1, 0, 0, '2022-10-13 07:38:57'),
-(23, 19, 5, 4, NULL, NULL, 0, 0, 0, '2022-10-13 10:02:27'),
-(24, 24, 11, 6, NULL, NULL, 0, 0, 0, '2022-10-13 11:58:01');
-
 -- --------------------------------------------------------
 
 --
@@ -112,11 +105,13 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`name`) VALUES
-('Applied Math'),
+('Applied Mathematics'),
+('BBA'),
 ('CSTE'),
+('Economics'),
 ('EEE'),
 ('ICE'),
-('SE');
+('Software Engineering');
 
 -- --------------------------------------------------------
 
@@ -154,23 +149,6 @@ CREATE TABLE `posts` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `title`, `writerName`, `description`, `category`, `type`, `isSuccess`, `isBlock`, `userBlock`, `userId`, `photo`, `createdAt`) VALUES
-(14, 'post one', 'post one', '', 'Networking', 'Request', 1, 0, 0, 4, 0x2e2f696d616765732f313839343336303031382e706e67, '2022-10-12 05:11:52'),
-(15, 'post two', '', '', 'Algorithms', 'Donate', 1, 0, 0, 4, 0x2e2f696d616765732f323034353330323430332e706e67, '2022-10-12 05:12:07'),
-(16, 'post three', '', '', 'Economics', 'Request', 0, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 05:14:10'),
-(17, 'dfsdsfg', '', '', 'Algorithms', 'Donate', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 14:54:47'),
-(18, 'post two', '', '', 'Algorithms', 'Request', 1, 0, 0, 4, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 17:47:24'),
-(19, 'fdgdsfg', '', '', 'Algorithms', 'Donate', 0, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:25:31'),
-(20, 'sdfsdf', '', '', 'Algorithms', 'Request', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:49:45'),
-(21, 'sdfds', '', '', 'Algorithms', 'Request', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:50:13'),
-(22, 'fsdf', '', '', 'Algorithms', 'Request', 1, 0, 0, 4, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 07:38:48'),
-(23, 'userthree', '', '', 'Data Structure', 'Request', 0, 0, 0, 6, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 11:56:20'),
-(24, 'ihjohny10', '', '', 'English Novel', 'Request', 0, 0, 0, 11, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 11:57:33');
-
 -- --------------------------------------------------------
 
 --
@@ -195,16 +173,6 @@ CREATE TABLE `users` (
   `verificationCode` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `address`, `phone`, `point`, `password`, `department`, `roll`, `photo`, `isBlock`, `giveCount`, `takeCount`, `verify`, `verificationCode`) VALUES
-(4, 'user one', 'userone@gmail.com', 'user one address', '01763183408', 1, 'userone', 'ICE', 'ASH1611022M', 0x2e2f696d616765732f313237393637363534352e6a7067, 0, 2, 3, 1, '0'),
-(5, 'md. imam hossain', 'usertwo@gmail.com', 'user two address', '01763183402', 3, 'admin', 'SE', 'ASH1611022M', 0x2e2f696d616765732f3337353037303137332e706e67, 0, 3, 2, 0, '0'),
-(6, 'user three', 'userthree@gmail.com', 'user three address', '01763183101', 2, 'userthree', 'EEE', 'ASH1611028M', 0x2e2f696d616765732f313737313230343333362e706e67, 0, 0, 0, 1, '966455ab4b4'),
-(11, 'ihjohny10', 'ihjohny10@gmail.com', 'ihjohny10 address', '01763183101', 2, 'ihjohny10', 'EEE', 'ASH1611022M', 0x2e2f696d616765732f3434313433353532382e6a7067, 0, 0, 0, 1, '42e0e7870b077ba6db7d672c1bfe68ed');
-
 -- --------------------------------------------------------
 
 --
@@ -216,16 +184,6 @@ CREATE TABLE `user_category` (
   `userId` int(11) NOT NULL,
   `category` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_category`
---
-
-INSERT INTO `user_category` (`id`, `userId`, `category`) VALUES
-(8, 5, 'Computer Programming'),
-(9, 5, 'English Novel'),
-(10, 11, 'Data Structure'),
-(11, 6, 'Data Structure');
 
 --
 -- Indexes for dumped tables
@@ -293,31 +251,31 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `user_category`
 --
 ALTER TABLE `user_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

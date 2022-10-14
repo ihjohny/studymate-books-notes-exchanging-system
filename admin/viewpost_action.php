@@ -76,7 +76,7 @@ if ($_POST["action"] == 'fetch_single') {
                     </div>
                     <div class="card-body">
                         <div class="d-flex flex-column mr-2">
-                            <img src="' . $user_row["photo"] . '" alt="Profile" class="rounded-circle" width="80">
+                            <img src="'. $object->base_url.'' . $user_row["photo"] . '" alt="Profile" class="rounded-circle" width="80">
                             <div class="mt-3">
                                 <span class="text-success">Points: ' . $user_row["point"] . '</span>
                                 <div></div>

@@ -49,7 +49,7 @@ if ($_POST["action"] == 'fetch_all_users') {
     foreach ($result as $row) {
         $sub_array = array();
 
-        $sub_array[] = '<img src="' . $row["photo"] . '" class="img-thumbnail" width="80" />';
+        $sub_array[] = '<img src="'. $object->base_url.'' . $row["photo"] . '" class="img-thumbnail" width="80" />';
         $sub_array[] = $row["name"];
         $sub_array[] = $row["email"];
         $sub_array[] = $row["phone"];

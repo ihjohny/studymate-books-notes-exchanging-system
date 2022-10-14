@@ -4,14 +4,14 @@ include('class/DbData.php');
 
 $object = new DbData;
 
-if ($_POST["action"] == 'fetch_offer') {
+if ($_POST["action"] == 'fetch_donate') {
 
     $order_column = array('category', 'type');
 
     $output = array();
 
     $main_query = "
-    SELECT * FROM posts WHERE type = 'Offer' AND userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0) AND (isBlock = 0) AND (userBlock = 0)
+    SELECT * FROM posts WHERE type = 'Donate' AND userId != '" . $_SESSION['user_id'] . "' AND (isSuccess = 0) AND (isBlock = 0) AND (userBlock = 0)
     ";
 
     $search_query = '';
@@ -62,7 +62,7 @@ if ($_POST["action"] == 'fetch_offer') {
         $sub_array[] = $row["category"];
 
         $status = '';
-        if ($row["type"] == 'Offer') {
+        if ($row["type"] == 'Donate') {
             $status = '<span class="badge badge-success">' . $row["type"] . '</span>';
         } else {
             $status = '<span class="badge badge-warning">' . $row["type"] . '</span>';

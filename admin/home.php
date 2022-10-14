@@ -66,10 +66,10 @@ include('basehome.php');
                 <div class="row no-gutters align-items-center">
                     <div align="center" class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Total Successful Offer
+                            Total Successful Donate
                         </div>
                         <div class="h4 mb-0 font-weight-bold text-gray-800">
-                            <span id="total_successful_offer"></span>
+                            <span id="total_successful_donate"></span>
                         </div>
                     </div>
                 </div>
@@ -134,10 +134,10 @@ include('footer.php');
             url: "home_action.php",
             method: "POST",
             data: {
-                action: 'fetch_total_successful_offer'
+                action: 'fetch_total_successful_donate'
             },
             success: function(data) {
-                $('#total_successful_offer').html(data);
+                $('#total_successful_donate').html(data);
             },
             error: function(error) {
                 console.log(error);

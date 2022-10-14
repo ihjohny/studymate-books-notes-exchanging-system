@@ -160,11 +160,11 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `title`, `writerName`, `description`, `category`, `type`, `isSuccess`, `isBlock`, `userBlock`, `userId`, `photo`, `createdAt`) VALUES
 (14, 'post one', 'post one', '', 'Networking', 'Request', 1, 0, 0, 4, 0x2e2f696d616765732f313839343336303031382e706e67, '2022-10-12 05:11:52'),
-(15, 'post two', '', '', 'Algorithms', 'Offer', 1, 0, 0, 4, 0x2e2f696d616765732f323034353330323430332e706e67, '2022-10-12 05:12:07'),
+(15, 'post two', '', '', 'Algorithms', 'Donate', 1, 0, 0, 4, 0x2e2f696d616765732f323034353330323430332e706e67, '2022-10-12 05:12:07'),
 (16, 'post three', '', '', 'Economics', 'Request', 0, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 05:14:10'),
-(17, 'dfsdsfg', '', '', 'Algorithms', 'Offer', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 14:54:47'),
+(17, 'dfsdsfg', '', '', 'Algorithms', 'Donate', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 14:54:47'),
 (18, 'post two', '', '', 'Algorithms', 'Request', 1, 0, 0, 4, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-12 17:47:24'),
-(19, 'fdgdsfg', '', '', 'Algorithms', 'Offer', 0, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:25:31'),
+(19, 'fdgdsfg', '', '', 'Algorithms', 'Donate', 0, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:25:31'),
 (20, 'sdfsdf', '', '', 'Algorithms', 'Request', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:49:45'),
 (21, 'sdfds', '', '', 'Algorithms', 'Request', 1, 0, 0, 5, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 06:50:13'),
 (22, 'fsdf', '', '', 'Algorithms', 'Request', 1, 0, 0, 4, 0x2e2e2f696d672f64656d6f5f626f6f6b2e737667, '2022-10-13 07:38:48'),

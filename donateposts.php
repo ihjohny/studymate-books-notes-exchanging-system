@@ -5,7 +5,7 @@ include('basehome.php');
 ?>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Offer Posts</h1>
+<h1 class="h3 mb-4 text-gray-800">Donate Posts</h1>
 
 <!-- DataTales Example -->
 <span id="message"></span>
@@ -13,7 +13,7 @@ include('basehome.php');
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">Books, Notes Offered by Other Users</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Books, Notes Donated by Other Users</h6>
             </div>
             <div class="col" align="right">
                 <button type="button" name="add_post" id="add_post" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Add New Post</i></button>
@@ -22,7 +22,7 @@ include('basehome.php');
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="offer_post_table" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="donate_post_table" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Photo</th>
@@ -51,15 +51,15 @@ include('footer.php');
 
     $(document).ready(function() {
 
-        dataTable = $('#offer_post_table').DataTable({
+        dataTable = $('#donate_post_table').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],
             "ajax": {
-                url: "offerposts_action.php",
+                url: "donateposts_action.php",
                 type: "POST",
                 data: {
-                    action: 'fetch_offer'
+                    action: 'fetch_donate'
                 }
             },
             "columnDefs": [{

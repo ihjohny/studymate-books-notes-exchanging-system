@@ -14,7 +14,7 @@
                             <div class="col-md-9">
                                 <select name="post_type" id="post_type" class="form-control" required>
                                     <option value="Request">Request</option>
-                                    <option value="Offer">Offer</option>
+                                    <option value="Donate">Donate</option>
                                 </select>
                             </div>
                         </div>

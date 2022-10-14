@@ -112,7 +112,7 @@ if (!$isValid) {
             if (
                 (($post_row["type"] == "Request") and ($conversation_row["posterUserId"] == $_SESSION['user_id']))
                 or
-                (($post_row["type"] == "Offer") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
+                (($post_row["type"] == "Donate") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
             ) {
                 echo
                 '
@@ -194,7 +194,7 @@ if (!$isValid) {
                             <div class="mt-3">
                                 <span class="text-success">Points: <?php echo $user_row["point"]; ?></span>
                                 <div></div>
-                                <span data-toggle="tooltip" data-placement="top" title="Successfull offer made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> <?php echo $user_row["giveCount"]; ?> </strong> </span>
+                                <span data-toggle="tooltip" data-placement="top" title="Successfull donate made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> <?php echo $user_row["giveCount"]; ?> </strong> </span>
                                 <span data-toggle="tooltip" data-placement="top" title="Successfull request made by this user"> <i class="fas fa-arrow-circle-down" style="color:#f6c23e"></i> <strong> <?php echo $user_row["takeCount"]; ?> </strong> </span>
                                 <h5 class="mt-1"><strong><?php echo $user_row["name"]; ?></strong></h5>
                                 <p class="text-secondary mb-1"><strong>Email: </strong><?php echo $user_row["email"]; ?></p>

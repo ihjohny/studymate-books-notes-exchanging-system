@@ -5,7 +5,7 @@ include('../class/DbData.php');
 $object = new DbData;
 
 if ($object->is_admin_login()) {
-	header("location:" . $object->base_url . "home.php");
+	header("location:" . "home.php");
 }
 
 ?>

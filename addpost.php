@@ -235,10 +235,25 @@
             method: "POST",
             data: {
                 post_id: postId,
-                action: 'send_new_post_email'
+                action: 'send_new_post_email_with_category'
             },
             success: function(data) {
-                console.log("Email ", data);
+                console.log("Category Email ", data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+
+        $.ajax({
+            url: "addpost_action.php",
+            method: "POST",
+            data: {
+                post_id: postId,
+                action: 'send_new_post_email_with_keyword'
+            },
+            success: function(data) {
+                console.log("Keyword Email ", data);
             },
             error: function(error) {
                 console.log(error);

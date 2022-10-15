@@ -161,7 +161,7 @@ function upload_image()
 }
 
 
-if ($_POST["action"] == 'send_new_post_email') {
+if ($_POST["action"] == 'send_new_post_email_with_category') {
 
     $post_id = '';
     $post_title = '';
@@ -236,7 +236,94 @@ if ($_POST["action"] == 'send_new_post_email') {
 	else
 	{
         $message = 'Mail Unsuccess';
+        $message .= json_encode($users_email);
 	}
 
     echo $message;
 }
+
+
+if ($_POST["action"] == 'send_new_post_email_with_keyword') {
+
+    $post_id = '';
+    $post_title = '';
+    $post_type = '';
+    
+    $object->query = "
+    SELECT * FROM posts 
+    WHERE id = '" . $_POST["post_id"] . "'
+    ";
+    $post_result = $object->get_result();
+    foreach($post_result as $post_row) {
+        $post_id = $post_row["id"];
+        $post_title = $post_row["title"];
+        $post_type = $post_row["type"];
+    }
+
+    $users_id = array();
+    $users_email = array();
+
+
+    $object->query = "
+    SELECT * FROM user_keyword 
+    ";
+    $keyword_result = $object->get_result();
+    foreach($keyword_result as $keyword) {
+        $cond = stripos($post_title, $keyword['keyword']);
+        if($cond !== false){
+            array_push($users_id, $keyword["userId"]);
+         }            
+    }
+
+
+    foreach($users_id as $user_id) {
+        $object->query = "
+        SELECT * FROM users 
+        WHERE id = '".$user_id."'
+        ";
+        $user_result = $object->get_result();
+        foreach($user_result as $user_row) {
+            if($user_row["id"] != $_SESSION['user_id']) {
+                array_push($users_email, $user_row["email"]);
+            }
+        }
+    }
+
+    // send batch email
+    $message_body = '
+    <p>Hi, A new '.$post_type.' post added on studymate related to your subscribed keyword.</p>
+    <strong>'.$post_title.'</strong> with your subscribed keyword.
+    </br>
+    <p><a href="'.$object->base_url.'home.php?post='. $post_id .'">
+    <b>Click here to see details.</b></a></p>
+    </br>
+    </br>
+    </br>
+    <p>Sincerely,</p>
+    <p>Studymate</p>
+    ';
+
+    $email = new SendEmail;
+
+    $isSuccess = $email->send(
+        $users_email,
+        'New '.$post_type.' Post on Studymate with Your Subscribed Keyword',
+        $message_body 
+    );
+
+    $message = '';
+
+	if($isSuccess)
+	{
+		$message = 'Mail Success ';
+        $message .= json_encode($users_email);
+	}
+	else
+	{
+        $message = 'Mail Unsuccess';
+        $message .= json_encode($users_email);
+	}
+
+    echo $message;
+}
+

@@ -174,7 +174,7 @@ if ($_POST["action"] == 'fetch_current_converstation') {
                     </div> 
                     <div class="card-body">
                         ' . $post_name . '
-                        <div class="mt-1 text-white small">' . $card_user_type . 'ed by ' . $card_user_name . '</div>
+                        <div class="mt-1 text-white small">'.$object->typed($card_user_type).' by ' . $card_user_name . '</div>
                     </div>
                 </div>
             </div>

@@ -78,7 +78,7 @@ if (!$isValid) {
 <div class="row mb-3">
     <div class="col-sm-8">
         <h1 class="h3 text-gray-800"><?php echo $post_row["title"]; ?></h1>
-        <span class="ml-1"><strong><?php echo $post_row["type"] ?>ed by <?php
+        <span class="ml-1"><strong><?php echo $object->typed($post_row["type"]) ?> by <?php
                                                                         if ($conversation_row["posterUserId"] == $user_row["id"]) {
                                                                             echo $user_row["name"];
                                                                         } else {

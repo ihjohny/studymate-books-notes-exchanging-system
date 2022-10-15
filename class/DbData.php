@@ -91,4 +91,12 @@ class DbData
 		return $isBlock;
 	}
 
+	function typed($type) {
+		if($type == 'Donate'){
+			return 'Donated';
+		} else {
+			return "'.$type.'ed";
+		}
+	}
+	
 }

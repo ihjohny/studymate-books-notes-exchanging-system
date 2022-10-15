@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2022 at 07:22 PM
+-- Generation Time: Oct 15, 2022 at 03:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -60,6 +60,7 @@ INSERT INTO `categories` (`name`) VALUES
 ('Algorithms'),
 ('Artificial intelligence'),
 ('Bangla Novel'),
+('C++'),
 ('Computer Networking'),
 ('Computer Programming'),
 ('Data structure'),
@@ -110,6 +111,7 @@ INSERT INTO `departments` (`name`) VALUES
 ('CSTE'),
 ('Economics'),
 ('EEE'),
+('English'),
 ('ICE'),
 ('Software Engineering');
 
@@ -185,6 +187,18 @@ CREATE TABLE `user_category` (
   `category` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_keyword`
+--
+
+CREATE TABLE `user_keyword` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `keyword` varchar(160) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -238,6 +252,13 @@ ALTER TABLE `user_category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_keyword`
+--
+ALTER TABLE `user_keyword`
+  ADD PRIMARY KEY (`userId`,`keyword`),
+  ADD UNIQUE KEY `one` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -275,6 +296,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_category`
 --
 ALTER TABLE `user_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `user_keyword`
+--
+ALTER TABLE `user_keyword`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 

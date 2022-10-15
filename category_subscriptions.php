@@ -5,23 +5,25 @@ include('basehome.php');
 ?>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Subscriptions</h1>
-<p>If you subscribe any category you will get email for new post on that category.</p>
+<h1 class="h3 mb-2 text-gray-800">Category Subscriptions</h1>
 
+<div>
+    <p>If you subscribe any category you will get email for new post on that category.</p>
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <div class="row">
-            <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">Categories</h6>
-            </div>
-            <div class="col" align="right">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col">
+                    <h6 class="m-0 font-weight-bold text-primary">Categories</h6>
+                </div>
+                <div class="col" align="right">
 
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body">
-        <div id="subscriptions_list"></div>
+        <div class="card-body">
+            <div id="subscriptions_list"></div>
+        </div>
     </div>
 </div>
 
@@ -33,7 +35,7 @@ include('footer.php');
 
     $(document).ready(function() {
         $.ajax({
-            url: "subscriptions_action.php",
+            url: "category_subscriptions_action.php",
             method: "POST",
             data: {
                 action: 'fetch_subscriptions'
@@ -52,7 +54,7 @@ include('footer.php');
         const isChecked = $(this).prop('checked');
         
         $.ajax({
-            url: "subscriptions_action.php",
+            url: "category_subscriptions_action.php",
             method: "POST",
             data: {
                 action: 'toggle_subscription',
@@ -69,4 +71,3 @@ include('footer.php');
     });
 
 </script>
-

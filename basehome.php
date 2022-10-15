@@ -88,11 +88,15 @@ if($object->isUserBlocked($_SESSION['user_id'])) {
                     <span>My Posts</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="subscriptions.php">
+                <a class="nav-link" href="category_subscriptions.php">
                     <i class="fas fa-star"></i>
-                    <span>Subscriptions</span></a>
+                    <span>Category Subscriptions</span></a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="keyword_subscriptions.php">
+                    <i class="fas fa-keyboard"></i>
+                    <span>Keyword Subscriptions</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="history.php">
                     <i class="fas fa-history"></i>

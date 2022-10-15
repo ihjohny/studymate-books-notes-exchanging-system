@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Studymate - Books, Notes Sharing Platform</title>
+	<title>Studymate - <?php echo $object->project_title?></title>
 
 	<!-- Custom styles for this page -->
 	<link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
 	</div>
 
 	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-		<h1 class="display-4">Books, Notes Sharing Platform</h1>
+		<h1 class="display-4"><?php echo $object->project_title?></h1>
 	</div>
 	<br />
 	<br />

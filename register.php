@@ -1,5 +1,9 @@
 <?php
 
+include('class/DbData.php');
+
+$object = new DbData;
+
 include('header.php');
 
 ?>

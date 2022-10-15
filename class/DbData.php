@@ -95,8 +95,8 @@ class DbData
 		if($type == 'Donate'){
 			return 'Donated';
 		} else {
-			return "'.$type.'ed";
+			return "${type}ed";
 		}
 	}
-	
+
 }

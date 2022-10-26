@@ -15,13 +15,19 @@ include('header.php');
 <div class="container">
 	<div class="row" id="input_view">
     	<div class="col ml-5 pt-md-5">
-			<h4>How Studymate Works?</h4>
-			<ol>
-				<li>Create New Account Or Login</li>
-				<li>Create New Post For Book Or Accept Post</li>
-				<li>Communicate with each other or Chat</li>
-				<li>Donate Or Get Requested Book</li>
-			</ol>
+			<h4 class="mb-4">How Studymate Will Works?</h4>
+			<div class="counter_body">
+  				<span class="counter_content">1</span> Create New Account Or Login
+			</div>
+			<div class="counter_body">
+  				<span class="counter_content">2</span> Create New Post For Book Or Accept Post
+			</div>
+			<div class="counter_body">
+  				<span class="counter_content">3</span> Communicate with each other or Chat
+			</div>
+			<div class="counter_body">
+  				<span class="counter_content">4</span> Donate Or Get Requested Book
+			</div>
     	</div>
    		<div class="col">
 		   <div class="row">

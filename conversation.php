@@ -274,6 +274,8 @@ include('footer.php');
                 $('#received').val('Received');
                 if (!result.error) {
                     window.location.replace("/");
+
+                    sendMail(<?php echo $_GET["id"]; ?>);
                 }
                 $('#message').html(result.msg);
                 setTimeout(function() {
@@ -341,4 +343,22 @@ include('footer.php');
             }
         });
     }
+
+    function sendMail(conversation_id) {
+        $.ajax({
+            url: "conversation_action.php",
+            method: "POST",
+            data: {
+                conversation_id : conversation_id,
+                action: 'send_received_email'
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
 </script>

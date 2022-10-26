@@ -1,6 +1,7 @@
 <?php
 
 include('class/DbData.php');
+include('class/SendEmail.php');
 
 $object = new DbData;
 
@@ -211,4 +212,79 @@ if ($_POST["action"] == 'get_messages') {
     }
 
     echo $data;
+}
+
+
+if ($_POST["action"] == 'send_received_email') {
+
+    $receiver_email = '';
+    $post_title = '';
+
+    $object->query = "
+    SELECT * FROM `conversations`
+    WHERE id = '" . $_POST["conversation_id"] . "'
+    ";
+
+    $result = $object->get_result();
+   
+    foreach($result as $row) {
+        $object->query = "
+        SELECT * FROM `posts` 
+        WHERE id = '" . $row["postId"] . "'
+        ";
+        $post_result = $object->get_result();
+        
+        $sender_id = '';
+        foreach($post_result as $post_row) {
+            $post_title = $post_row["title"];
+            if($post_row["type"] == "Request") {
+                $sender_id = $row["accepterUserId"];
+            } else {
+                $sender_id = $row["posterUserId"];
+            }
+        }
+        
+        $object->query = "
+        SELECT * FROM `users` 
+        WHERE id = '" . $sender_id . "'
+        ";
+        $user_result = $object->get_result();
+        foreach($user_result as $user_row) {
+            $receiver_email = $user_row["email"];
+        }
+    }
+
+	$message_body = '
+    <p>Hi, Congratulations you get point. Your Studymate post has been received by user.</p>
+    <strong>'.$post_title.'</strong>
+    </br>
+    <p><a href="'.$object->base_url.'conversation.php?id='. $_POST["conversation_id"] .'">
+    <b>Click here to see details.</b></a></p>
+    </br>
+    </br>
+    </br>
+    <p>Sincerely,</p>
+    <p>Studymate</p>
+    ';
+
+    $email = new SendEmail;
+
+    $isSuccess = $email->send(
+        array($receiver_email),
+        'Studymate Post has been Received.',
+        $message_body 
+    );
+
+    $message = '';
+
+	if($isSuccess)
+	{
+		$message = 'Mail Success';
+	}
+	else
+	{
+        $message = 'Mail Unsuccess';
+	}
+
+    echo $message;
 }

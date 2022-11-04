@@ -17,7 +17,7 @@ class SendEmail
         $this->mail->Password = 'mjabjltkpwdotjeu';
         $this->mail->SMTPSecure = 'tls';
         $this->mail->From = 'nstustudymate@gmail.com';
-        $this->mail->FromName = 'Studymate';
+        $this->mail->FromName = 'NSTU StudyMate';
         $this->mail->WordWrap = 50;
         $this->mail->IsHTML(true);
 	}

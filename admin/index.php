@@ -19,7 +19,7 @@ if ($object->is_admin_login()) {
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Studymate Admin</title>
+	<title>NSTU StudyMate Admin</title>
 
 	<!-- Custom styles for this page -->
 	<link href="../vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@ if ($object->is_admin_login()) {
 <body>
 	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
 		<div class="col">
-			<h5 class="my-0 mr-md-auto font-weight-normal">Studymate</h5>
+			<h5 class="my-0 mr-md-auto font-weight-normal">NSTU StudyMate</h5>
 		</div>
 		<?php
 		if (!isset($_SESSION['admin_id'])) {

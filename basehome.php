@@ -25,7 +25,7 @@ if($object->isUserBlocked($_SESSION['user_id'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Studymate - <?php echo $object->project_title?></title>
+    <title>NSTU StudyMate - <?php echo $object->project_title?></title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -60,7 +60,7 @@ if($object->isUserBlocked($_SESSION['user_id'])) {
 
                 </div>
                 <i class="fas fa-book-open"></i>
-                <div class="sidebar-brand-text mx-3">Studymate</div>
+                <div class="sidebar-brand-text mx-3">NSTU StudyMate</div>
             </a>
 
             <!-- Divider -->
@@ -125,7 +125,7 @@ if($object->isUserBlocked($_SESSION['user_id'])) {
                     </button>
 
                     <div class="text-center">
-                        <h2><?php echo $object->project_title?></h2>
+                        <h3><?php echo $object->project_title?></h3>
                     </div>
 
                     <!-- Topbar Navbar -->

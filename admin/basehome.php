@@ -22,7 +22,7 @@ if (!$object->is_admin_login()) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Studymate Admin</title>
+    <title>NSTU StudyMate Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -113,7 +113,7 @@ if (!$object->is_admin_login()) {
                     </button>
 
                     <div class="text-center">
-                        <h2>Studymate</h2>
+                        <h3>NSTU StudyMate</h3>
                     </div>
 
                     <!-- Topbar Navbar -->

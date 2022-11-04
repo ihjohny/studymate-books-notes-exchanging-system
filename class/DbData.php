@@ -2,7 +2,7 @@
 
 class DbData
 {
-	public $project_title = 'Books, Notes Sharing Platform For NSTU';
+	public $project_title = 'A digital platform for sharing study materials';
 	public $email_verify = 0;
 	public $base_url = 'http://localhost:8080/';
 	public $connect;

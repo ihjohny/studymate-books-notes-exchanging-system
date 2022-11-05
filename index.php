@@ -26,7 +26,7 @@ include('header.php');
   				<span class="counter_content">3</span> Communicate with each other or Chat
 			</div>
 			<div class="counter_body">
-  				<span class="counter_content">4</span> Donate Or Get Requested Book
+  				<span class="counter_content">4</span> Donate/Loan Or Get Requested Book
 			</div>
     	</div>
    		<div class="col">

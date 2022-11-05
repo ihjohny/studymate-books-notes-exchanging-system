@@ -62,7 +62,7 @@ if ($_POST["action"] == 'fetch_all') {
         $sub_array[] = $row["category"];
 
         $status = '';
-        if ($row["type"] == 'Donate') {
+        if ($row["type"] == 'Donate/Loan') {
             $status = '<span class="badge badge-success">' . $row["type"] . '</span>';
         } else {
             $status = '<span class="badge badge-warning">' . $row["type"] . '</span>';
@@ -154,7 +154,7 @@ if ($_POST["action"] == 'fetch_current_converstation') {
         if (
             (($post_row["type"] == "Request") and ($conversation_row["posterUserId"] == $_SESSION['user_id']))
             or
-            (($post_row["type"] == "Donate") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
+            (($post_row["type"] == "Donate/Loan") and ($conversation_row["accepterUserId"] == $_SESSION['user_id']))
         ) {
             $pending_action =
                 '

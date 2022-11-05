@@ -27,7 +27,7 @@ if ($_POST["action"] == 'fetch_total_active_post') {
 if ($_POST["action"] == 'fetch_total_successful_request') {
     
     $object->query = "
-    SELECT * FROM posts WHERE (isSuccess = 1 AND type = 'request')
+    SELECT * FROM posts WHERE (isSuccess = 1 AND type = 'Request')
     ";
     $object->execute();
     echo $object->row_count();
@@ -37,7 +37,7 @@ if ($_POST["action"] == 'fetch_total_successful_request') {
 if ($_POST["action"] == 'fetch_total_successful_donate') {
     
     $object->query = "
-    SELECT * FROM posts WHERE (isSuccess = 1 AND type = 'donate')
+    SELECT * FROM posts WHERE (isSuccess = 1 AND type = 'Donate/Loan')
     ";
     $object->execute();
     echo $object->row_count();

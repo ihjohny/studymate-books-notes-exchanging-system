@@ -76,7 +76,7 @@ if($object->isUserBlocked($_SESSION['user_id'])) {
             <li class="nav-item">
                 <a class="nav-link" href="donateposts.php">
                     <i class="fas fa-upload"></i>
-                    <span>Donate Posts</span></a>
+                    <span>Donate/Loan Posts</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="requestposts.php">
@@ -165,7 +165,7 @@ if($object->isUserBlocked($_SESSION['user_id'])) {
 
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <span class="dropdown-item">+2 Points for Registration</span>
-                                <span class="dropdown-item">+1 Point for Successful Donate</span>
+                                <span class="dropdown-item">+1 Point for Successful Donate/Loan</span>
                                 <span class="dropdown-item">-1 Point for Successful Request</span>
                             </div>
                         </li>

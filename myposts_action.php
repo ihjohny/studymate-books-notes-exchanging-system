@@ -62,7 +62,7 @@ if ($_POST["action"] == 'fetch_my_post') {
         $sub_array[] = $row["category"];
 
         $status = '';
-        if ($row["type"] == 'Donate') {
+        if ($row["type"] == 'Donate/Loan') {
             $status = '<span class="badge badge-success">' . $row["type"] . '</span>';
         } else {
             $status = '<span class="badge badge-warning">' . $row["type"] . '</span>';

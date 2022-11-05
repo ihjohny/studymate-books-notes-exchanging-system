@@ -92,8 +92,8 @@ class DbData
 	}
 
 	function typed($type) {
-		if($type == 'Donate'){
-			return 'Donated';
+		if($type == 'Donate/Loan'){
+			return 'Donated/Loaned';
 		} else {
 			return "${type}ed";
 		}

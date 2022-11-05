@@ -66,7 +66,7 @@ include('basehome.php');
                 <div class="row no-gutters align-items-center">
                     <div align="center" class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Total Successful Donate
+                            Total Successful Donate/Loan
                         </div>
                         <div class="h4 mb-0 font-weight-bold text-gray-800">
                             <span id="total_successful_donate"></span>

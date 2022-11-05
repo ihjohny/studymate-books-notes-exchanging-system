@@ -82,7 +82,7 @@ if ($_POST["action"] == 'fetch_single') {
                                 <div></div>
                                 <span class="text-success">Points: ' . $user_row["point"] . '</span>
                                 <div></div>
-                                <span data-toggle="tooltip" data-placement="top" title="Successfull donate made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> ' . $user_row["giveCount"] . ' </strong> </span>
+                                <span data-toggle="tooltip" data-placement="top" title="Successfull donate/loan made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> ' . $user_row["giveCount"] . ' </strong> </span>
                                 <span data-toggle="tooltip" data-placement="top" title="Successfull request made by this user"> <i class="fas fa-arrow-circle-down" style="color:#f6c23e"></i> <strong> ' . $user_row["takeCount"] . '</strong> </span>
                                 <h5 class="mt-1"><strong>' . $user_row["name"] . '</strong></h5>
                                 <p class="text-secondary mb-1"><strong>Email: </strong>' . $user_row["email"] . '</p>

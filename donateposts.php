@@ -5,7 +5,7 @@ include('basehome.php');
 ?>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Donate Posts</h1>
+<h1 class="h3 mb-4 text-gray-800">Donate/Loan Posts</h1>
 
 <!-- DataTales Example -->
 <span id="message"></span>
@@ -13,7 +13,7 @@ include('basehome.php');
     <div class="card-header py-3">
         <div class="row">
             <div class="col">
-                <h6 class="m-0 font-weight-bold text-primary">Books, Notes Donated by Other Users</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Books, Notes Donated/Loaned by Other Users</h6>
             </div>
             <div class="col" align="right">
                 <button type="button" name="add_post" id="add_post" class="btn btn-primary btn-sm"><i class="fas fa-plus"> Add New Post</i></button>

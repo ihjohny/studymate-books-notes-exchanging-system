@@ -57,7 +57,7 @@ if ($_POST["action"] == 'fetch_all_users') {
         $sub_array[] = $row["point"];
         $sub_array[] = 
             '
-                <span data-toggle="tooltip" data-placement="top" title="Successfull donate made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> ' . $row["giveCount"] . ' </strong> </span>
+                <span data-toggle="tooltip" data-placement="top" title="Successfull donate/loan made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> ' . $row["giveCount"] . ' </strong> </span>
                 <span data-toggle="tooltip" data-placement="top" title="Successfull request made by this user"> <i class="fas fa-arrow-circle-down" style="color:#f6c23e"></i> <strong> ' . $row["takeCount"] . '</strong> </span>
             ';
 

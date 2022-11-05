@@ -89,6 +89,8 @@ if ($_POST["action"] == 'fetch_single') {
                         <div class="d-flex flex-column mr-2">
                             <img src="' . $user_row["photo"] . '" alt="Profile" class="rounded-circle" width="80">
                             <div class="mt-3">
+                                <span class="text-success">User Rating: ' . $user_row["rating"] . '</span>
+                                <div></div>
                                 <span class="text-success">Points: ' . $user_row["point"] . '</span>
                                 <div></div>
                                 <span data-toggle="tooltip" data-placement="top" title="Successfull donate made by this user"> <i class="fas fa-arrow-circle-up" style="color:#1cc88a"></i> <strong> ' . $user_row["giveCount"] . ' </strong> </span>

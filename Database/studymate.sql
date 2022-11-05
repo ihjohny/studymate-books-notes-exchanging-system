@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2022 at 03:10 PM
+-- Generation Time: Nov 05, 2022 at 01:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -154,6 +154,22 @@ CREATE TABLE `posts` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rating_feedback`
+--
+
+CREATE TABLE `rating_feedback` (
+  `id` int(11) NOT NULL,
+  `postId` int(11) NOT NULL,
+  `senderId` int(11) NOT NULL,
+  `receiverId` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `feedback` varchar(1000) DEFAULT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -172,7 +188,11 @@ CREATE TABLE `users` (
   `giveCount` int(11) NOT NULL DEFAULT 0,
   `takeCount` int(11) NOT NULL DEFAULT 0,
   `verify` tinyint(1) NOT NULL DEFAULT 0,
-  `verificationCode` varchar(120) NOT NULL
+  `verificationCode` varchar(120) NOT NULL,
+  `pendingRatingUserId` int(11) DEFAULT NULL,
+  `pendingRatingPostId` int(11) DEFAULT NULL,
+  `rating` float NOT NULL DEFAULT 5,
+  `rateCount` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -240,6 +260,12 @@ ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rating_feedback`
+--
+ALTER TABLE `rating_feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -284,6 +310,12 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `rating_feedback`
+--
+ALTER TABLE `rating_feedback`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --

@@ -65,6 +65,27 @@ include('footer.php');
 
 <script>
     $(document).ready(function() {
+
+        $.ajax({
+            url: "home_action.php",
+            method: "POST",
+            data: {
+                action: 'has_pending_rating'
+            },
+            success: function(data) {
+                const result = JSON.parse(data);
+                if(result.user_id != null && result.user_id != "") {
+                    setPostTitleOnRating(result.post_id);
+                    $('#pending_rating_user_id').val(result.user_id);
+                    $('#pending_rating_post_id').val(result.post_id);
+                    $('#insertRatingModal').modal('show');
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+
         $.ajax({
             url: "home_action.php",
             method: "POST",
@@ -110,6 +131,24 @@ include('footer.php');
         });
 
     });
+
+    function setPostTitleOnRating(postId) {
+        $.ajax({
+            url: "home_action.php",
+            method: "POST",
+            data: {
+                action: 'get_post_title',
+                post_id: postId
+            },
+            success: function(data) {
+                $('#pending_rating_post_title').html(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
+
 </script>
 
 <?php
@@ -118,6 +157,10 @@ include('addpost.php');
 
 <?php
 include('viewpost.php');
+?>
+
+<?php
+include('rating_modal.php');
 ?>
 
 <?php

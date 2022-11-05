@@ -53,6 +53,7 @@ if ($_POST["action"] == 'fetch_all_users') {
         $sub_array[] = $row["name"];
         $sub_array[] = $row["email"];
         $sub_array[] = $row["phone"];
+        $sub_array[] = $row["rating"];
         $sub_array[] = $row["point"];
         $sub_array[] = 
             '

@@ -89,6 +89,11 @@ if (!$object->is_admin_login()) {
                     <i class="fas fa-school"></i>
                     <span>Departments List</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="rating_feedback.php">
+                    <i class="fas fa-star"></i>
+                    <span>Rating and Feedback</span></a>
+            </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

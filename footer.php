@@ -50,6 +50,7 @@
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="vendor/rating/bootstrap4-rating-input.js"></script>
 
 </body>
 

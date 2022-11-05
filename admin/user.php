@@ -26,6 +26,7 @@ include('basehome.php');
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Rating</th>
                         <th>Point</th>
                         <th>Success</th>
                         <th>Switch</th>
@@ -62,7 +63,7 @@ include('footer.php');
                 }
             },
             "columnDefs": [{
-                "targets": [0, 1, 2, 3, 4, 5],
+                "targets": [0, 1, 2, 3, 4, 5, 6, 7],
                 "orderable": false,
             }, ],
         });

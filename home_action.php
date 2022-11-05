@@ -196,3 +196,50 @@ if ($_POST["action"] == 'fetch_current_converstation') {
 
     echo $html;
 }
+
+if ($_POST["action"] == 'has_pending_rating') {
+    $pendingRatingUserId = "";
+    $pendingRatingPostId = "";
+    
+    $object->query = "
+    SELECT * FROM `users`
+    WHERE id = '" . $_SESSION['user_id'] . "'
+    ";
+
+    $user_result = $object->get_result();
+    foreach($user_result as $row) {
+        $pendingRatingUserId = $row["pendingRatingUserId"];
+        $pendingRatingPostId = $row["pendingRatingPostId"];
+    }
+
+    $object->query = "
+    UPDATE users
+    SET pendingRatingUserId = null,
+    pendingRatingPostId = null
+    WHERE id = '" . $_SESSION['user_id'] . "'
+    ";
+    $object->execute();
+
+    $output = array(
+        'user_id'    =>    $pendingRatingUserId,
+        'post_id'    =>    $pendingRatingPostId
+    );
+
+    echo json_encode($output);
+}
+
+if ($_POST["action"] == 'get_post_title') {
+    $post_title = "";
+    
+    $object->query = "
+    SELECT * FROM `posts`
+    WHERE id = '" . $_POST['post_id'] . "'
+    ";
+
+    $post_result = $object->get_result();
+    foreach($post_result as $row) {
+        $post_title = $row["title"];
+    }
+
+    echo $post_title;
+}

@@ -100,6 +100,23 @@ if ($_POST["action"] == 'received') {
         
             $object->execute();
 
+            // create pending rating entry  
+            $object->query = "
+            UPDATE users 
+            SET pendingRatingUserId = '" . $sender_id . "',
+            pendingRatingPostId = '".$conversation["postId"]."'
+            WHERE id = '" . $_SESSION['user_id'] . "'
+            ";
+            $object->execute();
+
+            $object->query = "
+            UPDATE users 
+            SET pendingRatingUserId = '" . $_SESSION['user_id'] . "',
+            pendingRatingPostId = '".$conversation["postId"]."'
+            WHERE id = '" . $sender_id . "'
+            ";
+            $object->execute();
+
         }
 
         $msg;
